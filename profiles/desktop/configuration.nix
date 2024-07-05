@@ -3,9 +3,6 @@
 let
   username = "pyro";
   hostname = "nixos";
-
-  desktopEnvironment = "gnome";
-  displayManager = "gdm";
 in {
   imports =
     [ 
@@ -36,8 +33,11 @@ in {
     };
 
     desktop = {
-      displayManager.${displayManager}.enable = true;
-      ${desktopEnvironment}.enable = true;
+      displayManager.gdm.enable = true;
+      gnome = {
+        enable = true;
+	tweaks.enable = true;
+      };
     };
   };
 
@@ -62,7 +62,6 @@ in {
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     neovim
     kitty

@@ -6,8 +6,11 @@ let
   inherit (lib.types) str;
 in {
   options.custom.desktop = {
-    gnome.enable = mkEnableOption "Enable the GNOME desktop environment.";
-    gnome.defaultPackages.enable = mkEnableOption "Enable the default GNOME packages.";
+    gnome = {
+      enable = mkEnableOption "Enable the GNOME desktop environment.";
+      defaultPackages.enable = mkEnableOption "Enable the default GNOME packages.";
+      tweaks.enable = mkEnableOption "Enable the GNOME Tweaks program.";
+    };
     kde.enable = mkEnableOption "Enable the KDE Plasma desktop environment.";
     hyprland.enable = mkEnableOption "Enable the Hyprland tiling window manager.";
     cinnamon.enable = mkEnableOption "Enable the Cinnamon desktop environment.";
@@ -49,6 +52,12 @@ in {
 	  hitori
 	  atomix
 	]);
+      })
+      
+      (mkIf (cfg.gnome.tweaks.enable) {
+        environment.systemPackages = with pkgs; [
+	  gnome-tweaks
+	];
       })
     ]))
 
