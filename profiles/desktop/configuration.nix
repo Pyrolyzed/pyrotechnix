@@ -7,13 +7,18 @@ in {
   imports =
     [ 
       ./hardware-configuration.nix
+      ./disko.nix
+
       ../../modules/nixos/system
       ../../modules/nixos/desktop
     ];
 
   custom = {
     sound.enable = true;
-    network.enable = true;
+    network = {
+      enable = true;
+      hostName = hostname;
+    };
     # hardware.gpu.amd.enable = true;
     
     boot.grub = {
@@ -23,7 +28,7 @@ in {
 
     user = {
       enable = true;
-      name = "pyro";
+      name = username;
     };
 
     locale = {
