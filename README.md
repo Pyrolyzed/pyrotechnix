@@ -1,2 +1,2 @@
-# pyronix
-Pyronix - My personal Nix configuration.
+# Pyrotechnix
+Pyrotechnix - My personal Nix configuration.
