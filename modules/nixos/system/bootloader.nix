@@ -12,8 +12,8 @@ in {
       enable = mkEnableOption "Enable the GRUB bootloader.";
       device = mkOption {
         type = str;
-	default = "/dev/nvme0n1p1";
-	description = "The boot device path.";
+	      default = "nodev";
+        description = "The boot device path.";
       };
     };
   };
@@ -23,15 +23,33 @@ in {
       boot.loader.efi.canTouchEfiVariables = true;
     }
 
+    (mkIf (!cfg.grub.enable && !cfg.systemd-boot.enable) {
+      assertions = [
+        {
+          assertion = false;
+          message = "You must have a bootloader enabled!";
+        }
+      ]
+    })
+
+    (mkIf (cfg.grub.enable && cfg.systemd-boot.enable) {
+      assertions = [
+        {
+          assertion = false;
+          message = "GRUB and Systemd-boot cannot be enabled at the same time.";
+        }
+      ]
+    })
+
     (mkIf cfg.systemd-boot.enable {
       boot.loader.systemd-boot.enable = true;
     })
 
     (mkIf cfg.grub.enable {
       boot.loader.grub = {
-	enable = true;
-	device = cfg.grub.device;
-	useOSProber = true;
+        enable = true;
+        device = cfg.grub.device;
+        useOSProber = true;
       };
     })
   ]);

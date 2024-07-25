@@ -14,13 +14,6 @@ in {
     kde.enable = mkEnableOption "Enable the KDE Plasma desktop environment.";
     hyprland.enable = mkEnableOption "Enable the Hyprland tiling window manager.";
     cinnamon.enable = mkEnableOption "Enable the Cinnamon desktop environment.";
-    xfce.enable = mkEnableOption "Enable the XFCE desktop environment.";
-    mate.enable = mkEnableOption "Enable the MATE desktop environment.";
-    pantheon.enable = mkEnableOption "Enable the Pantheon desktop environment.";
-    budgie.enable = mkEnableOption "Enable the Budgie desktop environment.";
-    deepin.enable = mkEnableOption "Enable the Deepin desktop environment.";
-    xmonad.enable = mkEnableOption "Enable the xmonad tiling window manager.";
-    i3.enable = mkEnableOption "Enable the i3 tiling windowm manager.";
   };
 
   config = (mkMerge [

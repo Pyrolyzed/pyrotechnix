@@ -11,24 +11,20 @@ in {
       type = str;
       default = "nixos";
     };
-    dns.enable = mkEnableOption "Enable custom DNS.";
     dns.server = mkOption {
       type = str;
       default = "1.1.1.1";
       example = "192.168.1.136";
     };
+    firewall.enable = mkEnableOption "Enable the firewall.";
   };
 
-  config = mkIf cfg.enable (mkMerge [
-    { 
-      networking.networkmanager.enable = true;
-      networking.hostName = cfg.hostName; 
-    }
-
-    (mkIf cfg.dns.enable {
-      environment.etc = {
-        "resolv.conf".text = "nameserver ${cfg.dns.server}\n";
-      };
-    })
-  ]);
+  config = mkIf cfg.enable { 
+    networking.networkmanager.enable = true;
+    networking.hostName = cfg.hostName; 
+    environment.etc = {
+      "resolv.conf".text = "nameserver ${cfg.dns.server}\n";
+    };
+    networking.firewall.enable = cfg.firewall.enable;
+  };
 }

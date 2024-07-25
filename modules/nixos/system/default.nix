@@ -6,5 +6,6 @@
     ./gpu.nix
     ./bootloader.nix
     ./locale.nix
+    ./ssh.nix
   ];
 }

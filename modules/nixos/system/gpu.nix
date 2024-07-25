@@ -15,6 +15,15 @@ in {
   };
 
   config = (mkMerge [
+    (mkIf (cfg.amd.enable && cfg.nvidia.enable) {
+      assertions = [
+        {
+          assertion = false;
+          message = "Nvidia and AMD cannot be enabled at the same time.";
+        }
+      ]
+    })
+
     (mkIf cfg.amd.enable {
       boot.initrd.kernelModules = [ "amdgpu" ];
       services.xserver.videoDrivers = [ "amdgpu" ];
@@ -24,11 +33,11 @@ in {
       hardware.graphics.enable = true;
       services.xserver.videoDrivers = [ "nvidia" ];
       hardware.nvidia = {
-        modesetting.enable = true;
-	powerManagement.enable = false;
-	powerManagement.finegrained = false;
-	open = cfg.nvidia.open;
-	nvidiaSettings = cfg.nvidia.settings;
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      open = cfg.nvidia.open;
+      nvidiaSettings = cfg.nvidia.settings;
       };
     })
   ]);

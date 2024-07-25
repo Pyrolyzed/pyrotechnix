@@ -2,11 +2,15 @@
 
 {
   imports = [
-    ../../modules/homeManager/programs/development/git.nix
+    ../../modules/homeManager/programs
+    ../../config/homeManager.nix
   ];
 
   custom = {
     programs = {
+
+      browser.firefox.enable = true;
+
       git = {
         userName = "Pyrolyzed";
         userEmail = "pyrolyzed@proton.me";
@@ -14,9 +18,6 @@
     };
   };
 
-  programs = {
-    home-manager.enable = true;
-  };
 
   home = {
     username = "pyro";
