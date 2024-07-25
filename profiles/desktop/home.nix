@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, userSettings, ... }:
 
 {
   imports = [
@@ -9,19 +9,19 @@
   custom = {
     programs = {
 
-      browser.firefox.enable = true;
+      browser.${userSettings.browser}.enable = true;
 
       git = {
         userName = "Pyrolyzed";
-        userEmail = "pyrolyzed@proton.me";
+        userEmail = userSettings.email;
       };
     };
   };
 
 
   home = {
-    username = "pyro";
-    homeDirectory = "/home/pyro";
+    username = userSettings.username;
+    homeDirectory = "/home/${userSettings.username}";
 
     stateVersion = "24.05";
 

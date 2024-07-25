@@ -13,7 +13,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    users.users.${cfg.name} = {
+    users.users.${toLower cfg.name} = {
       isNormalUser = true;
 
       home = cfg.home;

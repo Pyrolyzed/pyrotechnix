@@ -4,16 +4,36 @@
   outputs = { self, nixpkgs, ...}@inputs: 
     let
       # FLAKE SETTINGS
-      profile = "desktop";
+      systemSettings = {
+        profile = "desktop";
+        system = "x86_64-linux";
+        hostname = "overlord";
+        timezone = "America/Chicago";
+        locale = "en_US.UTF-8";
+        grubDevice = "nodev";
+        gpuVendor = "amd";
+      };
+
+      userSettings = {
+        username = "pyro";
+        name = "Pyro";
+        email = "pyrolyzed@proton.me";
+        desktopEnvironment = "hyprland";
+        displayManager = "sddm";
+        browser = "firefox";
+      };
+
     in {
       nixosConfigurations.system = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
+      system = systemSettings.system;
+      specialArgs = {
+        inherit inputs; 
+        inherit systemSettings;
+        inherit userSettings;
+      };
       modules = [
-        # Add profile configuration.
-        ./profiles/${profile}/configuration.nix
+        ./profiles/${systemSettings.profile}/configuration.nix
 
-        # Add in Home Manager.
         inputs.home-manager.nixosModules.default
       ];
     };

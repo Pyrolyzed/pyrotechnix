@@ -1,9 +1,6 @@
-{ config, inputs, pkgs, ... }:
+{ config, inputs, pkgs, systemSettings, userSettings, ... }:
 
-let
-  username = "pyro";
-  hostname = "nixos";
-in {
+{
   imports =
     [ 
       ./hardware-configuration.nix
@@ -25,30 +22,30 @@ in {
 
     network = {
       enable = true;
-      hostName = hostname;
+      hostName = systemSettings.hostname;
     };
 
-    hardware.gpu.amd.enable = true;
+    hardware.gpu.${systemSettings.gpuVendor}.enable = true;
     
     boot.grub = {
       enable = true;
-      device = "nodev";
+      device = systemSettings.grubDevice;
     };
 
     user = {
       enable = true;
-      name = username;
+      name = userSettings.name;
     };
 
     locale = {
-      locale = "en_US.UTF-8";
-      timezone = "America/Chicago";
+      locale = systemSettings.locale;
+      timezone = systemSettings.timezone;
       keymap = "us";
     };
 
     desktop = {
-      displayManager.sddm.enable = true;
-      hyprland.enable = true;
+      displayManager.${userSettings.displayManager}.enable = true;
+      ${userSettings.desktopEnvironment}.enable = true;
     };
 
     programs = {
@@ -61,14 +58,11 @@ in {
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs; inherit userSettings; inherit systemSettings; };
     users = {
-      ${username} = import ./home.nix;
+      ${userSettings.username} = import ./home.nix;
     };
   };
-
-  # Install firefox.
-  programs.firefox.enable = true;
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
