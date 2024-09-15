@@ -1,6 +1,6 @@
 {
     imports = [
-        "./browser.nix"
-        "./development"
+        ./browser.nix
+        ./development
     ];
 }

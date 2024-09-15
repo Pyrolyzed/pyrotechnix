@@ -29,7 +29,7 @@ in {
           assertion = false;
           message = "You must have a bootloader enabled!";
         }
-      ]
+      ];
     })
 
     (mkIf (cfg.grub.enable && cfg.systemd-boot.enable) {
@@ -38,7 +38,7 @@ in {
           assertion = false;
           message = "GRUB and Systemd-boot cannot be enabled at the same time.";
         }
-      ]
+      ];
     })
 
     (mkIf cfg.systemd-boot.enable {

@@ -12,7 +12,7 @@ in {
             type = listOf str;
             default = [];
             description = "List of authorized public keys.";
-        }
+        };
     };
 
     config = {
@@ -23,5 +23,5 @@ in {
         };
         programs.ssh.enableAskPassword = cfg.askPass.enable;
         users.users.${config.custom.user.name}.openssh.authorizedKeys.keys = cfg.authorizedKeys;
-    }
+    };
 }

@@ -26,7 +26,7 @@ in {
           assertion = false;
           message = "Pipewire and PulseAudio cannot be enabled at the same time.";
         }
-      ]
+      ];
     })
 
     (mkIf cfg.pipewire.enable {
