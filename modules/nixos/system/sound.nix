@@ -37,7 +37,7 @@ in {
         alsa.enable = cfg.pipewire.alsa.enable;
         alsa.support32Bit = cfg.pipewire.alsa.enable;
         jack.enable = cfg.pipewire.jack.enable;
-      }
+      };
     })
     
     (mkIf cfg.pulseaudio.enable {
