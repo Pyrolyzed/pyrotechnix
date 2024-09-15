@@ -44,7 +44,7 @@
 
     programs = {
       containers.docker.enable = true;
-    }
+    };
   };
 
   home-manager = {
