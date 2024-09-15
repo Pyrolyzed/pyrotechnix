@@ -33,7 +33,7 @@
     user = {
       enable = true;
       name = userSettings.name;
-      groups = [ "wheel" "docker" ]
+      groups = [ "wheel" "docker" ];
     };
 
     locale = {
