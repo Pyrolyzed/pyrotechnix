@@ -6,12 +6,9 @@
       ./hardware-configuration.nix
       ../../modules/nixos
       ../../config/system.nix
-      ../../modules/nixos/programs/games
     ];
 
   custom = {
-    sound.enable = true;
-    
     ssh = {
       askPass.enable = false;
       passwordAuthentication.enable = false;
@@ -36,25 +33,13 @@
     user = {
       enable = true;
       name = userSettings.name;
+      groups = [ "wheel" "docker" ]
     };
 
     locale = {
       locale = systemSettings.locale;
       timezone = systemSettings.timezone;
       keymap = "us";
-    };
-
-    desktop = {
-      displayManager.${userSettings.displayManager}.enable = true;
-      ${userSettings.desktopEnvironment}.enable = true;
-    };
-
-    programs = {
-      games = {
-        prismlauncher.enable = true;
-        steam.enable = true;
-        lutris.enable = true;
-      };
     };
   };
 
@@ -65,10 +50,8 @@
     };
   };
 
-  # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     neovim
-    kitty
   ];
 
   system.stateVersion = "24.05"; 

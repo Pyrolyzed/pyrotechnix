@@ -12,6 +12,7 @@
         locale = "en_US.UTF-8";
         grubDevice = "nodev";
         gpuVendor = "amd";
+        dnsServer = "192.168.1.100";
       };
 
       userSettings = {
