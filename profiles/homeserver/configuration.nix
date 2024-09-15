@@ -5,6 +5,7 @@
     [ 
       ./hardware-configuration.nix
       ../../modules/nixos
+      ../../modules/nixos/programs/containers.nix
       ../../config/system.nix
     ];
 
