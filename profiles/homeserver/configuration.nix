@@ -23,7 +23,7 @@
       dns.server = systemSettings.dnsServer;
     };
 
-    hardware.gpu.${systemSettings.gpuVendor}.enable = true;
+    # hardware.gpu.${systemSettings.gpuVendor}.enable = true;
     
     boot.grub = {
       enable = true;

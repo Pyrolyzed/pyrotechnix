@@ -5,9 +5,9 @@
     let
       # FLAKE SETTINGS
       systemSettings = {
-        profile = "desktop";
+        profile = "homeserver";
         system = "x86_64-linux";
-        hostname = "overlord";
+        hostname = "homeserver0";
         timezone = "America/Chicago";
         locale = "en_US.UTF-8";
         grubDevice = "nodev";
@@ -19,9 +19,6 @@
         username = "pyro";
         name = "Pyro";
         email = "pyrolyzed@proton.me";
-        desktopEnvironment = "hyprland";
-        displayManager = "sddm";
-        browser = "firefox";
       };
 
     in {
