@@ -1,7 +1,7 @@
 {
     imports = [
-        "./desktop"
-        "./programs"
-        "./system"
+        ./desktop
+        ./programs
+        ./system
     ];
 }
