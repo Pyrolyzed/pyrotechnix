@@ -22,6 +22,6 @@ in {
             PasswordAuthentication = cfg.passwordAuthentication.enable;
         };
         programs.ssh.enableAskPassword = cfg.askPass.enable;
-        users.users.${config.custom.user.name}.openssh.authorizedKeys.keys = cfg.authorizedKeys;
+        users.users.${lib.toLower config.custom.user.name}.openssh.authorizedKeys.keys = cfg.authorizedKeys;
     };
 }

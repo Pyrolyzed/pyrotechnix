@@ -41,6 +41,10 @@
       timezone = systemSettings.timezone;
       keymap = "us";
     };
+
+    programs = {
+      containers.docker.enable = true;
+    }
   };
 
   home-manager = {
