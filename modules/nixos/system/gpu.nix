@@ -21,7 +21,7 @@ in {
           assertion = false;
           message = "Nvidia and AMD cannot be enabled at the same time.";
         }
-      ]
+      ];
     })
 
     (mkIf cfg.amd.enable {

@@ -5,6 +5,7 @@
     [ 
       ./hardware-configuration.nix
       ../../modules/nixos
+      ../../modules/nixos/programs/containers.nix
       ../../config/system.nix
     ];
 
@@ -23,7 +24,7 @@
       dns.server = systemSettings.dnsServer;
     };
 
-    hardware.gpu.${systemSettings.gpuVendor}.enable = true;
+    # hardware.gpu.${systemSettings.gpuVendor}.enable = true;
     
     boot.grub = {
       enable = true;
@@ -33,13 +34,17 @@
     user = {
       enable = true;
       name = userSettings.name;
-      groups = [ "wheel" "docker" ]
+      groups = [ "wheel" "docker" ];
     };
 
     locale = {
       locale = systemSettings.locale;
       timezone = systemSettings.timezone;
       keymap = "us";
+    };
+
+    programs = {
+      containers.docker.enable = true;
     };
   };
 

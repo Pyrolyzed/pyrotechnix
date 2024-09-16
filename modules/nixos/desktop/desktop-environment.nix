@@ -69,47 +69,5 @@ in {
 	desktopManager.cinnamon.enable = true;
       };
     })
-
-    (mkIf cfg.xfce.enable {
-      services.xserver = {
-	desktopManager.xfce.enable = true;
-      };
-    })
-
-    (mkIf cfg.mate.enable {
-      services.xserver = {
-	desktopManager.mate.enable = true;
-      };
-    })
-
-    (mkIf cfg.pantheon.enable {
-      services.xserver = {
-	desktopManager.pantheon.enable = true;
-      };
-    })
-
-    (mkIf cfg.deepin.enable {
-      services.xserver = {
-	desktopManager.deepin.enable = true;
-      };
-    })
-
-    (mkIf cfg.budgie.enable {
-      services.xserver = {
-        desktopManager.budgie.enable = true;
-      };
-    })
-
-    (mkIf cfg.i3.enable {
-      services.xserver = {
-        windowManager.i3.enable = true;
-      };
-    })
-
-    (mkIf cfg.xmonad.enable {
-      services.xserver = {
-        windowManager.xmonad.enable = true;
-      };
-    })
   ]);
 }
