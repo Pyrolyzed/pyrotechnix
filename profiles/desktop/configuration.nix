@@ -45,12 +45,20 @@
     enable32Bit = true;
   };
 
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
   fileSystems."/home/pyro/NAS" = {
     device = "//192.168.1.200/Storage";
     fsType = "cifs";
     # Plain text password because I'm lazy and also because it's not exposed to the internet and also I don't use it anywhere else.
     options = [ "uid=1000" "username=pyro" "password=spoons" ];
   };
+
+  fonts.packages = with pkgs; [ 
+    (nerdfonts.override { fonts = [ "JetBrainsMono" "CascadiaCode" ]; })
+  ];
+
   environment.systemPackages = with pkgs; [
       neovim
       git
@@ -64,11 +72,13 @@
       rofi-wayland
       vesktop
       dunst
+      spotify
       mangohud
       obs-studio
       qbittorrent
       vlc
       cifs-utils
+      obsidian
   ];
 
   networking.firewall.enable = false;
