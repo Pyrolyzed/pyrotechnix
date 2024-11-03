@@ -16,11 +16,12 @@
   };
 
   networking.hostName = "overlord";
-  networking.networkmanager.enable = true;  
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  networking.networkmanager.enable = true;
 
-  time.timeZone = "America/Chicago";
-  
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.allowUnfree = true;
+
+  time.timeZone = "America/Chicago"; 
   i18n.defaultLocale = "en_US.UTF-8";
 
   services.xserver.enable = true;
@@ -37,11 +38,26 @@
     extraGroups = [ "wheel" "video" "audio" "power" ]; 
   };
 
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
   environment.systemPackages = with pkgs; [
       neovim
       git
       firefox
       kitty
+      steam
+      grim
+      slurp
+      copyq
+      wl-clipboard
+      rofi-wayland
+      vesktop
+      dunst
+      mangohud
+      obs-studio
   ];
 
   networking.firewall.enable = false;
@@ -49,4 +65,3 @@
   system.stateVersion = "24.05"; 
 
 }
-
