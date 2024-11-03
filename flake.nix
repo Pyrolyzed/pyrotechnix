@@ -1,48 +1,22 @@
 {
-  description = "Pyrotechnix Flake.";
-
-  outputs = { self, nixpkgs, ...}@inputs: 
-    let
-      # FLAKE SETTINGS
-      systemSettings = {
-        profile = "homeserver";
-        system = "x86_64-linux";
-        hostname = "homeserver0";
-        timezone = "America/Chicago";
-        locale = "en_US.UTF-8";
-        grubDevice = "nodev";
-        gpuVendor = "amd";
-        dnsServer = "192.168.1.100";
-      };
-
-      userSettings = {
-        username = "pyro";
-        name = "Pyro";
-        email = "pyrolyzed@proton.me";
-      };
-
-    in {
-      nixosConfigurations.system = nixpkgs.lib.nixosSystem {
-      system = systemSettings.system;
-      specialArgs = {
-        inherit inputs; 
-        inherit systemSettings;
-        inherit userSettings;
-      };
-      modules = [
-        ./profiles/${systemSettings.profile}/configuration.nix
-
-        inputs.home-manager.nixosModules.default
-      ];
-    };
-  };
+  description = "Pyrolyzed's Pyrotechnix Flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs = { self, nixpkgs, ... }@inputs: {
+    nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./profiles/desktop/configuration.nix
+	inputs.home-manager.nixosModules.default
+      ];
     };
   };
 }
