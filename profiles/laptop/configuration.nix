@@ -15,7 +15,7 @@
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
-  networking.hostName = "overlord";
+  networking.hostName = "duke";
   networking.networkmanager.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -24,12 +24,8 @@
   time.timeZone = "America/Chicago"; 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-  };
-  services.desktopManager.plasma6.enable = true;
+
+  programs.hyprland.enable = true;
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
@@ -50,20 +46,11 @@
     enable32Bit = true;
   };
 
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  services.xserver.videoDrivers = [ "amdgpu" ];
-
   fileSystems."/home/pyro/NAS" = {
     device = "//192.168.1.200/Storage";
     fsType = "cifs";
     # Plain text password because I'm lazy and also because it's not exposed to the internet and also I don't use it anywhere else.
     options = [ "uid=1000" "username=pyro" "password=spoons" ];
-  };
-
-  fileSystems."/home/pyro/Storage" = {
-    device = "/dev/vg1/lvol0";
-    fsType = "ext4";
-    # options = [ "uid=1000" "gid=100" "dmask=007" "fmask=117" ];
   };
 
   fonts.packages = with pkgs; [ 
@@ -74,12 +61,9 @@
       neovim
       git
       firefox
-      pavucontrol
-      btop
       protontricks
       protonup-qt
       steamtinkerlaunch
-      koreader
       protonvpn-gui
       kitty
       steam
@@ -87,19 +71,15 @@
       slurp
       copyq
       wl-clipboard
-      gamescope
       rofi-wayland
       vesktop
       dunst
       spotify
       mangohud
-      obs-studio
       qbittorrent
       vlc
       cifs-utils
       obsidian
-      lvm2
-      clonehero
       calibre
       parsec-bin
   ];
