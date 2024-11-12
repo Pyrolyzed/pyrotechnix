@@ -70,10 +70,18 @@
     (nerdfonts.override { fonts = [ "JetBrainsMono" "CascadiaCode" ]; })
   ];
 
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "pyro" = import ./home.nix;
+    };
+  };
+
   environment.systemPackages = with pkgs; [
       neovim
       git
       firefox
+      zoxide
       pavucontrol
       btop
       protontricks
@@ -107,5 +115,4 @@
   networking.firewall.enable = false;
 
   system.stateVersion = "24.05"; 
-
 }

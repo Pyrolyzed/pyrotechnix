@@ -28,5 +28,16 @@
 	inputs.home-manager.nixosModules.default
       ];
     };
+
+    # Server configuration
+    nixosConfigurations.server = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./profiles/server/configuration.nix
+
+	# Not sure if necessary for a server configuration
+	inputs.home-manager.nixosModules.default
+      ];
+    };
   };
 }

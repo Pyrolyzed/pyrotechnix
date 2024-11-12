@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports =
@@ -87,5 +87,4 @@
   networking.firewall.enable = false;
 
   system.stateVersion = "24.05"; 
-
 }
