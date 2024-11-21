@@ -49,6 +49,7 @@ in {
     openssh.authorizedKeys.keys = [ sshKey ];
   };
 
+  # Allow SSH into root
   users.users.root.openssh.authorizedKeys.keys = [ sshKey ];
 
   environment.systemPackages = with pkgs; [
