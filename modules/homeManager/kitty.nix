@@ -30,7 +30,7 @@ in {
     programs.kitty.font.size = cfg.fontSize;
     programs.kitty.settings = {
       background_opacity = cfg.backgroundOpacity;
-      confirm_os_window_close = cfg.warnOnClose;
+      confirm_os_window_close = if cfg.warnOnClose then 1 else 0;
     };
   };
 }

@@ -19,6 +19,7 @@
       fontSize = 12;
     };
   };
+
   home.username = "pyro";
   home.homeDirectory = "/home/pyro";
 
