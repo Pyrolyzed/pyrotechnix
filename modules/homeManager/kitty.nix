@@ -24,6 +24,7 @@ in {
   };
 
   config = mkIf cfg.enable {
+    programs.kitty.enable = true;
     programs.kitty.font.name = cfg.font;
     programs.kitty.font.size = cfg.fontSize;
     programs.kitty.settings = {
