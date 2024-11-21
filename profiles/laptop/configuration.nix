@@ -41,10 +41,6 @@
     wayland.enable = true;
   };
 
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
 
   programs.zsh.enable = true;
 
