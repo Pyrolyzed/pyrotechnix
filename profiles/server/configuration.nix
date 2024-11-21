@@ -14,12 +14,16 @@ in {
   # Unsure about this in a server environment
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
-  networking.hostName = "homeserver-1";
-  networking.networkmanager.enable = true;
-  networking.interfaces.ens18.ipv4.addresses = [ {
-    address = "192.168.1.102";
-    prefixLength = 24;
-  } ];
+  networking = {
+    hostName = "homeserver-1";
+    networkmanager.enable = true;
+    interfaces.ens18.ipv4.addresses = [ {
+      address = "192.168.1.102";
+      prefixLength = 24;
+    } ];
+    defaultGateway = "192.168.1.1";
+    nameservers = [ "8.8.8.8" ];
+  };
 
   services.openssh = {
     enable = true;
