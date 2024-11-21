@@ -27,8 +27,14 @@
 	  ips = [ "10.100.0.2/24" ];
 	  listenPort = 51820;
 	  privateKeyFile = "/home/pyro/Documents/privatekey";
-	  endpoint = "192.168.1.103:51820";
-	  persistentKeepalive = 25;
+	  peers = [
+	    {
+	      publicKey = "yQro21Kaqw3Ryfew24YCGnVYh+P6ogEvIAhz3nsXs0s=";
+	      allowedIPs = [ "0.0.0.0/0" ];
+	      endpoint = "192.168.1.103:51820";
+	      persistentKeepalive = 25;
+	    }
+	  ];
 	};
       };
     };

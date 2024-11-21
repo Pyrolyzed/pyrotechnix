@@ -73,8 +73,8 @@ in {
 	  privateKeyFile = "/home/pyro/privatekey";
 
 	  peers = [
-	    overlord = {
-	      publicKey = "u++y5aMB/iXDaMCnSA5LirEZhd77nvv5c0W93aBzjBo="
+	    {
+	      publicKey = "u++y5aMB/iXDaMCnSA5LirEZhd77nvv5c0W93aBzjBo=";
 	      allowedIPs = [ "10.100.0.2/32" ];
 	    }
 	  ];
