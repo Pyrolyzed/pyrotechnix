@@ -18,8 +18,14 @@
   time.timeZone = "America/Chicago"; 
   i18n.defaultLocale = "en_US.UTF-8";
 
-
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    authKeyFile = "/home/pyro/Documents/authkey";
+    extraUpFlags = [
+      "--advertise-routes=192.168.1.0/24"
+      "--accept-routes"
+    ];
+  };
 
   services.pipewire = {
     enable = true;
@@ -78,7 +84,6 @@
       cifs-utils
       obsidian
       parsec-bin
-      tailscale
   ];
 
   home-manager = {
