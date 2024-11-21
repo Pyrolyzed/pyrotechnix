@@ -6,13 +6,7 @@
       ./hardware-configuration.nix
     ];
 
-  boot.loader.grub = {
-    enable = true;
-    efiSupport = true;
-    devices = [ "nodev" ];
-    efiInstallAsRemovable = true;
-  };
-
+  boot.loader.systemd-boot.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
   networking.hostName = "duke";
@@ -25,12 +19,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
 
-  programs.hyprland.enable = true;
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-  };
-  
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -39,12 +27,26 @@
   users.users.pyro = {
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" "power" ]; 
+    shell = pkgs.zsh;
   };
 
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
   };
+
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
+
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
+
+  programs.zsh.enable = true;
 
   fileSystems."/home/pyro/NAS" = {
     device = "//192.168.1.200/Storage";
@@ -67,9 +69,6 @@
       protonvpn-gui
       kitty
       steam
-      grim
-      slurp
-      copyq
       wl-clipboard
       rofi-wayland
       vesktop
@@ -80,10 +79,15 @@
       vlc
       cifs-utils
       obsidian
-      calibre
       parsec-bin
   ];
 
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "pyro" = import ./home.nix;
+    };
+  };
   networking.firewall.enable = false;
 
   system.stateVersion = "24.05"; 
