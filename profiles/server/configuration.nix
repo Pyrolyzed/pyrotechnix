@@ -16,6 +16,10 @@ in {
 
   networking.hostName = "homeserver-1";
   networking.networkmanager.enable = true;
+  networking.interfaces.ens18.ipv4.addresses = [ {
+    address = "192.168.1.102";
+    prefixLength = 24;
+  } ];
 
   services.openssh = {
     enable = true;
