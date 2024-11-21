@@ -19,27 +19,6 @@
   networking.hostName = "overlord";
   networking.networkmanager.enable = true;
 
-  networking = {
-    wireguard = {
-      enable = true;
-      interfaces = {
-	wg0 = {
-	  ips = [ "10.100.0.2/24" ];
-	  listenPort = 51820;
-	  privateKeyFile = "/home/pyro/Documents/privatekey";
-	  peers = [
-	    {
-	      publicKey = "yQro21Kaqw3Ryfew24YCGnVYh+P6ogEvIAhz3nsXs0s=";
-	      allowedIPs = [ "0.0.0.0/0" ];
-	      endpoint = "192.168.1.103:51820";
-	      persistentKeepalive = 25;
-	    }
-	  ];
-	};
-      };
-    };
-  };
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
