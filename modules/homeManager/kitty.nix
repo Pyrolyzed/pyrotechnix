@@ -21,6 +21,7 @@ in {
       description = "Font size of Kitty";
       default = 14;
     };
+    warnOnClose = mkEnableOption "Enable kitty warning you on closing it";
   };
 
   config = mkIf cfg.enable {
@@ -29,6 +30,7 @@ in {
     programs.kitty.font.size = cfg.fontSize;
     programs.kitty.settings = {
       background_opacity = cfg.backgroundOpacity;
+      confirm_os_window_close = cfg.warnOnClose;
     };
   };
 }
