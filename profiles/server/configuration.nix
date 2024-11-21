@@ -39,7 +39,7 @@ in {
 
   users.users.pyro = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "power" ]; 
+    extraGroups = [ "wheel" "power" "docker" ]; 
     openssh.authorizedKeys.keys = [ sshKey ];
   };
 
