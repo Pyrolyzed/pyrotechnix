@@ -31,7 +31,15 @@
 #    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
-  services.tailscale.enable = true;
+
+  services.tailscale = {
+    enable = true;
+    authKeyFile = "/home/pyro/Documents/authkey";
+    extraUpFlags = [
+      "--advertise-routes=192.168.1.0/24"
+      "--accept-routes"
+    ];
+  };
 
   services.udev.packages = with pkgs; [
     via
@@ -126,7 +134,6 @@
       clonehero
       calibre
       parsec-bin
-      tailscale
   ];
 
   networking.firewall.enable = false;
