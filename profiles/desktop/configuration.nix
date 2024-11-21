@@ -20,35 +20,20 @@
   networking.networkmanager.enable = true;
 
   networking = {
-    nat.enable = true;
-    nat.externalInterface = "ens18";
-    nat.internalInterfaces = [ "wg0" ];
-    
     wireguard = {
       enable = true;
       interfaces = {
-        wg0 = {
-	  ips = [ "10.100.0.1/24" ];
+	wg0 = {
+	  ips = [ "10.100.0.2/24" ];
 	  listenPort = 51820;
-	  postSetup = ''
-	    ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
-	  '';
-
-	  postShutdown = ''
-	    ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
-	  '';
-
-	  privateKeyFile = "~/privatekey";
-
-	  peers = [
-	    {
-	      publicKey = "u++y5aMB/iXDaMCnSA5LirEZhd77nvv5c0W93aBzjBo=";
-	    }
-	  ];
+	  privateKeyFile = "/home/pyro/Documents/privatekey";
+	  endpoint = "192.168.1.103:51820";
+	  persistentKeepalive = 25;
 	};
       };
     };
   };
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
