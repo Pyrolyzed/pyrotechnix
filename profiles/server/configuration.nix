@@ -14,6 +14,14 @@ in {
   # Unsure about this in a server environment
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
+  services.tailscale = {
+    enable = true;
+    authKeyFile = "/home/pyro/authkey";
+    extraUpFlags = [
+      "--advertise-routes=192.168.1.0/24"
+    ];
+  };
+
   networking = {
     hostName = "homeserver-1";
     networkmanager.enable = true;
