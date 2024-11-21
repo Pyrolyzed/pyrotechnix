@@ -31,6 +31,7 @@
 #    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
+  services.tailscale.enable = true;
   services.udev.packages = with pkgs; [
     via
   ];
@@ -124,6 +125,7 @@
       clonehero
       calibre
       parsec-bin
+      tailscale
   ];
 
   networking.firewall.enable = false;
