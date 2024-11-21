@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./git.nix
-    ./kitty.nix
+    ./programs/git.nix
+    ./programs/kitty.nix
   ];
 }
