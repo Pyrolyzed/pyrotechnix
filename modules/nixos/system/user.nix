@@ -26,6 +26,11 @@ in {
       type = path;
       default = "/home/${toLower replaceStrings [" "] [""] cfg.name}/"
     };
+
+    shell = mkOption {
+      type = str;
+      default = "bash";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -34,6 +39,7 @@ in {
       home = cfg.home;
       isNormalUser = true;
       extraGroups = cfg.groups;
+      shell = cfg.shell;
     };
   };
 }

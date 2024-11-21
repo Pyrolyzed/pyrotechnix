@@ -4,6 +4,7 @@
   imports =
     [ 
       ./hardware-configuration.nix
+      inputs.home-manager.nixosModules.default
     ];
 
   boot.loader.grub = {
@@ -26,9 +27,14 @@
 
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+#    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
+#    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
+
+  services.udev.packages = with pkgs; [
+    via
+  ];
+
   services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm = {
     enable = true;
@@ -40,7 +46,9 @@
     pulse.enable = true;
   };
 
+  programs.zsh.enable = true;
   users.users.pyro = {
+    shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" "power" ]; 
   };
@@ -81,7 +89,13 @@
       neovim
       git
       firefox
-      zoxide
+      ungoogled-chromium
+      via
+      syncthing
+      yt-dlp
+      unrar
+      unzip
+      fastfetch
       pavucontrol
       btop
       protontricks

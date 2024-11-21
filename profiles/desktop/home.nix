@@ -6,11 +6,17 @@
 
   home.stateVersion = "24.05";
 
+  programs.zsh.enable = true;
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   home.sessionVariables = {
     EDITOR = "nvim";
   };
 
-  home.shellAliases = { 
+  programs.zsh.shellAliases = { 
     cd = "z";
   };
 
