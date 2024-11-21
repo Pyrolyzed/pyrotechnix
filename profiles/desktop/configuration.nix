@@ -32,6 +32,7 @@
   };
 
   services.tailscale.enable = true;
+
   services.udev.packages = with pkgs; [
     via
   ];

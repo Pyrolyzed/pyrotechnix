@@ -19,6 +19,8 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
 
+  services.tailscale.enable = true;
+
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -76,6 +78,7 @@
       cifs-utils
       obsidian
       parsec-bin
+      tailscale
   ];
 
   home-manager = {
