@@ -18,6 +18,26 @@
       font = "CaskaydiaCove Nerd Font Mono";
       fontSize = 12;
     };
+
+    shell.zsh = {
+      enable = true;
+      aliases = {
+	ls = "lsd";
+        ll = "ls -l";
+	vim = "nvim";
+	cd = "z";
+      };
+    };
+
+    scripts.enable = true;
+    scripts.script.rebuild = {
+      text = ''
+        #!/usr/bin/env bash
+	cd /home/pyro/pyrotechnix
+	sudo nixos-rebuild switch --flake .#"$1"
+      '';
+      runtimeInputs = [ ];
+    };
   };
 
   home.username = "pyro";

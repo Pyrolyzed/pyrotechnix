@@ -42,8 +42,15 @@
     enable = true;
     enable32Bit = true;
   };
-
-  services.desktopManager.plasma6.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
+  };
+  programs.hyprland.enable = true;
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
@@ -67,6 +74,7 @@
       neovim
       git
       firefox
+      lsd
       protontricks
       protonup-qt
       steamtinkerlaunch
@@ -77,6 +85,10 @@
       rofi-wayland
       vesktop
       dunst
+      wl-clipboard
+      copyq
+      grim
+      slurp
       spotify
       mangohud
       qbittorrent
