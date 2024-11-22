@@ -16,6 +16,7 @@
 
   # Allow waking via magic packet (Wake on LAN)
   networking.interfaces.enp8s0.wakeOnLan.policy = [ "magic" ];
+  networking.interfaces.enp8s0.wakeOnLan.enable = true;
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
