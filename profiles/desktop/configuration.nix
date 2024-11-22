@@ -14,6 +14,9 @@
     efiInstallAsRemovable = true;
   };
 
+  # Allow waking via magic packet (Wake on LAN)
+  networking.interfaces.ens18.wakeOnLan.policy = [ "magic" ];
+
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
   networking.hostName = "overlord";
