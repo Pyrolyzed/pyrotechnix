@@ -25,10 +25,10 @@
   time.timeZone = "America/Chicago"; 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  programs.hyprland = {
+  programs.hyprland.enable = true;
+  services.displayManager.sddm = {
     enable = true;
-#    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
-#    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    wayland.enable = true;
   };
 
   services.tailscale = {
@@ -43,12 +43,6 @@
   services.udev.packages = with pkgs; [
     via
   ];
-
-  services.desktopManager.plasma6.enable = true;
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-  };
   
   services.pipewire = {
     enable = true;
