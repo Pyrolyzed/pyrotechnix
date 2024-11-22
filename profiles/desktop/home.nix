@@ -18,6 +18,16 @@
       font = "CaskaydiaCove Nerd Font Mono";
       fontSize = 18;
     };
+
+    shell.zsh = {
+      enable = true;
+      aliases = {
+	ls = "lsd";
+        ll = "ls -l";
+	vim = "nvim";
+	cd = "z";
+      };
+    };
   };
 
   home.username = "pyro";
@@ -25,7 +35,6 @@
 
   home.stateVersion = "24.05";
 
-  programs.zsh.enable = true;
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
@@ -35,9 +44,6 @@
     EDITOR = "nvim";
   };
 
-  programs.zsh.shellAliases = { 
-    cd = "z";
-  };
 
   programs.home-manager.enable = true;
 }

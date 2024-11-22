@@ -99,7 +99,6 @@
       neovim
       git
       firefox
-      ungoogled-chromium
       via
       syncthing
       yt-dlp
@@ -111,18 +110,11 @@
       protontricks
       protonup-qt
       steamtinkerlaunch
-      koreader
       protonvpn-gui
       kitty
       steam
-      grim
-      slurp
-      copyq
-      wl-clipboard
-      gamescope
       rofi-wayland
       vesktop
-      dunst
       spotify
       mangohud
       obs-studio
@@ -134,6 +126,7 @@
       clonehero
       calibre
       parsec-bin
+      lsd
   ];
 
   networking.firewall.enable = false;
