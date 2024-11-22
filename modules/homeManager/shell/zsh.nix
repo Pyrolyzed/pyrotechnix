@@ -30,7 +30,7 @@ in {
 
       shellAliases = {
         # Anything here
-      } ++ cfg.aliases;
+      } // cfg.aliases;
 
       initExtra = optionalString cfg.options.extendedGlobbing ''
         setopt extended_glob
