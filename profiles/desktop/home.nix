@@ -44,7 +44,7 @@
     gtk.enable = true;
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Classic";
-    size = 18;
+    size = 24;
   };
 
   home.username = "pyro";
@@ -60,7 +60,7 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     NIXOS_OZONE_WL = 1;
-    HYPRCURSOR_SIZE = 18;
+    HYPRCURSOR_SIZE = 24;
   };
 
 
