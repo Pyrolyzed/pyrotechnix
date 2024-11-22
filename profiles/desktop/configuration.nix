@@ -31,7 +31,6 @@
 #    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
-
   services.tailscale = {
     enable = true;
     authKeyFile = "/home/pyro/Documents/authkey";
@@ -99,6 +98,11 @@
       neovim
       git
       firefox
+      copyq
+      wl-clipboard
+      grim
+      slurp
+      dunst
       via
       syncthing
       yt-dlp

@@ -28,6 +28,16 @@
 	cd = "z";
       };
     };
+
+    scripts.enable = true;
+    scripts.script.rebuild = {
+      text = ''
+        #!/usr/bin/env bash
+	cd /home/pyro/pyrotechnix
+	sudo nixos-rebuild switch --flake .#"$1"
+      '';
+      runtimeInputs = [ ];
+    };
   };
 
   home.username = "pyro";
