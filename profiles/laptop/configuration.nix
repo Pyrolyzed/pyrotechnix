@@ -63,7 +63,7 @@
     device = "//192.168.1.200/Storage";
     fsType = "cifs";
     # Plain text password because I'm lazy and also because it's not exposed to the internet and also I don't use it anywhere else.
-    options = [ "uid=1000" "username=pyro" "password=spoons" ];
+    options = [ "uid=1000" "username=pyro" "password=spoons" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=60" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s" ];
   };
 
   fonts.packages = with pkgs; [ 

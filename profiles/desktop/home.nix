@@ -40,6 +40,13 @@
     };
   };
 
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 18;
+  };
+
   home.username = "pyro";
   home.homeDirectory = "/home/pyro";
 
@@ -53,6 +60,7 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     NIXOS_OZONE_WL = 1;
+    HYPRCURSOR_SIZE = 18;
   };
 
 
