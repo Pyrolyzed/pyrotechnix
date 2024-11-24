@@ -30,7 +30,8 @@
     in {
       # Desktop configuration
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-	specialArgs = { inherit inputs pkgs lib; };
+        inherit pkgs;
+	specialArgs = { inherit inputs; };
 	modules = [
 	  ./profiles/desktop/configuration.nix
 	  inputs.home-manager.nixosModules.default
@@ -39,7 +40,8 @@
 
       # Laptop configuration
       nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
-	specialArgs = { inherit inputs pkgs lib; };
+        inherit pkgs;
+	specialArgs = { inherit inputs; };
 	modules = [
 	  ./profiles/laptop/configuration.nix
 	  inputs.home-manager.nixosModules.default
@@ -48,7 +50,8 @@
 
       # Server configuration
       nixosConfigurations.homeserver-1 = nixpkgs.lib.nixosSystem {
-	specialArgs = { inherit inputs pkgs lib; };
+        inherit pkgs;
+	specialArgs = { inherit inputs; };
 	modules = [
 	  ./profiles/homeserver-1/configuration.nix
 	  ./profiles/homeserver-1/hardware-configuration.nix
@@ -58,5 +61,7 @@
 	  inputs.home-manager.nixosModules.default
 	];
       };
+
+      inherit lib self;
     };
 }
