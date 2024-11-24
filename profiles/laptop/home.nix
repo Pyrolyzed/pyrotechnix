@@ -3,6 +3,7 @@
 {
   imports = [
     ../../modules/homeManager
+    ./hyprland.nix
   ];
 
   custom = {

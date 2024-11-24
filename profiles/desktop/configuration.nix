@@ -30,6 +30,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   programs.hyprland.enable = true;
+  services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
@@ -83,6 +84,8 @@
 
   fonts.packages = with pkgs; [ 
     (nerdfonts.override { fonts = [ "JetBrainsMono" "CascadiaCode" ]; })
+    noto-fonts
+    noto-fonts-cjk-sans
   ];
 
   home-manager = {
@@ -96,6 +99,7 @@
       neovim
       git
       firefox
+      libreoffice
       copyq
       wl-clipboard
       grim
