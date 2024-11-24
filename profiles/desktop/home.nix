@@ -35,7 +35,7 @@
       text = ''
         #!/usr/bin/env bash
 	cd /home/pyro/pyrotechnix
-	sudo nixos-rebuild switch --flake .#"$1"
+	sudo nixos-rebuild switch --flake .#desktop
       '';
       runtimeInputs = [ ];
     };
