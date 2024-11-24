@@ -35,11 +35,11 @@
     };
 
     # Server configuration
-    nixosConfigurations.server = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.homeserver-1 = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
-        ./profiles/server/configuration.nix
-	./profiles/server/hardware-configuration.nix
+        ./profiles/homeserver-1/configuration.nix
+	./profiles/homeserver-1/hardware-configuration.nix
 	inputs.disko.nixosModules.default
 
 	# Not sure if necessary for a server configuration
