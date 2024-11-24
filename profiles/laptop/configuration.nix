@@ -74,6 +74,7 @@
       neovim
       git
       firefox
+      fastfetch
       lsd
       protontricks
       protonup-qt

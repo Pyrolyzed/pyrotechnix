@@ -17,7 +17,7 @@
       enable = true;
       backgroundOpacity = 0.8;
       font = "CaskaydiaCove Nerd Font Mono";
-      fontSize = 12;
+      fontSize = 16;
     };
 
     shell.zsh = {
