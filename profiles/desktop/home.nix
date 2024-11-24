@@ -30,8 +30,8 @@
       };
     };
 
-    scripts.enable = true;
     scripts.script.rebuild = {
+      enable = true;
       text = ''
         #!/usr/bin/env bash
 	cd /home/pyro/pyrotechnix

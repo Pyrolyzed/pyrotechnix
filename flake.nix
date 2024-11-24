@@ -15,36 +15,48 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-    # Desktop configuration
-    nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./profiles/desktop/configuration.nix
-	inputs.home-manager.nixosModules.default
-      ];
-    };
+  outputs = { self, nixpkgs, ... }@inputs: 
+    let
+      system = "x86_64-linux";
+      pkgs = import inputs.nixpkgs {
+	inherit system;
+	config.allowUnfree = true;
+      };
+      lib = import ./lib/utils.nix {
+        inherit (nixpkgs) lib;
+	inherit pkgs;
+	inherit (inputs) home-manager;
+      };
+    in {
+      # Desktop configuration
+      nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+	specialArgs = { inherit inputs pkgs lib; };
+	modules = [
+	  ./profiles/desktop/configuration.nix
+	  inputs.home-manager.nixosModules.default
+	];
+      };
 
-    # Laptop configuration
-    nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./profiles/laptop/configuration.nix
-	inputs.home-manager.nixosModules.default
-      ];
-    };
+      # Laptop configuration
+      nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
+	specialArgs = { inherit inputs pkgs lib; };
+	modules = [
+	  ./profiles/laptop/configuration.nix
+	  inputs.home-manager.nixosModules.default
+	];
+      };
 
-    # Server configuration
-    nixosConfigurations.homeserver-1 = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./profiles/homeserver-1/configuration.nix
-	./profiles/homeserver-1/hardware-configuration.nix
-	inputs.disko.nixosModules.default
+      # Server configuration
+      nixosConfigurations.homeserver-1 = nixpkgs.lib.nixosSystem {
+	specialArgs = { inherit inputs pkgs lib; };
+	modules = [
+	  ./profiles/homeserver-1/configuration.nix
+	  ./profiles/homeserver-1/hardware-configuration.nix
+	  inputs.disko.nixosModules.default
 
-	# Not sure if necessary for a server configuration
-	inputs.home-manager.nixosModules.default
-      ];
+	  # Not sure if necessary for a server configuration
+	  inputs.home-manager.nixosModules.default
+	];
+      };
     };
-  };
 }
