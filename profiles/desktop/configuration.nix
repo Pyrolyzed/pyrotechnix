@@ -14,14 +14,25 @@
     efiInstallAsRemovable = true;
   };
 
-  # Allow waking via magic packet (Wake on LAN)
-  networking.interfaces.enp8s0.wakeOnLan.policy = [ "magic" ];
-  networking.interfaces.enp8s0.wakeOnLan.enable = true;
-
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
-  networking.hostName = "overlord";
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "overlord";
+    useDHCP = false;
+    networkmanager.enable = true;
+    interfaces.enp8s0 = {
+      ipv4.addresses = [ {
+	address = "192.168.1.150";
+	prefixLength = 24;
+      } ];
+      wakeOnLan = {
+        policy = [ "magic" ];
+	enable = true;
+      };
+    };
+    defaultGateway = "192.168.1.1";
+    nameservers = [ "1.1.1.1" ];
+  };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

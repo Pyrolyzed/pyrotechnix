@@ -29,9 +29,8 @@
 	cd = "z";
       };
     };
-
+    scripts.enable = true;
     scripts.script.rebuild = {
-      enable = true;
       text = ''
         #!/usr/bin/env bash
 	cd /home/pyro/pyrotechnix
@@ -53,14 +52,22 @@
 
   home.stateVersion = "24.05";
 
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
   };
+
   programs.kitty.settings = { 
     window_padding_width = 10;
     window_padding_height = 5;
   };
+  
   home.sessionVariables = {
     EDITOR = "nvim";
     NIXOS_OZONE_WL = 1;

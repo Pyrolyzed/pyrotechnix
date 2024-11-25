@@ -54,6 +54,12 @@
   home.stateVersion = "24.05";
 
   programs.zsh.enable = true;
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
