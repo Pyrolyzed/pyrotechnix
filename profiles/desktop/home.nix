@@ -54,7 +54,7 @@
 
 
   programs.starship = {
-    enable = true;
+   # enable = true;
     enableZshIntegration = true;
   };
 

@@ -56,7 +56,7 @@
   programs.zsh.enable = true;
 
   programs.starship = {
-    enable = true;
+    # enable = true;
     enableZshIntegration = true;
   };
 
