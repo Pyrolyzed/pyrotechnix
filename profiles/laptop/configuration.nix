@@ -65,6 +65,11 @@
     options = [ "uid=1000" "username=pyro" "password=spoons" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=60" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s" ];
   };
 
+  fileSystems."/home/pyro/Storage" = {
+    device = "/dev/sda1";
+    fsType = "ext4";
+  };
+
   fonts.packages = with pkgs; [ 
     (nerdfonts.override { fonts = [ "JetBrainsMono" "CascadiaCode" ]; })
   ];

@@ -2,7 +2,7 @@
 {
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.extraConfig = ''
-      monitor=eDP-1,1920x180@60,0x0,1
+      monitor=eDP-1,1920x1080@60,0x0,1
 
       # Autostart programs
       exec-once = copyq --start-server & dunst
