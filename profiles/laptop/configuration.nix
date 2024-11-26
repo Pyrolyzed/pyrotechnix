@@ -72,6 +72,8 @@
 
   fonts.packages = with pkgs; [ 
     (nerdfonts.override { fonts = [ "JetBrainsMono" "CascadiaCode" ]; })
+    noto-fonts
+    noto-fonts-cjk-sans
   ];
 
   environment.systemPackages = with pkgs; [
