@@ -33,6 +33,7 @@
     defaultGateway = "192.168.1.1";
     nameservers = [ "1.1.1.1" ];
   };
+  services.openssh.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -97,6 +98,8 @@
     noto-fonts
     noto-fonts-cjk-sans
   ];
+
+  programs.tmux.enable = true;
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };

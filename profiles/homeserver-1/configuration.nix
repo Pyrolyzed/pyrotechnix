@@ -35,6 +35,7 @@ in {
     nameservers = [ "8.8.8.8" ];
   };
 
+  programs.tmux.enable = true;
   services.openssh = {
     enable = true;
     settings = {
