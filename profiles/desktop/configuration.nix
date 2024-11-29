@@ -112,7 +112,7 @@
       neovim
       git
       firefox
-      ungoogled-chromium
+      brave
       libreoffice
       copyq
       wl-clipboard
