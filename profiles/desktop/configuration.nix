@@ -34,7 +34,6 @@
     nameservers = [ "1.1.1.1" ];
   };
   services.openssh.enable = true;
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   time.timeZone = "America/Chicago"; 
@@ -133,6 +132,7 @@
       protonvpn-gui
       kitty
       steam
+      #emulationstation-de
       rofi-wayland
       vesktop
       spotify

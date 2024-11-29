@@ -21,6 +21,9 @@
       pkgs = import inputs.nixpkgs {
 	inherit system;
 	config.allowUnfree = true;
+	config.permittedInsecurePackages = [
+	  "freeimage-unstable-2021-11-01"
+	];
       };
       lib = import ./lib/utils.nix {
         inherit (nixpkgs) lib;
