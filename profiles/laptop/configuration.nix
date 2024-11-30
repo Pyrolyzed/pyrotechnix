@@ -73,12 +73,13 @@
   };
 
   fonts.packages = with pkgs; [ 
-    (nerdfonts.override { fonts = [ "JetBrainsMono" "CascadiaCode" ]; })
     noto-fonts
     noto-fonts-cjk-sans
   ];
 
   environment.systemPackages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.caskaydia-cove
       neovim
       git
       firefox
