@@ -70,6 +70,7 @@
       set preview_images_method kitty
     '';
   };
+
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;

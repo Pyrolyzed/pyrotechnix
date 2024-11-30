@@ -56,8 +56,21 @@
   programs.zsh.enable = true;
 
   programs.starship = {
-    # enable = true;
+    enable = true;
     enableZshIntegration = true;
+  };
+  
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.ranger = {
+    enable = true;
+    extraConfig = ''
+      set preview_images true
+      set preview_images_method kitty
+    '';
   };
 
   programs.zoxide = {
