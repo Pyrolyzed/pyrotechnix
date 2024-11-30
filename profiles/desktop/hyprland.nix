@@ -12,7 +12,7 @@
       exec-once = copyq --start-server & dunst
       
       # Set cursor (lazy way)
-      exec-once = hyprctl setcursor Bibata-Modern-Classic 24
+      # exec-once = hyprctl setcursor Bibata-Modern-Classic 24
 
 
       general { 
