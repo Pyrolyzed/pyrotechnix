@@ -49,9 +49,13 @@
 
   home.username = "pyro";
   home.homeDirectory = "/home/pyro";
-
   home.stateVersion = "24.05";
 
+  programs.zsh.initExtra = ''
+    if [ -x "$(command -v tmux)" ] && [ -n "''${DISPLAY}" ] && [ -z "''${TMUX}" ]; then
+      exec tmux new-session -A -s ''${USER} >/dev/null 2>&1
+    fi
+  '';
 
   programs.starship = {
     enable = true;
