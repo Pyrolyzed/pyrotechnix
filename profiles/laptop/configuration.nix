@@ -106,6 +106,7 @@
       cifs-utils
       obsidian
       parsec-bin
+      moonlight-qt
   ];
 
   home-manager = {

@@ -65,6 +65,12 @@
     pulse.enable = true;
   };
 
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    openFirewall = true;
+  };
+
   programs.zsh.enable = true;
   users.users.pyro = {
     shell = pkgs.zsh;
