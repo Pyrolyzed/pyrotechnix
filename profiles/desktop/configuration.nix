@@ -31,8 +31,9 @@
       };
     };
     defaultGateway = "192.168.1.1";
-    nameservers = [ "1.1.1.1" ];
+    nameservers = [ "8.8.8.8" ];
   };
+
   services.openssh.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
