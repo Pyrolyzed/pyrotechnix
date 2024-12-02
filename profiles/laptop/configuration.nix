@@ -43,6 +43,7 @@
     enable = true;
     enable32Bit = true;
   };
+
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;
@@ -51,7 +52,8 @@
     open = false;
     nvidiaSettings = true;
   };
-  programs.hyprland.enable = true;
+  #programs.hyprland.enable = true;
+  services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
@@ -83,6 +85,7 @@
       neovim
       git
       firefox
+      calibre
       fastfetch
       lsd
       protontricks
