@@ -22,8 +22,8 @@
     networkmanager.enable = true;
     interfaces.enp8s0 = {
       ipv4.addresses = [ {
-	address = "192.168.1.150";
-	prefixLength = 24;
+        address = "192.168.1.150";
+        prefixLength = 24;
       } ];
       wakeOnLan = {
         policy = [ "magic" ];
@@ -31,9 +31,10 @@
       };
     };
     defaultGateway = "192.168.1.1";
-    nameservers = [ "8.8.8.8" ];
+    nameservers = [ "192.168.1.1" ];
   };
 
+  hardware.bluetooth.enable = true;
   services.openssh.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -87,6 +88,10 @@
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
 
+  systemd.extraConfig = ''
+    DefaultTimeoutStopSec=5s
+  '';
+
   fileSystems."/home/pyro/NAS" = {
     device = "//192.168.1.200/Storage";
     fsType = "cifs";
@@ -117,6 +122,7 @@
   environment.systemPackages = with pkgs; [
       nerd-fonts.jetbrains-mono
       nerd-fonts.caskaydia-cove
+      kdePackages.bluedevil
       neovim
       git
       firefox
@@ -140,8 +146,7 @@
       steamtinkerlaunch
       protonvpn-gui
       kitty
-      steam
-      #emulationstation-de
+      emulationstation-de
       rofi-wayland
       vesktop
       spotify
