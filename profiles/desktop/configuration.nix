@@ -118,7 +118,7 @@
       "pyro" = import ./home.nix;
     };
   };
-
+  programs.steam.enable = true;
   environment.systemPackages = with pkgs; [
       nerd-fonts.jetbrains-mono
       nerd-fonts.caskaydia-cove
