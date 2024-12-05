@@ -9,14 +9,12 @@ in {
     email = mkOption {
       type = str;
       description = "Your git email";
-      # default = custom.user.email;
-      default = "your@email.com";
+      default = custom.user.email;
     };
     name = mkOption {
       type = str;
       description = "Your git name";
-      # default = custom.user.name;
-      default = "John Doe";
+      default = custom.user.name;
     };
   };
 
