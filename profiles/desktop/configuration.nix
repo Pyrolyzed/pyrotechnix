@@ -126,7 +126,7 @@
       neovim
       git
       firefox
-      brave
+      prismlauncher
       libreoffice
       copyq
       wl-clipboard
