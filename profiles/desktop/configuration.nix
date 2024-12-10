@@ -48,6 +48,9 @@
     wayland.enable = true;
   };
 
+  programs.virt-manager.enable = true;
+  virtualisation.libvirtd.enable = true;
+
   services.tailscale = {
     enable = true;
     authKeyFile = "/home/pyro/Documents/authkey";
@@ -77,7 +80,7 @@
   users.users.pyro = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "audio" "power" ]; 
+    extraGroups = [ "wheel" "video" "audio" "power" "libvirtd" ]; 
   };
 
   hardware.graphics = {
