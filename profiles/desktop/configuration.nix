@@ -122,6 +122,16 @@
     };
   };
   programs.steam.enable = true;
+
+  systemd.services.lnxlink-install = {
+    description = "Install lnxlink";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.pipx}/bin/pipx install lnxlink'";
+      ExecStop = "${pkgs.coreutils}/bin/true";
+      Type = "oneshot";
+    };
+  };
   environment.systemPackages = with pkgs; [
       nerd-fonts.jetbrains-mono
       nerd-fonts.caskaydia-cove
