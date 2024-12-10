@@ -166,6 +166,7 @@
       lsd
       wine
       wineWowPackages.waylandFull
+      pipx
   ];
 
   networking.firewall.enable = false;
