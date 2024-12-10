@@ -161,6 +161,8 @@
       calibre
       parsec-bin
       lsd
+      wine
+      wineWowPackages.waylandFull
   ];
 
   networking.firewall.enable = false;
