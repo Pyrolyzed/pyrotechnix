@@ -15,7 +15,7 @@
   };
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
-
+  environment.localBinInPath = true;
   networking = {
     hostName = "overlord";
     useDHCP = false;
@@ -122,12 +122,12 @@
     };
   };
   programs.steam.enable = true;
-
-  systemd.services.lnxlink-install = {
-    description = "Install lnxlink";
-    wantedBy = [ "multi-user.target" ];
+  systemd.user.services.lnxlink-pyro = {
+    enable = true;
+    description = "Manual service for lnxlink since it won't autostart";
+    wantedBy = [ "default.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.pipx}/bin/pipx install lnxlink'";
+      ExecStart = "${pkgs.bash}/bin/bash -c '/home/pyro/.local/bin/lnxlink -c /home/pyro/.config/lnxlink/lnxlink.yaml'";
       ExecStop = "${pkgs.coreutils}/bin/true";
       Type = "oneshot";
     };
@@ -166,8 +166,9 @@
       mangohud
       obs-studio
       qbittorrent
-      vlc
       cifs-utils
+      pipx
+      vlc
       obsidian
       lvm2
       clonehero
@@ -176,7 +177,6 @@
       lsd
       wine
       wineWowPackages.waylandFull
-      pipx
   ];
 
   networking.firewall.enable = false;
