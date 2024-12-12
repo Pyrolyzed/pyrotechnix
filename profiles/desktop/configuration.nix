@@ -4,9 +4,9 @@
   imports =
     [ 
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
+      inputs.home-manager.nixosModules.default 
     ];
-
+ # nixpkgs.overlays = [ (import ./es-de.nix) ];
   boot.loader.grub = {
     enable = true;
     efiSupport = true;
@@ -163,6 +163,7 @@
       rofi-wayland
       vesktop
       spotify
+      appimage-run
       mangohud
       obs-studio
       qbittorrent
@@ -177,6 +178,16 @@
       lsd
       wine
       wineWowPackages.waylandFull
+      emulationstation-de
+      duckstation
+      flycast
+      melonDS
+      pcsx2
+      rpcs3
+      retroarchFull
+      cemu
+      ppsspp-qt
+      dolphin-emu
   ];
 
   networking.firewall.enable = false;
