@@ -74,6 +74,11 @@ in {
   environment.systemPackages = with pkgs; [
       neovim
       git
+      lsd
+      unrar
+      unzip
+      btop
+      fastfetch
 
       # For clearing the terminal while in SSH
       kitty
