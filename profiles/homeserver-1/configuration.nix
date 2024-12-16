@@ -13,6 +13,7 @@
   # Unsure about this in a server environment
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
+  # This machine advertises routes on the Tailnet so other local devices don't need tailscale
   services.tailscale = {
     enable = true;
     authKeyFile = "/home/pyro/authkey";
@@ -20,10 +21,6 @@
       "--advertise-routes=192.168.1.0/24"
       "--accept-routes"
     ];
-  };
-
-  systemd.services = {
-    NetworkManager-wait-online.enable = false;
   };
 
   networking = {

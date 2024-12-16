@@ -15,6 +15,11 @@ in {
     };
   };
 
+  # Was giving me build issues
+  systemd.services = {
+    NetworkManager-wait-online.enable = false;
+  };
+
   users.users.pyro = {
     isNormalUser = mkDefault true;
     extraGroups = mkDefault [ "wheel" "power" "video" "audio" ];
