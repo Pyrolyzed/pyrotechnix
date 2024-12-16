@@ -4,9 +4,10 @@
   imports =
     [ 
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default 
+      inputs.home-manager.nixosModules.default
+      ../default
     ];
- # nixpkgs.overlays = [ (import ./es-de.nix) ];
+
   boot.loader.grub = {
     enable = true;
     efiSupport = true;
@@ -35,11 +36,6 @@
   };
 
   hardware.bluetooth.enable = true;
-  services.openssh.enable = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  time.timeZone = "America/Chicago"; 
-  i18n.defaultLocale = "en_US.UTF-8";
 
   programs.hyprland.enable = true;
   services.desktopManager.plasma6.enable = true;
@@ -79,7 +75,6 @@
   programs.zsh.enable = true;
   users.users.pyro = {
     shell = pkgs.zsh;
-    isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" "power" "libvirtd" ]; 
   };
 
@@ -189,8 +184,6 @@
       ppsspp-qt
       dolphin-emu
   ];
-
-  networking.firewall.enable = false;
 
   system.stateVersion = "24.05"; 
 }

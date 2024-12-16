@@ -4,6 +4,7 @@
   imports =
     [ 
       ./hardware-configuration.nix
+      ../default
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -11,11 +12,6 @@
 
   networking.hostName = "duke";
   networking.networkmanager.enable = true;
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  time.timeZone = "America/Chicago"; 
-  i18n.defaultLocale = "en_US.UTF-8";
 
   services.tailscale = {
     enable = true;
@@ -26,15 +22,12 @@
     ];
   };
 
-  services.openssh.enable = true;
-
   services.pipewire = {
     enable = true;
     pulse.enable = true;
   };
 
   users.users.pyro = {
-    isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" "power" ]; 
     shell = pkgs.zsh;
   };
@@ -52,7 +45,7 @@
     open = false;
     nvidiaSettings = true;
   };
-  #programs.hyprland.enable = true;
+
   services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm = {
     enable = true;
@@ -118,7 +111,6 @@
       "pyro" = import ./home.nix;
     };
   };
-  networking.firewall.enable = false;
 
   system.stateVersion = "24.05"; 
 }
