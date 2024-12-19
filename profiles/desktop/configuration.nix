@@ -14,7 +14,7 @@
     devices = [ "nodev" ];
     efiInstallAsRemovable = true;
   };
-
+  virtualisation.docker.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
   environment.localBinInPath = true;
   networking = {
@@ -75,7 +75,7 @@
   programs.zsh.enable = true;
   users.users.pyro = {
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "video" "audio" "power" "libvirtd" ]; 
+    extraGroups = [ "wheel" "video" "audio" "power" "libvirtd" "docker" ]; 
   };
 
   hardware.graphics = {
@@ -134,6 +134,7 @@
       neovim
       git
       firefox
+      filezilla
       lutris
       prismlauncher
       libreoffice

@@ -85,6 +85,7 @@
     EDITOR = "nvim";
     NIXOS_OZONE_WL = 1;
     ESDE_APPDATA_DIR = "~/.config/ES-DE";
+    MANPAGER = "nvim +Man!";
   };
 
   home.file.".config/user-dirs.dirs" = {
