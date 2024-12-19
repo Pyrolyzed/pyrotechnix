@@ -134,6 +134,7 @@
       neovim
       git
       firefox
+      lutris
       prismlauncher
       libreoffice
       copyq
