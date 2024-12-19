@@ -67,7 +67,7 @@
     enableZshIntegration = true;
   };
 
-  programs.lf = {
+  programs.ranger = {
     enable = true;
   };
 
