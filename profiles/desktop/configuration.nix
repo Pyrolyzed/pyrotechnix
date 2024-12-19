@@ -141,6 +141,8 @@
       copyq
       wl-clipboard
       grim
+      tealdeer
+      wikiman
       slurp
       dunst
       via
