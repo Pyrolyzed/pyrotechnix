@@ -142,6 +142,7 @@
       wl-clipboard
       grim
       tealdeer
+      manix
       wikiman
       slurp
       dunst
