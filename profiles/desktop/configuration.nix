@@ -148,6 +148,7 @@
       grim
       tealdeer
       manix
+      vscode
       wikiman
       slurp
       dunst
