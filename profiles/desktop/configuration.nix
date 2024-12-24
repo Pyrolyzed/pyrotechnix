@@ -47,6 +47,8 @@
   programs.virt-manager.enable = true;
   virtualisation.libvirtd.enable = true;
 
+  programs.ssh.startAgent = true;
+
   services.tailscale = {
     enable = true;
     authKeyFile = "/home/pyro/Documents/authkey";
