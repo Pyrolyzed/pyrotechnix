@@ -134,6 +134,9 @@
       neovim
       git
       firefox
+      anki
+      ciscoPacketTracer8
+      arma3-unix-launcher
       filezilla
       lutris
       prismlauncher
