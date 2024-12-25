@@ -136,6 +136,7 @@
       neovim
       git
       firefox
+      streamdeck-ui
       anki
       ciscoPacketTracer8
       arma3-unix-launcher
