@@ -29,14 +29,25 @@
 	cd = "z";
       };
     };
-    scripts.enable = true;
-    scripts.script.rebuild = {
-      text = ''
-        #!/usr/bin/env bash
-	cd /home/pyro/pyrotechnix
-	sudo nixos-rebuild switch --flake .#desktop
-      '';
-      runtimeInputs = [ ];
+    scripts = {
+      enable = true;
+      script = {
+	rebuild = {
+	  text = ''
+	    #!/usr/bin/env bash
+	    cd /home/pyro/pyrotechnix
+	    sudo nixos-rebuild switch --flake .#desktop
+	  '';
+	};
+
+	build-iso = {
+	  text = ''
+	  #!/usr/bin/env bash
+	  cd /home/pyro/pyrotechnix
+	  nix build .#nixosConfigurations.isoInstaller.config.system.build.isoImage
+	  '';
+	};
+      };
     };
   };
 

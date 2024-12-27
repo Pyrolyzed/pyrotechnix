@@ -142,6 +142,7 @@
       arma3-unix-launcher
       filezilla
       lutris
+      kdePackages.kde-cli-tools
       prismlauncher
       libreoffice
       onlyoffice-desktopeditors

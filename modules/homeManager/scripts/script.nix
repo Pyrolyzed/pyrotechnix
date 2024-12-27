@@ -16,6 +16,7 @@ in {
 	  runtimeInputs = mkOption {
 	    type = listOf str;
 	    description = "Packages used in the script";
+	    default = [ ];
 	  };
 	};
       });
