@@ -89,12 +89,12 @@
     MANPAGER = "nvim +Man!";
   };
 
-  home.file.".config/user-dirs.dirs" = {
-    enable = true;
-    text = ''
-      XDG_DOWNLOAD_DIR="''$HOME/Downloads"
-    '';
-  };
+#  home.file.".config/user-dirs.dirs" = {
+#    enable = true;
+#    text = ''
+#      XDG_DOWNLOAD_DIR="''$HOME/Downloads"
+#    '';
+#  };
   home.file.".config/MangoHud/MangoHud.conf" = {
     enable = true;
     text = ''

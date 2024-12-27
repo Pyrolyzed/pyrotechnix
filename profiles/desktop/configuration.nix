@@ -144,6 +144,7 @@
       lutris
       prismlauncher
       libreoffice
+      onlyoffice-desktopeditors
       copyq
       wl-clipboard
       grim
@@ -160,6 +161,7 @@
       unzip
       fastfetch
       pavucontrol
+      moonlight-qt
       btop
       protontricks
       protonup-qt
