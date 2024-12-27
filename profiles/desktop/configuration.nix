@@ -136,7 +136,7 @@
       neovim
       git
       firefox
-      streamdeck-ui
+      streamcontroller
       anki
       ciscoPacketTracer8
       arma3-unix-launcher
@@ -171,7 +171,7 @@
       kitty
       emulationstation-de
       rofi-wayland
-      vesktop
+      discord
       spotify
       appimage-run
       mangohud
