@@ -159,6 +159,7 @@
       syncthing
       yt-dlp
       unrar
+      sshpass
       unzip
       fastfetch
       pavucontrol
