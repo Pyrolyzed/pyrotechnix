@@ -85,7 +85,7 @@
     enable32Bit = true;
   };
 
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = [ "amdgpu" "dm-mirror" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   systemd.extraConfig = ''
@@ -136,6 +136,7 @@
       neovim
       git
       firefox
+      steamtinkerlaunch
       streamcontroller
       anki
       ciscoPacketTracer8
