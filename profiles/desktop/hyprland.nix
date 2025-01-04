@@ -3,7 +3,7 @@
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.extraConfig = ''
       monitor=DP-3,3840x2160@240,0x0,1.5
-      monitor=DP-1,2560x1440@144,0x0,1.25
+      monitor=DP-1,2560x1440@144,2560x0,1.25
 
       xwayland {
 	force_zero_scaling = true

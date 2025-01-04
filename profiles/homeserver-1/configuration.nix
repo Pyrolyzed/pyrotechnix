@@ -1,10 +1,13 @@
 { config, lib, pkgs, inputs, ... }:
-{
+let 
+  kubeMasterIP = "127.0.0.1";
+  kubeMasterHostname = "homeserver-1";
+  kubeMasterAPIServerPort = 6443;
+in {
   imports =
     [ 
-      ./hardware-configuration.nix
       ./disk-config.nix
-      ../server
+      ../homeserver-common
       inputs.home-manager.nixosModules.default
     ];
 
@@ -24,6 +27,24 @@
       address = "192.168.1.101";
       prefixLength = 24;
     } ];
+  };
+
+
+  environment.systemPackages = with pkgs; [
+    kubectl
+    kubernetes
+  ];
+
+  services.kubernetes = {
+    roles = [ "master" "node" ];
+    masterAddress = kubeMasterHostname;
+    apiserverAddress = "https://${kubeMasterHostname}:${toString kubeMasterAPIServerPort}";
+    easyCerts = true;
+    apiserver = {
+      securePort = kubeMasterAPIServerPort;
+      advertiseAddress = kubeMasterIP;
+    };
+    addons.dns.enable = true;
   };
 
   virtualisation.docker.enable = true;
