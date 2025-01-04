@@ -3,17 +3,24 @@
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.extraConfig = ''
       monitor=DP-3,3840x2160@240,0x0,1.5
+      monitor=DP-1,2560x1440@144,0x0,1.25
 
       xwayland {
 	force_zero_scaling = true
       }
 
       # Autostart programs
-      exec-once = copyq --start-server & dunst
+      exec-once = copyq --start-server & dunst & streamcontroller
       
       # Set cursor (lazy way)
       # exec-once = hyprctl setcursor Bibata-Modern-Classic 24
 
+      workspace = 1, monitor:DP-3, default:true
+      workspace = 2, monitor:DP-3
+      workspace = 3, monitor:DP-3
+      workspace = 4, monitor:DP-1, default:true
+      workspace = 5, monitor:DP-1
+      workspace = 6, monitor:DP-1
 
       general { 
 	  gaps_in = 10
