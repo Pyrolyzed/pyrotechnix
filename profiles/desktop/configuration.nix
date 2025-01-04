@@ -32,13 +32,13 @@
       };
     };
     defaultGateway = "192.168.1.1";
-    nameservers = [ "1.1.1.1" ];
+    nameservers = [ "192.168.1.132" ];
   };
 
   hardware.bluetooth.enable = true;
 
   programs.hyprland.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  #services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
