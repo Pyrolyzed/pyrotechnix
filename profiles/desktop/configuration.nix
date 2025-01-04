@@ -137,6 +137,7 @@
       git
       firefox
       steamtinkerlaunch
+      python314
       streamcontroller
       anki
       ciscoPacketTracer8
