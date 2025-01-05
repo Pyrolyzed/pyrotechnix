@@ -108,6 +108,8 @@
   fonts.packages = with pkgs; [ 
     noto-fonts
     noto-fonts-cjk-sans
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.caskaydia-cove
   ];
 
   programs.tmux.enable = true;
@@ -130,8 +132,6 @@
     };
   };
   environment.systemPackages = with pkgs; [
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.caskaydia-cove
       kdePackages.bluedevil
       neovim
       git

@@ -73,7 +73,7 @@
     $terminal = kitty
     $menu = rofi -show drun
     $browser = firefox
-    $chat = vesktop --enable-features=UseOzonePlatform --ozone-platform=wayland
+    $chat = discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
     $mainMod = SUPER 
 
