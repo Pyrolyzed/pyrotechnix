@@ -110,6 +110,7 @@
     noto-fonts-cjk-sans
     nerd-fonts.jetbrains-mono
     nerd-fonts.caskaydia-cove
+    poppins
   ];
 
   programs.tmux.enable = true;
@@ -136,6 +137,7 @@
       neovim
       git
       firefox
+      qalculate-gtk
       steamtinkerlaunch
       python314
       streamcontroller
@@ -155,6 +157,7 @@
       manix
       vscode
       wikiman
+      kdePackages.dolphin
       slurp
       dunst
       via

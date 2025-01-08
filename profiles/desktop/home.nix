@@ -3,7 +3,8 @@
 {
   imports = [
     ../../modules/homeManager
-    ./hyprland.nix
+    #./hyprland.nix
+    ./hyprland-new.nix
   ];
 
   custom = {
@@ -51,17 +52,17 @@
     };
   };
 
- # home.pointerCursor = {
- #   gtk.enable = true;
- #   package = pkgs.bibata-cursors;
- #   name = "Bibata-Modern-Classic";
- #   size = 24;
- # };
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 24;
+  };
 
   home.username = "pyro";
   home.homeDirectory = "/home/pyro";
   home.stateVersion = "24.05";
-
+  programs.kitty.settings.cursor_trail = 3;
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
