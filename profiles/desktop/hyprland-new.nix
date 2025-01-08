@@ -39,15 +39,7 @@
   };
 
   wayland.windowManager.hyprland = {
-    settings = let
-      makeWorkspace = workspace: monitor:
-	"${toString workspace}, monitor:${monitor}";
-      generateWorkspaces = range: monitor:
-	map (w: makeWorkspace w monitor) range;
-    in {
-      xwayland = {
-        force_zero_scaling = true;
-      };
+    settings = {
       monitor = map (m:
 	let
 	  resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
@@ -57,9 +49,19 @@
       )
       (config.custom.windowManager.hyprland.monitors);
 
+      xwayland = {
+        force_zero_scaling = true;
+      };
+
       exec-once = "copyq --start-server & dunst & streamcontroller";
 
-      workspace = (generateWorkspaces (lib.range 1 3) "DP-1") ++ (generateWorkspaces (lib.range 4 6) "DP-3") ++ (generateWorkspaces (lib.range 7 9) "HDMI-A-1");
+      workspace = let
+	makeWorkspace = workspace: monitor:
+	  "${toString workspace}, monitor:${monitor}";
+	generateWorkspaces = range: monitor:
+	  map (w: makeWorkspace w monitor) range;
+      in 
+      (generateWorkspaces (lib.range 1 3) "DP-1") ++ (generateWorkspaces (lib.range 4 6) "DP-3") ++ (generateWorkspaces (lib.range 7 9) "HDMI-A-1");
 
       general = {
         gaps_in = 10;
