@@ -109,6 +109,7 @@
       "$menu" = "rofi -show drun";
       "$browser" = "firefox";
       "$chat" = "discord --enable-features=UseOzonePlatform --ozone-platform=wayland";
+      "$files" = "thunar";
 
       bind = [
         "$mod SHIFT, S, exec, grim -g \"$(slurp -d)\" - | wl-copy"
@@ -116,6 +117,7 @@
 	"$mod, Q, exec, $terminal"
 	"$mod, R, exec, $menu"
 	"$mod, D, exec, $chat"
+	"$mod, E, exec, $files"
 	"$mod, C, killactive"
 	"$mod, M, exit"
 	"$mod, V, togglefloating"

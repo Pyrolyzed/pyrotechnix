@@ -1,5 +1,4 @@
 { config, lib, pkgs, inputs, ... }:
-
 {
   imports =
     [ 
@@ -17,21 +16,25 @@
   virtualisation.docker.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
   environment.localBinInPath = true;
+
   networking = {
     hostName = "overlord";
     useDHCP = false;
     networkmanager.enable = true;
     interfaces.enp8s0 = {
       ipv4.addresses = [ {
-        address = "192.168.1.150";
-        prefixLength = 24;
+      	address = "192.168.1.150";
+	prefixLength = 24;
       } ];
       wakeOnLan = {
         policy = [ "magic" ];
 	enable = true;
       };
     };
-    defaultGateway = "192.168.1.1";
+    defaultGateway = {
+      address = "192.168.1.1";
+      interface = "enp8s0";
+    };
     nameservers = [ "192.168.1.132" ];
   };
 
@@ -142,12 +145,13 @@
       python314
       streamcontroller
       anki
-      ciscoPacketTracer8
       arma3-unix-launcher
       filezilla
       lutris
       kdePackages.kde-cli-tools
       prismlauncher
+      kdePackages.qtsvg
+      kdePackages.qt6ct
       libreoffice
       onlyoffice-desktopeditors
       copyq
@@ -157,7 +161,7 @@
       manix
       vscode
       wikiman
-      kdePackages.dolphin
+      xfce.thunar
       slurp
       dunst
       via

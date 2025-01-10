@@ -3,8 +3,7 @@
 {
   imports = [
     ../../modules/homeManager
-    #./hyprland.nix
-    ./hyprland-new.nix
+    ./hyprland.nix
   ];
 
   custom = {
@@ -52,8 +51,33 @@
     };
   };
 
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+    iconTheme = {
+      package = pkgs.adwaita-icon-theme;
+      name = "Adwaita-dark";
+    };
+  };
+
+  qt = {
+    enable = true;
+    style = {
+      name = "adwaita-dark";
+      package = pkgs.adwaita-qt6;
+    };
+    platformTheme.name = "qtct";
+  };
+
   home.pointerCursor = {
     gtk.enable = true;
+    hyprcursor.enable = true;
+    hyprcursor.size = 24;
+    x11.enable = true;
+    x11.defaultCursor = "left_ptr";
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Classic";
     size = 24;
@@ -62,7 +86,7 @@
   home.username = "pyro";
   home.homeDirectory = "/home/pyro";
   home.stateVersion = "24.05";
-  programs.kitty.settings.cursor_trail = 3;
+  #programs.kitty.settings.cursor_trail = 3;
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
@@ -92,14 +116,9 @@
     NIXOS_OZONE_WL = 1;
     ESDE_APPDATA_DIR = "~/.config/ES-DE";
     MANPAGER = "nvim +Man!";
+    QT_QPA_PLATFORM = "wayland";
   };
 
-#  home.file.".config/user-dirs.dirs" = {
-#    enable = true;
-#    text = ''
-#      XDG_DOWNLOAD_DIR="''$HOME/Downloads"
-#    '';
-#  };
   home.file.".config/MangoHud/MangoHud.conf" = {
     enable = true;
     text = ''
