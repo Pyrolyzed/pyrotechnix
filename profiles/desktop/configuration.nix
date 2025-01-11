@@ -12,7 +12,15 @@
     efiSupport = true;
     devices = [ "nodev" ];
     efiInstallAsRemovable = true;
+    useOSProber = true;
+    theme = "${pkgs.catppuccin-grub}";
+    font = "${pkgs.poppins}/share/fonts/truetype/Poppins-Regular.ttf";
+    fontSize = 24;
+    extraConfig = ''
+      set timeout=-1
+    '';
   };
+
   virtualisation.docker.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
   environment.localBinInPath = true;
@@ -23,7 +31,7 @@
     networkmanager.enable = true;
     interfaces.enp8s0 = {
       ipv4.addresses = [ {
-      	address = "192.168.1.150";
+      	address = "192.168.1.98";
 	prefixLength = 24;
       } ];
       wakeOnLan = {
