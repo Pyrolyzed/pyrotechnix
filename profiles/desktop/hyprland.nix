@@ -56,10 +56,10 @@
       exec-once = "copyq --start-server & dunst & streamcontroller";
 
       workspace = let
-	makeWorkspace = workspace: monitor:
-	  "${toString workspace}, monitor:${monitor}";
+	makeWorkspace = workspace: monitor: range:
+	  "${toString workspace}, monitor:${monitor}, default:${lib.boolToString ((builtins.elemAt range 0) == workspace)}";
 	generateWorkspaces = range: monitor:
-	  map (w: makeWorkspace w monitor) range;
+	  map (w: makeWorkspace w monitor range) range;
       in 
       (generateWorkspaces (lib.range 1 3) "DP-1") ++ (generateWorkspaces (lib.range 4 6) "DP-3") ++ (generateWorkspaces (lib.range 7 9) "HDMI-A-1");
 

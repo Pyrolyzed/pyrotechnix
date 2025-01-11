@@ -14,6 +14,7 @@
     efiInstallAsRemovable = true;
     useOSProber = true;
     theme = "${pkgs.catppuccin-grub}";
+    gfxmodeEfi = "3840x2160";
     font = "${pkgs.poppins}/share/fonts/truetype/Poppins-Regular.ttf";
     fontSize = 24;
     extraConfig = ''
