@@ -1,0 +1,22 @@
+diff --git a/theme.txt b/theme.txt
+index 84cb2c8..b3f1abd 100755
+--- a/src/catppuccin-mocha-grub-theme/theme.txt
++++ b/src/catppuccin-mocha-grub-theme/theme.txt
+@@ -6,7 +6,7 @@ title-text: ""
+ desktop-image: "background.png"
+ desktop-image-scale-method: "stretch"
+ desktop-color: "#1E1E2E"
+-terminal-font: "Unifont Regular 16"
++terminal-font: "Poppins Regular 24"
+ terminal-left: "0"
+ terminal-top: "0"
+ terminal-width: "100%"
+@@ -26,7 +26,7 @@ terminal-border: "0"
+   top = 60%
+   width = 480
+   height = 30%
+-  item_font = "Unifont Regular 16"
++  item_font = "Poppins Regular 24"
+   item_color = "#CDD6F4"
+   selected_item_color = "#CDD6F4"
+   icon_width = 32

@@ -15,7 +15,7 @@
     useOSProber = true;
     theme = "${pkgs.catppuccin-grub.overrideAttrs (old: {
       patches = (old.patches or []) ++ [
-        ./grub_patch.patch
+        ../../patches/grub_patch.patch
       ];
     })}";
     gfxmodeEfi = "3840x2160";
