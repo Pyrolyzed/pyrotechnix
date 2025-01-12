@@ -102,7 +102,19 @@
 	preserve_split = true;
       };
 
-      windowrulev2 = "suppressevent maximize, class:.*";
+      "$scratch_term" = "class:^(scratch_term)$";
+      "$scratch_spotify" = "class:^(scratch_spotify)$";
+      windowrulev2 = [
+	"suppressevent maximize, class:.*"
+	"float,$scratch_term"
+	"size 80% 85%, $scratch_term"
+	"workspace special:scratch_term,$scratch_term"
+	"center, $scratch_term"
+	"float,$scratch_spotify"
+	"size 80% 85%, $scratch_spotify"
+	"workspace special:scratch_spotify,$scratch_spotify"
+	"center, $scratch_spotify"
+      ];
 
       "$mod" = "SUPER";
       "$terminal" = "kitty";
@@ -113,6 +125,10 @@
 
       bind = [
         "$mod SHIFT, S, exec, grim -g \"$(slurp -d)\" - | wl-copy"
+	"$mod, Z, exec, if hyprctl clients | grep scratch_term; then echo 'scratch_term found'; else kitty --class scratch_term; fi"
+	"$mod, Z, togglespecialworkspace, scratch_term"
+	"$mod, P, exec, if hyprctl clients | grep scratch_spotify; then echo 'scratch_spotify found'; else spotify --class scratch_spotify; fi"
+	"$mod, P, togglespecialworkspace, scratch_spotify"
 	"$mod, F, exec, $browser"
 	"$mod, Q, exec, $terminal"
 	"$mod, R, exec, $menu"
@@ -122,12 +138,10 @@
 	"$mod, M, exit"
 	"$mod, V, togglefloating"
 	"$mod, X, fullscreen"
-	"$mod, S, exec, pseudo"
-	"$mod, S, exec, resizeactive, exact 50% 50%"
-	"$mod, h, movefocus, l"
-	"$mod, l, movefocus, r"
-	"$mod, k, movefocus, u"
-	"$mod, j, movefocus, d"
+	"$mod, H, movefocus, l"
+	"$mod, L, movefocus, r"
+	"$mod, K, movefocus, u"
+	"$mod, J, movefocus, d"
 	"$mod, 1, workspace, 1"
 	"$mod, 2, workspace, 2"
 	"$mod, 3, workspace, 3"

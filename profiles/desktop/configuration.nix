@@ -13,7 +13,11 @@
     devices = [ "nodev" ];
     efiInstallAsRemovable = true;
     useOSProber = true;
-    theme = "${pkgs.catppuccin-grub}";
+    theme = "${pkgs.catppuccin-grub.overrideAttrs (old: {
+      patches = (old.patches or []) ++ [
+        ./grub_patch.patch
+      ];
+    })}";
     gfxmodeEfi = "3840x2160";
     font = "${pkgs.poppins}/share/fonts/truetype/Poppins-Regular.ttf";
     fontSize = 24;
@@ -29,10 +33,10 @@
   networking = {
     hostName = "overlord";
     useDHCP = false;
-    networkmanager.enable = true;
+    #networkmanager.enable = true;
     interfaces.enp8s0 = {
       ipv4.addresses = [ {
-      	address = "192.168.1.98";
+      	address = "192.168.1.97";
 	prefixLength = 24;
       } ];
       wakeOnLan = {
