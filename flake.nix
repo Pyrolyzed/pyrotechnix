@@ -30,51 +30,22 @@
 	inherit pkgs;
 	inherit (inputs) home-manager;
       };
-    in {
-      nixosConfigurations = {
-	# Desktop configuration
-	desktop = nixpkgs.lib.nixosSystem {
-	  inherit pkgs;
-	  specialArgs = { inherit inputs; };
-	  modules = [
-	    ./profiles/desktop/configuration.nix
-	    inputs.home-manager.nixosModules.default
-	  ];
-	};
-
-	# Laptop configuration
-	laptop = nixpkgs.lib.nixosSystem {
-	  inherit pkgs;
-	  specialArgs = { inherit inputs; };
-	  modules = [
-	    ./profiles/laptop/configuration.nix
-	    inputs.home-manager.nixosModules.default
-	  ];
-	};
-
-	# Server configuration
-	homeserver-1 = nixpkgs.lib.nixosSystem {
-	  inherit pkgs;
-	  specialArgs = { inherit inputs; };
-	  modules = [
-	    ./profiles/homeserver-1/configuration.nix
-	    ./profiles/homeserver-1/hardware-configuration.nix
-	    inputs.disko.nixosModules.default
-
-	    # Not sure if necessary for a server configuration
-	    inputs.home-manager.nixosModules.default
-	  ];
-	};
-
-	# ISO Installer
-	isoInstaller = nixpkgs.lib.nixosSystem {
-	  inherit pkgs;
-	  specialArgs = { inherit inputs; };
-	  modules = [
-	    ./profiles/iso/configuration.nix
-	  ];
+      createCommonArgs = system: {
+        inherit
+	  self
+	  inputs
+	  nixpkgs
+	  lib
+	  pkgs
+	  system
+	  ;
+        specialArgs = {
+	  inherit self inputs;
 	};
       };
+      commonArgs = createCommonArgs system;
+    in {
+      nixosConfigurations = (import ./hosts/nixos.nix commonArgs);
       inherit lib self;
     };
 }
