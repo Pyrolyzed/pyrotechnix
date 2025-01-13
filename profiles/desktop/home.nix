@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
@@ -51,6 +51,24 @@
     };
   };
 
+  systemd.user.services =
+    let
+      graphicalTarget = config.wayland.systemd.target;
+    in
+    {
+      swww = {
+        Install.WantedBy = [ graphicalTarget ];
+        Unit = {
+          Description = "Wayland wallpaper daemon";
+          After = [ graphicalTarget ];
+          PartOf = [ graphicalTarget ];
+        };
+        Service = {
+          ExecStart = lib.getExe' pkgs.swww "swww-daemon";
+          Restart = "on-failure";
+        };
+      };
+    };
   gtk = {
     enable = true;
     theme = {

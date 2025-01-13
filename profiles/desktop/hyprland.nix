@@ -103,7 +103,7 @@
       };
 
       "$scratch_term" = "class:^(scratch_term)$";
-      "$scratch_spotify" = "class:^(scratch_spotify)$";
+      "$scratch_spotify" = "class:^(spotify)$";
       windowrulev2 = [
 	"suppressevent maximize, class:.*"
 	"float,$scratch_term"

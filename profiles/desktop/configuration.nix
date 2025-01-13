@@ -153,6 +153,7 @@
       neovim
       git
       firefox
+      swww
       qalculate-gtk
       steamtinkerlaunch
       python314
