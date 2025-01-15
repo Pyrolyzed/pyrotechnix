@@ -12,12 +12,11 @@
 
   networking.hostName = "duke";
   networking.networkmanager.enable = true;
-
+  #networking.nameservers = [ "192.168.1.132" ];
   services.tailscale = {
     enable = true;
     authKeyFile = "/home/pyro/Documents/authkey";
     extraUpFlags = [
-      "--advertise-routes=192.168.1.0/24"
       "--accept-routes"
     ];
   };
@@ -55,12 +54,12 @@
 
   programs.zsh.enable = true;
 
-  fileSystems."/home/pyro/NAS" = {
-    device = "//192.168.1.200/Storage";
-    fsType = "cifs";
+  #fileSystems."/home/pyro/NAS" = {
+  #  device = "//192.168.1.200/Storage";
+  #  fsType = "cifs";
     # Plain text password because I'm lazy and also because it's not exposed to the internet and also I don't use it anywhere else.
-    options = [ "uid=1000" "username=pyro" "password=spoons" "x-systemd.automount" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s" ];
-  };
+  #  options = [ "uid=1000" "username=pyro" "password=spoons" "x-systemd.automount" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s" ];
+  #};
 
   fileSystems."/home/pyro/Storage" = {
     device = "/dev/sda1";
