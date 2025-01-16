@@ -10,9 +10,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
-  networking.hostName = "duke";
-  networking.networkmanager.enable = true;
-  #networking.nameservers = [ "192.168.1.132" ];
+  networking = {
+    hostName = "duke";
+    networkmanager.enable = true;
+  };
   services.tailscale = {
     enable = true;
     authKeyFile = "/home/pyro/Documents/authkey";
