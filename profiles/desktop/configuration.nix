@@ -29,7 +29,10 @@
   virtualisation.docker.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
   environment.localBinInPath = true;
-
+  services.ollama = {
+    enable = true;
+    loadModels = [ "llama3" ];
+  };
   networking = {
     hostName = "overlord";
     useDHCP = false;
