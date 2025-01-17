@@ -104,13 +104,4 @@
       parsec-bin
       moonlight-qt
   ];
-
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "pyro" = import ./home.nix;
-    };
-  };
-
-  system.stateVersion = "24.05"; 
 }

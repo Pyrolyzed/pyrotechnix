@@ -25,11 +25,13 @@
 	  "freeimage-unstable-2021-11-01"
 	];
       };
+
       lib = import ./lib/utils.nix {
         inherit (nixpkgs) lib;
 	inherit pkgs;
 	inherit (inputs) home-manager;
       };
+
       createCommonArgs = system: {
         inherit
 	  self
@@ -43,7 +45,7 @@
 	  inherit self inputs;
 	};
 	# user = "test";
-	# modules = [ ];
+	modules = [ ];
       };
       commonArgs = createCommonArgs system;
     in {

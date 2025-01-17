@@ -1,9 +1,8 @@
-# This file shamelessly copied from the one and only iynaix.
 { inputs, lib, specialArgs, modules, user ? "pyro", ...}@args:
 let
   mkConfiguration =
     host: { pkgs ? args.pkgs, }:
-      lib.nixosSystem {
+      inputs.nixpkgs.lib.nixosSystem {
         inherit pkgs;
 
 	specialArgs = specialArgs // {
@@ -13,11 +12,10 @@ let
 	  isLaptop = host == "duke";
 	  isVm = host == "vm";
 	  isServer = host == "homeserver-1" || host == "homeserver-2" || host == "homeserver-3";
-	  dotfiles = "/home/${user}/Projects/dotfiles";
 	};
 
 	modules = modules ++ [
-	  ./${host} # Host specific configuration
+	  ./${host}/configuration.nix # Host specific configuration
 	  ./${host}/hardware.nix # Host hardware configuration
 	  ../nixos # Common nixos configuration
 	  ../overlays # Access to overlays
@@ -32,7 +30,6 @@ let
 		isLaptop = host == "duke";
 		isVm = host == "vm";
 	        isServer = host == "homeserver-1" || host == "homeserver-2" || host == "homeserver-3";
-		dotfiles = "/home/${user}/Projects/dotfiles";
 	      };
 
 	      users.${user} = {
@@ -44,16 +41,11 @@ let
 	    };
 	  }
           inputs.disko.nixosModules.default # Disko just in case the host uses it.
-	  # Alias for home-manager.
-	  (lib.mkAliasOptionModule [ "hm" ] [
-	    "home-manager"
-	    "users"
-	    user
-	  ])
 	];
       };
+  getHomeservers = range: map (n: "homeserver-${n}") range;
+  mkHomeservers = range: lib.attrsets.genAttrs (getHomeservers range) (name: mkConfiguration name);
 in {
   emperor = mkConfiguration "emperor" { };
   duke = mkConfiguration "duke" { };
-  homeserver-1 = mkConfiguration "homeserver-1" { };
-}
+} // mkHomeservers lib.range (1 3)

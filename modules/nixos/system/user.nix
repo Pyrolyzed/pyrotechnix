@@ -1,6 +1,6 @@
 { lib, pkgs, config, ... }:
 let
-  inherit (lib) mkOption mkEnableOption mkIf replaceStrings toLower toOneWord;
+  inherit (lib) mkOption mkEnableOption mkIf replaceStrings toLower;
   inherit (lib.types) str path listOf;
   cfg = config.custom.user;
 in {
@@ -24,7 +24,7 @@ in {
 
     home = mkOption {
       type = path;
-      default = "/home/${toLower toOneWord cfg.name}/"
+      default = "/home/${toLower custom.toOneWord cfg.name}/"
     };
 
     shell = mkOption {

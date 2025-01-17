@@ -1,12 +1,5 @@
 { config, lib, pkgs, inputs, ... }:
 {
-  imports =
-    [ 
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
-      ../default
-    ];
-
   boot.loader.grub = {
     enable = true;
     efiSupport = true;
@@ -27,11 +20,10 @@
   };
 
   virtualisation.docker.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_zen;
   environment.localBinInPath = true;
 
   networking = {
-    hostName = "overlord";
+    hostName = "emperor";
     useDHCP = false;
     #networkmanager.enable = true;
     interfaces.enp8s0 = {
@@ -48,7 +40,6 @@
       address = "192.168.1.1";
       interface = "enp8s0";
     };
-    nameservers = [ "192.168.1.132" ];
   };
 
   hardware.bluetooth.enable = true;
@@ -104,10 +95,6 @@
   boot.initrd.kernelModules = [ "amdgpu" "dm-mirror" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  systemd.extraConfig = ''
-    DefaultTimeoutStopSec=5s
-  '';
-
   fileSystems."/home/pyro/NAS" = {
     device = "//192.168.1.200/Storage";
     fsType = "cifs";
@@ -131,12 +118,6 @@
 
   programs.tmux.enable = true;
 
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "pyro" = import ./home.nix;
-    };
-  };
   programs.steam.enable = true;
   systemd.user.services.lnxlink-pyro = {
     enable = true;
@@ -223,6 +204,4 @@
       ppsspp-qt
       dolphin-emu
   ];
-
-  system.stateVersion = "24.05"; 
 }
