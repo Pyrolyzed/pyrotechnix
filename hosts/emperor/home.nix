@@ -45,7 +45,7 @@
 	  #!/usr/bin/env bash
 	  cd /home/pyro/pyrotechnix
 	  nixos-rebuild switch --flake .#homeserver-1 --target-host 192.168.1.151 --use-remote-sudo
-	  nixos-rebuild switch --flake .#homeserver-2 --target-host 192.168.1.152 --use-remote-sudo
+	  nixos-rebuild switch --flake .#homeserver-2 --target-host 192.168.1.154 --use-remote-sudo
 	  nixos-rebuild switch --flake .#homeserver-3 --target-host 192.168.1.153 --use-remote-sudo
 	  '';
 	};
