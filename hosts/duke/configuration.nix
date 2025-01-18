@@ -8,6 +8,7 @@
     hostName = "duke";
     networkmanager.enable = true;
   };
+
   services.tailscale = {
     enable = true;
     authKeyFile = "/home/pyro/Documents/authkey";
