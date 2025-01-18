@@ -3,6 +3,7 @@
   imports =
     [ 
       ./disk-config.nix
+      ../../../modules/virtualisation/k3s.nix
     ];
 
   # This machine advertises routes on the Tailnet so other local devices don't need tailscale
@@ -16,18 +17,6 @@
 
   boot.loader.grub.enable = true;
 
-  services.k3s = {
-    enable = true;
-    role = "server";
-    tokenFile = "/home/${user}/.k3token";
-    clusterInit = true;
-  };
-
-  environment.systemPackages = with pkgs; [
-    kubernetes
-    kubectl
-  ];
-
   networking = {
     hostName = "homeserver-1";
     interfaces.ens18 = {
@@ -37,7 +26,4 @@
       } ];
     };
   };
-
-  virtualisation.docker.enable = true;
-  users.users.${user}.extraGroups = [ "docker" ];
 }

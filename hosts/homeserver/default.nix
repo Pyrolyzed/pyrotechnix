@@ -14,6 +14,9 @@
     };
   };
 
+  virtualisation.docker.enable = true;
+  users.users.${user}.extraGroups = [ "docker" ]; 
+
   programs.tmux.enable = true;
   environment.systemPackages = with pkgs; [
     neovim
