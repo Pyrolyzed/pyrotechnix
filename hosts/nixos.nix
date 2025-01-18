@@ -43,8 +43,10 @@ let
           inputs.disko.nixosModules.default # Disko just in case the host uses it.
 	];
       };
-  getHomeservers = range: map (n: "homeserver-${n}") range;
-  mkHomeservers = range: lib.attrsets.genAttrs (getHomeservers range) (name: mkConfiguration name);
+  getHomeservers = range: 
+    map (n: "homeserver-${n}") range;
+  mkHomeservers = range:
+    lib.attrsets.genAttrs (getHomeservers range) (name: mkConfiguration name);
 in {
   emperor = mkConfiguration "emperor" { };
   duke = mkConfiguration "duke" { };
