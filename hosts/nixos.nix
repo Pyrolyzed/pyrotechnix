@@ -1,5 +1,6 @@
 { inputs, lib, specialArgs, modules, user ? "pyro", ...}@args:
 let
+  isServer = host: lib.strings.hasPrefix "homeserver" host;
   mkConfiguration =
     host: { pkgs ? args.pkgs, }:
       inputs.nixpkgs.lib.nixosSystem {
@@ -11,12 +12,13 @@ let
 	  isDesktop = host == "emperor";
 	  isLaptop = host == "duke";
 	  isVm = host == "vm";
-	  isServer = host == "homeserver-1" || host == "homeserver-2" || host == "homeserver-3";
+	  isServer = isServer host;
 	};
 
 	modules = modules ++ [
-	  ./${host}/configuration.nix # Host specific configuration
-	  ./${host}/hardware.nix # Host hardware configuration
+	  (if isServer host then ./homeserver/${host}/configuration.nix else ./${host}/configuration.nix) # Host specific configuration
+	  (if isServer host then ./homeserver/${host}/hardware.nix else ./${host}/hardware.nix) # Host hardware configuration
+	  (if isServer host then ./homeserver else { }) # Common homeserver configuration
 	  ../nixos # Common nixos configuration
 	  ../overlays # Access to overlays
 	  inputs.home-manager.nixosModules.home-manager {
@@ -29,12 +31,12 @@ let
 		isDesktop = host == "emperor";
 		isLaptop = host == "duke";
 		isVm = host == "vm";
-	        isServer = host == "homeserver-1" || host == "homeserver-2" || host == "homeserver-3";
+	        isServer = lib.strings.hasPrefix "homeserver" host;
 	      };
 
 	      users.${user} = {
 	        imports = [
-		  ./${host}/home.nix # Host specific home configuration
+		  (if isServer host then ./homeserver/${host}/home.nix else ./${host}/home.nix) # Host specific home configuration
 		  ../home-manager # Common home configuration
 		];
 	      };

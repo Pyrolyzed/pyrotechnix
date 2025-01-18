@@ -1,20 +1,8 @@
-{ config, lib, pkgs, inputs, user, ... }:
+{ config, lib, pkgs, ... }:
 {
-  imports =
-    [ 
-      ./disk-config.nix
-    ];
-
-  boot.loader.grub.enable = true;
-
   networking = {
-    hostName = "homeserver-3";
     useDHCP = false;
     interfaces.ens18 = {
-      ipv4.addresses = [ {
-	address = "192.168.1.103";
-	prefixLength = 24;
-      } ];
       wakeOnLan = {
         enable = true;
         policy = [ "magic" ];
@@ -27,7 +15,6 @@
   };
 
   programs.tmux.enable = true;
-
   environment.systemPackages = with pkgs; [
     neovim
     git
@@ -37,7 +24,4 @@
     # For clearing the terminal while in SSH
     kitty
   ];
-
-  virtualisation.docker.enable = true;
-  users.users.${user}.extraGroups = [ "docker" ];
 }
