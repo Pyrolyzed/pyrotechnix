@@ -21,7 +21,10 @@
 
   virtualisation.docker.enable = true;
   environment.localBinInPath = true;
-
+  services.ollama = {
+    enable = true;
+    loadModels = [ "llama3" ];
+  };
   networking = {
     hostName = "emperor";
     useDHCP = false;
