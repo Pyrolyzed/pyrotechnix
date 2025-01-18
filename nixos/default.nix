@@ -5,7 +5,7 @@ let
 in {
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "pyro" ];
+    trusted-users = [ user ];
   };
   time.timeZone = mkDefault "America/Chicago";
   i18n.defaultLocale = mkDefault "en_US.UTF-8";
@@ -36,7 +36,7 @@ in {
 
   users.users.${user} = {
     isNormalUser = mkDefault true;
-    extraGroups = mkDefault [ "wheel" "power" "video" "audio" ];
+    extraGroups = [ "wheel" "power" "video" "audio" ];
     openssh.authorizedKeys.keys = mkDefault [ sshKey ];
   };
 
