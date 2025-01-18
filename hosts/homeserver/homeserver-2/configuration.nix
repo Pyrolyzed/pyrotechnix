@@ -11,7 +11,7 @@
     hostName = "homeserver-2";
     interfaces.ens18 = {
       ipv4.addresses = [ {
-	address = "192.168.1.102";
+	address = "192.168.1.52";
 	prefixLength = 24;
       } ];
     };
