@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }:
-{
+{  
   networking = {
     useDHCP = false;
     interfaces.ens18 = {

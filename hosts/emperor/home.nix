@@ -36,7 +36,17 @@
 	  text = ''
 	    #!/usr/bin/env bash
 	    cd /home/pyro/pyrotechnix
-	    sudo nixos-rebuild switch --flake .#desktop
+	    sudo nixos-rebuild switch --flake .#emperor
+	  '';
+	};
+
+	rebuild-servers = {
+	  text = ''
+	  #!/usr/bin/env bash
+	  cd /home/pyro/pyrotechnix
+	  nixos-rebuild switch --flake .#homeserver-1 --target-host 192.168.1.151
+	  nixos-rebuild switch --flake .#homeserver-2 --target-host 192.168.1.152
+	  nixos-rebuild switch --flake .#homeserver-3 --target-host 192.168.1.153
 	  '';
 	};
 
