@@ -7,6 +7,11 @@
 
   boot.loader.grub.enable = true;
 
+  environment.systemPackages = with pkgs; [
+    kubernetes
+    kubectl
+  ];
+
   networking = {
     hostName = "homeserver-3";
     interfaces.ens18 = {
