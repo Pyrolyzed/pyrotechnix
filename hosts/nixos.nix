@@ -44,10 +44,10 @@ let
 	];
       };
   getHomeservers = range: 
-    map (n: "homeserver-${n}") range;
+    map (n: "homeserver-${toString n}") range;
   mkHomeservers = range:
-    lib.attrsets.genAttrs (getHomeservers range) (name: mkConfiguration name);
+    lib.attrsets.genAttrs (getHomeservers range) (name: mkConfiguration name { });
 in {
   emperor = mkConfiguration "emperor" { };
   duke = mkConfiguration "duke" { };
-} // mkHomeservers lib.range (1 3)
+} // mkHomeservers (lib.range 1 3)

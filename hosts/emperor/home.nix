@@ -102,9 +102,6 @@
     size = 24;
   };
 
-  home.username = "pyro";
-  home.homeDirectory = "/home/pyro";
-  home.stateVersion = "24.05";
   #programs.kitty.settings.cursor_trail = 3;
   programs.starship = {
     enable = true;

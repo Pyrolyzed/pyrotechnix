@@ -56,15 +56,6 @@
 
   programs.ssh.startAgent = true;
 
-  #services.tailscale = {
-  #  enable = true;
-  #  authKeyFile = "/home/pyro/Documents/authkey";
-  #  extraSetFlags = [
-  #    "--advertise-routes=192.168.1.0/24"
-  #    "--accept-routes"
-  #  ];
-  #};
-
   services.udev.packages = with pkgs; [
     via
   ];
