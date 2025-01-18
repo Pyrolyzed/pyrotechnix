@@ -44,7 +44,7 @@
         specialArgs = {
 	  inherit self inputs;
 	};
-	# user = "test";
+	user = "pyro";
 	modules = [ ];
       };
       commonArgs = createCommonArgs system;
