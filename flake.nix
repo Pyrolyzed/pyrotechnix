@@ -40,7 +40,6 @@
 	  lib
 	  pkgs
 	  system
-	  modules
 	  ;
         specialArgs = {
 	  inherit self inputs;
