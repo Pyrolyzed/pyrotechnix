@@ -12,6 +12,12 @@
     kubectl
   ];
 
+  services.k3s = {
+    enable = true;
+    role = "agent";
+    serverAddr = "https://192.168.1.151:6443";
+  };
+
   networking = {
     hostName = "homeserver-3";
     interfaces.ens18 = {

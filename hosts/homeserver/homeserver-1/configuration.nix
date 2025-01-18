@@ -16,6 +16,12 @@
 
   boot.loader.grub.enable = true;
 
+  services.k3s = {
+    enable = true;
+    role = "server";
+    clusterInit = true;
+  };
+
   environment.systemPackages = with pkgs; [
     kubernetes
     kubectl
