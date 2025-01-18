@@ -32,6 +32,8 @@
 	inherit (inputs) home-manager;
       };
 
+      user = "pyro";
+      modules = [ ];
       createCommonArgs = system: {
         inherit
 	  self
@@ -40,12 +42,12 @@
 	  lib
 	  pkgs
 	  system
+	  user
+	  modules
 	  ;
         specialArgs = {
 	  inherit self inputs;
 	};
-	user = "pyro";
-	modules = [ ];
       };
       commonArgs = createCommonArgs system;
     in {
