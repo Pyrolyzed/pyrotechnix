@@ -1,7 +1,8 @@
 { lib, ... }:
-
-let 
-  inherit (lib) toLower replaceStrings;
-in {
-  toOneWord = string: replaceStrings [" "] [""] string;
-}
+lib.extend (
+  _: libprev: {
+    custom = rec {
+      toOneWord = string: libprev.replaceStrings [" "] [""] string;
+    };
+  }
+)

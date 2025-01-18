@@ -1,12 +1,6 @@
 { config, lib, pkgs, inputs, ... }:
 
 {
-  imports =
-    [ 
-      ./hardware-configuration.nix
-      ../default
-    ];
-
   boot.loader.systemd-boot.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
@@ -14,6 +8,7 @@
     hostName = "duke";
     networkmanager.enable = true;
   };
+
   services.tailscale = {
     enable = true;
     authKeyFile = "/home/pyro/Documents/authkey";
@@ -104,13 +99,4 @@
       parsec-bin
       moonlight-qt
   ];
-
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "pyro" = import ./home.nix;
-    };
-  };
-
-  system.stateVersion = "24.05"; 
 }
