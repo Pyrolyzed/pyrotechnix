@@ -72,7 +72,6 @@
       calibre
       fastfetch
       lsd
-      k3s
       kubectl
       protontricks
       protonup-qt
