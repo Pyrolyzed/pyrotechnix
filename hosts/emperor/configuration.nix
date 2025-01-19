@@ -134,6 +134,8 @@
       streamcontroller
       anki
       arma3-unix-launcher
+      kubernetes-helm
+      helmfile
       filezilla
       lutris
       kdePackages.kde-cli-tools
