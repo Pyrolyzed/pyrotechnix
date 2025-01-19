@@ -15,6 +15,10 @@
     ];
   };
 
+  services.k3s = {
+    role = "server";
+  };
+
   boot.loader.grub.enable = true;
 
   networking = {

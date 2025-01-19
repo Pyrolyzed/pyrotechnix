@@ -3,6 +3,7 @@
   imports =
     [ 
       ./disk-config.nix
+      ../../../modules/nixos/virtualisation/k3s.nix
     ];
 
   boot.loader.grub.enable = true;
@@ -13,9 +14,7 @@
   ];
 
   services.k3s = {
-    enable = true;
     role = "agent";
-    tokenFile = "/home/${user}/.k3token";
     serverAddr = "https://192.168.1.151:6443";
   };
 
