@@ -147,7 +147,6 @@
       wl-clipboard
       grim
       tealdeer
-      k3s
       manix
       vscode
       wikiman

@@ -36,7 +36,7 @@
 	rebuild = {
 	  text = ''
 	    #!/usr/bin/env bash
-	    cd /home/pyro/pyrotechnix
+	    cd /home/pyro/Projects/pyrotechnix
 	    sudo nixos-rebuild switch --flake .#emperor
 	  '';
 	};
@@ -44,7 +44,7 @@
 	rebuild-servers = {
 	  text = ''
 	  #!/usr/bin/env bash
-	  cd /home/pyro/pyrotechnix
+	  cd /home/pyro/Projects/pyrotechnix
 	  nixos-rebuild switch --flake .#homeserver-1 --target-host 192.168.1.151 --use-remote-sudo
 	  nixos-rebuild switch --flake .#homeserver-2 --target-host 192.168.1.154 --use-remote-sudo
 	  nixos-rebuild switch --flake .#homeserver-3 --target-host 192.168.1.153 --use-remote-sudo
@@ -54,7 +54,7 @@
 	build-iso = {
 	  text = ''
 	  #!/usr/bin/env bash
-	  cd /home/pyro/pyrotechnix
+	  cd /home/pyro/Projects/pyrotechnix
 	  nix build .#nixosConfigurations.isoInstaller.config.system.build.isoImage
 	  '';
 	};
