@@ -73,6 +73,8 @@
       fastfetch
       lsd
       kubectl
+      kubernetes-helm
+      helmfile
       protontricks
       protonup-qt
       steamtinkerlaunch
