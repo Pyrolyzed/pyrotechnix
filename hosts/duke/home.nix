@@ -27,6 +27,7 @@
         ll = "ls -l";
 	vim = "nvim";
 	cd = "z";
+	k = "kubectl";
       };
     };
 
