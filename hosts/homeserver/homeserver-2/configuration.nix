@@ -3,7 +3,6 @@
   imports =
     [ 
       ./disk-config.nix
-      ../../../modules/nixos/virtualisation/k3s.nix
     ];
 
   boot.loader.grub.enable = true;
