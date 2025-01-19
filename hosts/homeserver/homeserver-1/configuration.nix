@@ -3,7 +3,7 @@
   imports =
     [ 
       ./disk-config.nix
-      ../../../modules/virtualisation/k3s.nix
+      ../../../modules/nixos/virtualisation/k3s.nix
     ];
 
   # This machine advertises routes on the Tailnet so other local devices don't need tailscale
