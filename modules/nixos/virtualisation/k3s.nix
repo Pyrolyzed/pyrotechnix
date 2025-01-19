@@ -3,7 +3,6 @@
   services.k3s = {
     enable = true;
     tokenFile = "/home/${user}/.k3token";
-    clusterInit = true;
     extraFlags = [
       "--docker"
     ];

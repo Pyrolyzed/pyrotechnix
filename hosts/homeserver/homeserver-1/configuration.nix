@@ -17,6 +17,7 @@
 
   services.k3s = {
     role = "server";
+    clusterInit = true;
   };
 
   boot.loader.grub.enable = true;
