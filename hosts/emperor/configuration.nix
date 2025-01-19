@@ -139,6 +139,8 @@
       lutris
       kdePackages.kde-cli-tools
       prismlauncher
+      kubectl
+      k3s
       kdePackages.qtsvg
       kdePackages.qt6ct
       libreoffice
