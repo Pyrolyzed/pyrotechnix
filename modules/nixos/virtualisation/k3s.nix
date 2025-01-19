@@ -15,6 +15,7 @@
   virtualisation.docker.logDriver = "json-file";
 
   environment.systemPackages = with pkgs; [
+    openiscsi
     kubernetes
     kubectl
     kubernetes-helm
