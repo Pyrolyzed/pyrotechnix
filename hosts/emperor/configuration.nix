@@ -35,8 +35,8 @@
 	prefixLength = 24;
       } ];
       wakeOnLan = {
-        policy = [ "magic" ];
-	enable = true;
+        enable = true;
+	policy = [ "magic" ];
       };
     };
     defaultGateway = {
@@ -48,7 +48,6 @@
   hardware.bluetooth.enable = true;
 
   programs.hyprland.enable = true;
-  #services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
@@ -78,7 +77,7 @@
   programs.zsh.enable = true;
   users.users.pyro = {
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "video" "audio" "power" "libvirtd" "docker" ]; 
+    extraGroups = [ "libvirtd" "docker" ]; 
   };
 
   hardware.graphics = {
@@ -149,6 +148,8 @@
       wl-clipboard
       grim
       tealdeer
+      k3s
+      kubectl
       manix
       vscode
       wikiman
