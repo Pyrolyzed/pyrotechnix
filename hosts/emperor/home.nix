@@ -47,9 +47,15 @@ in {
 	  text = ''
 	    #!/usr/bin/env bash
 	    cd ${projectDir}
-	    echo "Rebuilding homeserver-1..."
-	    nixos-rebuild switch --flake .#homeserver-1 --target-host root@192.168.1.151 > ${projectDir}/.logs/homeserver-1-build.log
-	    echo "Done."
+	    build_server () {
+	      num=$1
+	      ip=$2
+
+	      echo "Rebuilding homeserver-$num..."
+	      nixos-rebuild switch --flake .#homeserver-"$num" --target-host root@"$ip" > ${projectDir}/.logs/homeserver-"$num"-build.log
+	      echo "Done."
+	    }
+	    build_server 1 192.168.1.151
 	  '';
 	};
 
