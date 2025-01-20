@@ -52,4 +52,4 @@ let
 in {
   emperor = mkConfiguration "emperor" { };
   duke = mkConfiguration "duke" { };
-} // mkHomeservers (lib.range 1 3)
+} // mkHomeservers (lib.range 1 4)

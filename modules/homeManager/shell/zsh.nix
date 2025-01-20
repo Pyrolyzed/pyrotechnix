@@ -24,9 +24,15 @@ in {
       enable = true;
 
       history = {
+        path = "$HOME/.zsh_history";
+	save = 10000;
+	share = true;
+	size = 10000;
         ignoreAllDups = cfg.options.ignoreAllDups;
 	ignoreDups = cfg.options.ignoreDups;
       };
+
+      historySubstringSearch.enable = true;
 
       shellAliases = {
         # Anything here

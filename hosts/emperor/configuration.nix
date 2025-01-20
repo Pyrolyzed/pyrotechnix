@@ -29,6 +29,9 @@
     hostName = "emperor";
     useDHCP = false;
     #networkmanager.enable = true;
+    hosts = {
+      "192.168.1.156" = [ "longhorn.local" ];
+    };
     interfaces.enp8s0 = {
       ipv4.addresses = [ {
       	address = "192.168.1.97";
