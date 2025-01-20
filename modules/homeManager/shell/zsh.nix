@@ -40,6 +40,9 @@ in {
 
       initExtra = optionalString cfg.options.extendedGlobbing ''
         setopt extended_glob
+      '' + ''
+        bindkey '^[[A' history_substring_search_up
+        bindkey '^[[B' history_substring_search_down
       '';
       # repeat with "+ optionalString secondOptionName" for more options
       
