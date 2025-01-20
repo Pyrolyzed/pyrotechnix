@@ -43,19 +43,28 @@
 
 	rebuild-servers = {
 	  text = ''
-	  #!/usr/bin/env bash
-	  cd /home/pyro/Projects/pyrotechnix
-	  nixos-rebuild switch --flake .#homeserver-1 --target-host 192.168.1.151 --use-remote-sudo
-	  nixos-rebuild switch --flake .#homeserver-2 --target-host 192.168.1.154 --use-remote-sudo
-	  nixos-rebuild switch --flake .#homeserver-3 --target-host 192.168.1.153 --use-remote-sudo
+	    #!/usr/bin/env bash
+	    cd /home/pyro/Projects/pyrotechnix
+	    nixos-rebuild switch --flake .#homeserver-1 --target-host 192.168.1.151 --use-remote-sudo
+	    nixos-rebuild switch --flake .#homeserver-2 --target-host 192.168.1.154 --use-remote-sudo
+	    nixos-rebuild switch --flake .#homeserver-3 --target-host 192.168.1.153 --use-remote-sudo
 	  '';
 	};
 
+	install-remote = {
+	  text = ''
+	    #!/usr/bin/env bash
+	    cd /home/pyro/Projects/pyrotechnix
+	    flake=$1
+	    host=$2
+	    nix run github:nix-community/nixos-anywhere -- --flake .#"$flake" root@"$host"
+	  '';
+	};
 	build-iso = {
 	  text = ''
-	  #!/usr/bin/env bash
-	  cd /home/pyro/Projects/pyrotechnix
-	  nix build .#nixosConfigurations.isoInstaller.config.system.build.isoImage
+	    #!/usr/bin/env bash
+	    cd /home/pyro/Projects/pyrotechnix
+	    nix build .#nixosConfigurations.isoInstaller.config.system.build.isoImage
 	  '';
 	};
       };
