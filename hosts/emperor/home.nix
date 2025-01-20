@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
-{
+let
+  projectDir = "/home/pyro/Projects/pyrotechnix";
+in {
   imports = [
     ../../modules/homeManager
     ./hyprland.nix
@@ -36,7 +38,7 @@
 	rebuild = {
 	  text = ''
 	    #!/usr/bin/env bash
-	    cd /home/pyro/Projects/pyrotechnix
+	    cd ${projectDir}
 	    sudo nixos-rebuild switch --flake .#emperor
 	  '';
 	};
@@ -44,17 +46,17 @@
 	rebuild-servers = {
 	  text = ''
 	    #!/usr/bin/env bash
-	    cd /home/pyro/Projects/pyrotechnix
-	    nixos-rebuild switch --flake .#homeserver-1 --target-host 192.168.1.151 --use-remote-sudo
-	    nixos-rebuild switch --flake .#homeserver-2 --target-host 192.168.1.154 --use-remote-sudo
-	    nixos-rebuild switch --flake .#homeserver-3 --target-host 192.168.1.153 --use-remote-sudo
+	    cd ${projectDir}
+	    echo "Rebuilding homeserver-1..."
+	    nixos-rebuild switch --flake .#homeserver-1 --target-host root@192.168.1.151 > ${projectDir}/.logs/homeserver-1-build.log
+	    echo "Done."
 	  '';
 	};
 
 	install-remote = {
 	  text = ''
 	    #!/usr/bin/env bash
-	    cd /home/pyro/Projects/pyrotechnix
+	    cd ${projectDir}
 	    flake=$1
 	    host=$2
 	    nix run github:nix-community/nixos-anywhere -- --flake .#"$flake" root@"$host"
@@ -63,7 +65,7 @@
 	build-iso = {
 	  text = ''
 	    #!/usr/bin/env bash
-	    cd /home/pyro/Projects/pyrotechnix
+	    cd ${projectDir}
 	    nix build .#nixosConfigurations.isoInstaller.config.system.build.isoImage
 	  '';
 	};

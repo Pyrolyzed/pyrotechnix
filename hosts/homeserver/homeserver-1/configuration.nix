@@ -15,15 +15,6 @@
     ];
   };
 
-  services.nginx = {
-    enable = true;
-    recommendedProxySettings = true;
-    virtualHosts."homeserver.local" = {
-      locations."/" = {
-        proxyPass = "http://longhorn.local";
-      };
-    };
-  };
   services.k3s = {
     role = "server";
     clusterInit = true;
@@ -38,9 +29,6 @@
 	address = "192.168.1.151";
 	prefixLength = 24;
       } ];
-    };
-    hosts = {
-      "192.168.1.156" = [ "longhorn.local" ];
     };
   };
 }
