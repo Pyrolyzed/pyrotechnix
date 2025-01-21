@@ -13,11 +13,15 @@
     "L+ /usr/local/bin - - - - /run/current-system/sw/bin/"
   ];
   virtualisation.docker.logDriver = "json-file";
-
+  services.openiscsi = {
+    name = "homeserver-1";
+    enable = true;
+  };
   environment.systemPackages = with pkgs; [
     openiscsi
     kubernetes
     kubectl
     kubernetes-helm
+    nfs-utils
   ];
 }
