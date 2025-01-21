@@ -2,7 +2,7 @@
 let 
   cfg = config.custom.customDirs;
   inherit (lib) mkDefault mkOption mkEnableOption mkMerge mkIf;
-  inherit (lib.types) str null nullOr attrsOf;
+  inherit (lib.types) str nullOr attrsOf;
 in {
   options.custom.customDirs = {
     enable = mkEnableOption "Enable custom home directories" // { default = true; };
