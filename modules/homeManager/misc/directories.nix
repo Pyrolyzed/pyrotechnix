@@ -2,43 +2,43 @@
 let 
   cfg = config.custom.customDirs;
   inherit (lib) mkDefault mkOption mkEnableOption mkMerge mkIf;
-  inherit (lib.types) str attrsOf;
+  inherit (lib.types) str null nullOr attrsOf;
 in {
   options.custom.customDirs = {
     enable = mkEnableOption "Enable custom home directories" // { default = true; };
     documents = mkOption {
-      type = str;
+      type = nullOr str;
       default = "/home/${user}/Storage/Media/Documents";
       example = "/home/${user}/Storage/Media/Documents";
       description = "Location of the documents folder";
     };
     downloads = mkOption {
-      type = str;
+      type = nullOr str;
       default = "/home/${user}/Storage/Media/Downloads";
       example = "/home/${user}/Storage/Media/Downloads";
       description = "Location of the downloads folder";
     };
     videos = mkOption {
-      type = str;
+      type = nullOr str;
       default = "/home/${user}/Storage/Media/Videos";
       example = "/home/${user}/Storage/Media/Videos";
       description = "Location of the videos folder";
     };
     pictures = mkOption {
-      type = str;
+      type = nullOr str;
       default = "/home/${user}/Storage/Media/Pictures";
       example = "/home/${user}/Storage/Media/Pictures";
       description = "Location of the pictures folder";
     };
     desktop = mkOption {
-      type = str;
-      default = "/home/${user}/Desktop";
+      type = nullOr str;
+      default = null;
       example = "/home/${user}/Desktop";
       description = "Location of the desktop folder";
     };
     music = mkOption {
-      type = str;
-      default = "/home/${user}/Storage/Media/Music";
+      type = nullOr str;
+      default = null;
       example = "/home/${user}/Storage/Media/Music";
       description = "Location of the music folder";
     };
