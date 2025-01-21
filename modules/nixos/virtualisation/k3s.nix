@@ -14,7 +14,7 @@
   ];
   virtualisation.docker.logDriver = "json-file";
   services.openiscsi = {
-    name = "homeserver-1";
+    name = "homeserver";
     enable = true;
   };
   environment.systemPackages = with pkgs; [
