@@ -3,5 +3,6 @@
     ./programs
     ./shell
     ./scripts
+    ./misc
   ];
 }
