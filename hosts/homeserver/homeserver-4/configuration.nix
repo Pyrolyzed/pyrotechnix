@@ -18,9 +18,8 @@
 
   services.nginx = {
     enable = true;
-    recommendedProxySettings = true;
     virtualHosts."homeserver.home" = {
-      locations."/longhorn" = {
+      locations."/" = {
         recommendedProxySettings = true;
         proxyPass = "http://longhorn.home";
       };

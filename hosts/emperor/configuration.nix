@@ -126,6 +126,8 @@
       neovim
       git
       firefox
+      xorg.xrandr
+      gamescope
       swww
       qalculate-gtk
       steamtinkerlaunch
