@@ -43,7 +43,7 @@ in {
 	  '';
 	};
 
-	rebuild-servers = {
+	rebuild-server = {
 	  text = ''
 	    #!/usr/bin/env bash
 	    cd ${projectDir}
@@ -55,7 +55,14 @@ in {
 	      nixos-rebuild switch --flake .#homeserver-"$num" --target-host root@"$ip" > ${projectDir}/.logs/homeserver-"$num"-build.log
 	      echo "Done."
 	    }
-	    build_server 1 192.168.1.151
+	    build_server "$1" "$2"
+	  '';
+	};
+	rebuild-servers = {
+	  text = ''
+	    #!/usr/bin/env bash
+	    rebuild-server 1 192.168.1.151
+	    rebuild-server 4 192.168.1.147
 	  '';
 	};
 

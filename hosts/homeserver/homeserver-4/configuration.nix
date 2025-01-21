@@ -11,7 +11,7 @@
     enable = true;
     recommendedProxySettings = true;
     virtualHosts."homeserver.home" = {
-      locations."/" = {
+      locations."/longhorn" = {
         recommendedProxySettings = true;
         proxyPass = "http://longhorn.home";
       };
@@ -25,6 +25,9 @@
 	address = "192.168.1.147";
 	prefixLength = 24;
       } ];
+    };
+    hosts = {
+      "192.168.1.155" = [ "longhorn.home" ];
     };
   };
 }
