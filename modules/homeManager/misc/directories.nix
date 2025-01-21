@@ -5,49 +5,48 @@ let
   inherit (lib.types) str attrsOf;
 in {
   options.custom.customDirs = {
-      enable = mkEnableOption "Enable custom home directories" // { default = true; };
-      documents = mkOption {
-        type = str;
-	default = "/home/${user}/Storage/Media/Documents";
-	example = "/home/${user}/Storage/Media/Documents";
-	description = "Location of the documents folder";
-      };
-      downloads = mkOption {
-        type = str;
-	default = "/home/${user}/Storage/Media/Downloads";
-	example = "/home/${user}/Storage/Media/Downloads";
-	description = "Location of the downloads folder";
-      };
-      videos = mkOption {
-        type = str;
-	default = "/home/${user}/Storage/Media/Videos";
-	example = "/home/${user}/Storage/Media/Videos";
-	description = "Location of the videos folder";
-      };
-      pictures = mkOption {
-        type = str;
-	default = "/home/${user}/Storage/Media/Pictures";
-	example = "/home/${user}/Storage/Media/Pictures";
-	description = "Location of the pictures folder";
-      };
-      desktop = mkOption {
-        type = str;
-	default = "/home/${user}/Desktop";
-	example = "/home/${user}/Desktop";
-	description = "Location of the desktop folder";
-      };
-      music = mkOption {
-        type = str;
-	default = "/home/${user}/Storage/Media/Music";
-	example = "/home/${user}/Storage/Media/Music";
-	description = "Location of the music folder";
-      };
-      extraFolders = mkOption {
-        type = attrsOf str;
-	default = { XDG_PROJECTS_DIR = "/home/${user}/Projects"; };
-	example = { XDG_PROJECTS_DIR = "/home/${user}/Projects"; };
-	description = "Attribute set of extra folders";
-      };
+    enable = mkEnableOption "Enable custom home directories" // { default = true; };
+    documents = mkOption {
+      type = str;
+      default = "/home/${user}/Storage/Media/Documents";
+      example = "/home/${user}/Storage/Media/Documents";
+      description = "Location of the documents folder";
+    };
+    downloads = mkOption {
+      type = str;
+      default = "/home/${user}/Storage/Media/Downloads";
+      example = "/home/${user}/Storage/Media/Downloads";
+      description = "Location of the downloads folder";
+    };
+    videos = mkOption {
+      type = str;
+      default = "/home/${user}/Storage/Media/Videos";
+      example = "/home/${user}/Storage/Media/Videos";
+      description = "Location of the videos folder";
+    };
+    pictures = mkOption {
+      type = str;
+      default = "/home/${user}/Storage/Media/Pictures";
+      example = "/home/${user}/Storage/Media/Pictures";
+      description = "Location of the pictures folder";
+    };
+    desktop = mkOption {
+      type = str;
+      default = "/home/${user}/Desktop";
+      example = "/home/${user}/Desktop";
+      description = "Location of the desktop folder";
+    };
+    music = mkOption {
+      type = str;
+      default = "/home/${user}/Storage/Media/Music";
+      example = "/home/${user}/Storage/Media/Music";
+      description = "Location of the music folder";
+    };
+    extraFolders = mkOption {
+      type = attrsOf str;
+      default = { XDG_PROJECTS_DIR = "/home/${user}/Projects"; };
+      example = { XDG_PROJECTS_DIR = "/home/${user}/Projects"; };
+      description = "Attribute set of extra folders";
     };
   };
 
