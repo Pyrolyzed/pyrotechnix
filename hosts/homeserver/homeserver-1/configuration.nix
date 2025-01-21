@@ -6,14 +6,6 @@
       ../../../modules/nixos/virtualisation/k3s.nix
     ];
 
-  # This machine advertises routes on the Tailnet so other local devices don't need tailscale
-  services.tailscale = {
-    enable = true;
-    authKeyFile = "/home/pyro/authkey";
-    extraSetFlags = [
-      "--advertise-routes=192.168.1.0/24"
-    ];
-  };
 
   services.k3s = {
     role = "server";
