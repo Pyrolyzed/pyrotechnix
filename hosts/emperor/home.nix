@@ -99,6 +99,10 @@ in {
     };
   };
 
+  programs.zsh.historySubstringSearch = {
+    searchDownKey = "$terminfo[kcud1]";
+    searchUpKey = "$terminfo[kcuu1]";
+  };
   systemd.user.services =
     let
       graphicalTarget = config.wayland.systemd.target;
