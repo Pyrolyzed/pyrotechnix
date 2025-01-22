@@ -12,9 +12,9 @@ in {
       description = "Shell aliases";
     };
     options = {
-      extendedGlobbing = mkEnableOption "Enable extending globbing";
-      ignoreDups = mkEnableOption "Ignore duplicate commands";
-      ignoreAllDups = mkEnableOption "Ignore ALL duplicate commands";
+      extendedGlobbing = mkEnableOption "Enable extending globbing" // { default = true; };
+      ignoreDups = mkEnableOption "Ignore duplicate commands" // { default = true; };
+      ignoreAllDups = mkEnableOption "Ignore ALL duplicate commands" // { default = true; };
     };
     
   };
@@ -22,10 +22,14 @@ in {
   config = mkIf cfg.enable {
     programs.zsh = {
       enable = true;
-
+      enableCompletion = true;
+      autosuggestion = {
+        enable = true;
+      };
       history = {
         path = "$HOME/.zsh_history";
 	save = 10000;
+	append = true;
 	share = true;
 	size = 10000;
         ignoreAllDups = cfg.options.ignoreAllDups;
@@ -40,10 +44,7 @@ in {
 
       initExtra = optionalString cfg.options.extendedGlobbing ''
         setopt extended_glob
-      '' + ''
-        bindkey '^[[A' history_substring_search_up
-        bindkey '^[[B' history_substring_search_down
-      '';
+      ''; 
       # repeat with "+ optionalString secondOptionName" for more options
       
 

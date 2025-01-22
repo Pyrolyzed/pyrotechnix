@@ -22,6 +22,7 @@
       set timeout=-1
     '';
   };
+  environment.pathsToLink = [ "/share/zsh" ];
 
   custom = {
     gaming = {
