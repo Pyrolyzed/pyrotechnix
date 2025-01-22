@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, osConfig, lib, pkgs, ... }:
 
 let
   projectDir = "/home/pyro/Projects/pyrotechnix";
@@ -9,6 +9,18 @@ in {
   ];
 
   custom = {
+    gaming = {
+      enable = true;
+      emulation.enable = true;
+      streaming = {
+	moonlight.enable = true;
+      };
+      games = {
+        armaLauncher.enable = true;
+	cloneHero.enable = true;
+      };
+    };
+
     git = {
       enable = true;
       email = "pyrolyzed@proton.me";
@@ -32,6 +44,7 @@ in {
 	k = "kubectl";
       };
     };
+
     scripts = {
       enable = true;
       script = {
@@ -137,7 +150,6 @@ in {
     size = 24;
   };
 
-  #programs.kitty.settings.cursor_trail = 3;
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
@@ -168,38 +180,6 @@ in {
     ESDE_APPDATA_DIR = "~/.config/ES-DE";
     MANPAGER = "nvim +Man!";
     QT_QPA_PLATFORM = "wayland";
-  };
-
-  home.file.".config/MangoHud/MangoHud.conf" = {
-    enable = true;
-    text = ''
-      gpu_stats
-      gpu_temp
-      gpu_core_clock
-      gpu_mem_clock
-
-      cpu_stats
-      cpu_temp
-      cpu_mhz
-
-      vram
-      ram
-      fps
-      frametime
-
-      throttling_status
-      #throttling_status_graph
-
-      gpu_name
-
-      frame_timing
-
-      font_size=36
-      # font_scale=1.0
-      font_size_text=36
-      text_outline
-      toggle_hud=Shift_R+F12
-    '';
   };
 
   programs.home-manager.enable = true;

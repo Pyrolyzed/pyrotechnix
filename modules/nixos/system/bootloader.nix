@@ -6,7 +6,7 @@ let
 in {
   options.custom.boot = {
     systemd-boot = {
-      enable = mkEnableOption "Enable systemd-boot" // { default = true; };
+      enable = mkEnableOption "Enable systemd-boot";
     };
 
     grub = {

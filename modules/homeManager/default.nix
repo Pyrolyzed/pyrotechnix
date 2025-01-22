@@ -4,5 +4,6 @@
     ./shell
     ./scripts
     ./misc
+    ./gaming
   ];
 }
