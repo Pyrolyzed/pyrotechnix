@@ -177,6 +177,7 @@
       calibre
       parsec-bin
       lsd
+      bat
       wine
       wineWowPackages.waylandFull
   ];
