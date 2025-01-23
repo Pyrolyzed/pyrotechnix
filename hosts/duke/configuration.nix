@@ -1,8 +1,14 @@
 { config, lib, pkgs, inputs, ... }:
 
 {
+  imports = [
+    ../../modules/nixos/gaming
+  ];
   boot.loader.systemd-boot.enable = true;
 
+  custom = {
+    gaming.enable = true;
+  };
   networking = {
     hostName = "duke";
     networkmanager.enable = true;
@@ -61,11 +67,12 @@
   fonts.packages = with pkgs; [ 
     noto-fonts
     noto-fonts-cjk-sans
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.caskaydia-cove
+    poppins
   ];
 
   environment.systemPackages = with pkgs; [
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.caskaydia-cove
       neovim
       git
       firefox

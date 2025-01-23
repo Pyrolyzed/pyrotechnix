@@ -93,37 +93,5 @@
     cd = "z";
   };
 
-  home.file.".config/MangoHud/MangoHud.conf" = {
-    enable = true;
-    text = ''
-      gpu_stats
-      gpu_temp
-      gpu_core_clock
-      gpu_mem_clock
-
-      cpu_stats
-      cpu_temp
-      cpu_mhz
-
-      vram
-      ram
-      fps
-      frametime
-
-      throttling_status
-      #throttling_status_graph
-
-      gpu_name
-
-      frame_timing
-
-      font_size=36
-      # font_scale=1.0
-      font_size_text=36
-      text_outline
-      toggle_hud=Shift_R+F12
-    '';
-  };
-
   programs.home-manager.enable = true;
 }
