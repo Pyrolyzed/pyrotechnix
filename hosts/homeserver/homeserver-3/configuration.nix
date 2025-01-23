@@ -3,9 +3,20 @@
   imports =
     [ 
       ./disk-config.nix
+      ../../../modules/nixos/virtualisation/k3s.nix
     ];
 
   boot.loader.grub.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    kubernetes
+    kubectl
+  ];
+
+  services.k3s = {
+    role = "agent";
+    serverAddr = "https://192.168.1.151:6443";
+  };
 
   networking = {
     hostName = "homeserver-3";

@@ -1,5 +1,5 @@
-{ config, lib, pkgs, ... }:
-{
+{ config, lib, pkgs, user, ... }:
+{  
   networking = {
     useDHCP = false;
     interfaces.ens18 = {
@@ -13,6 +13,9 @@
       interface = "ens18";
     };
   };
+
+  virtualisation.docker.enable = true;
+  users.users.${user}.extraGroups = [ "docker" ]; 
 
   programs.tmux.enable = true;
   environment.systemPackages = with pkgs; [

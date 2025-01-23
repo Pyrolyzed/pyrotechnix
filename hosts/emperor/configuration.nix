@@ -1,6 +1,7 @@
 { config, lib, pkgs, inputs, ... }:
 {
   imports = [
+<<<<<<< HEAD
     (import ./disk-config.nix { device = "/dev/disk/by-partuuid/8324c052-a744-4d7f-aad8-cd3b84a15f90"; })
   ];
 
@@ -46,6 +47,11 @@
   };
   programs.fuse.userAllowOther = true;
 
+=======
+    ../../modules/nixos/gaming
+  ];
+
+>>>>>>> main
   boot.loader.grub = {
     enable = true;
     efiSupport = true;
@@ -64,25 +70,29 @@
       set timeout=-1
     '';
   };
+  environment.pathsToLink = [ "/share/zsh" ];
+
+  custom = {
+    gaming = {
+      enable = true;
+      streaming.sunshine.enable = true;
+    };
+  };
 
   virtualisation.docker.enable = true;
   environment.localBinInPath = true;
-  services.ollama = {
-    enable = true;
-    loadModels = [ "llama3" ];
-  };
+
   networking = {
     hostName = "emperor";
     useDHCP = false;
-    #networkmanager.enable = true;
     interfaces.enp8s0 = {
       ipv4.addresses = [ {
       	address = "192.168.1.97";
 	prefixLength = 24;
       } ];
       wakeOnLan = {
-        policy = [ "magic" ];
-	enable = true;
+        enable = true;
+	policy = [ "magic" ];
       };
     };
     defaultGateway = {
@@ -94,7 +104,6 @@
   hardware.bluetooth.enable = true;
 
   programs.hyprland.enable = true;
-  #services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
@@ -114,18 +123,15 @@
     pulse.enable = true;
   };
 
-  services.sunshine = {
-    enable = true;
-    autoStart = true;
-    capSysAdmin = true;
-    openFirewall = true;
-  };
-
   programs.zsh.enable = true;
   users.users.pyro = {
     shell = pkgs.zsh;
+<<<<<<< HEAD
     initialPassword = "foobar";
     extraGroups = [ "wheel" "video" "audio" "power" "libvirtd" "docker" ]; 
+=======
+    extraGroups = [ "libvirtd" "docker" ]; 
+>>>>>>> main
   };
 
   hardware.graphics = {
@@ -159,7 +165,6 @@
 
   programs.tmux.enable = true;
 
-  programs.steam.enable = true;
   systemd.user.services.lnxlink-pyro = {
     enable = true;
     description = "Manual service for lnxlink since it won't autostart";
@@ -175,17 +180,17 @@
       neovim
       git
       firefox
+      xorg.xrandr
       swww
       qalculate-gtk
-      steamtinkerlaunch
       python314
       streamcontroller
       anki
-      arma3-unix-launcher
+      kubernetes-helm
+      helmfile
       filezilla
-      lutris
       kdePackages.kde-cli-tools
-      prismlauncher
+      kubectl
       kdePackages.qtsvg
       kdePackages.qt6ct
       libreoffice
@@ -208,19 +213,13 @@
       unzip
       fastfetch
       pavucontrol
-      moonlight-qt
       btop
-      protontricks
-      protonup-qt
-      steamtinkerlaunch
       protonvpn-gui
       kitty
-      emulationstation-de
       rofi-wayland
       discord
       spotify
       appimage-run
-      mangohud
       obs-studio
       qbittorrent
       cifs-utils
@@ -228,21 +227,11 @@
       vlc
       obsidian
       lvm2
-      clonehero
       calibre
       parsec-bin
       lsd
+      bat
       wine
       wineWowPackages.waylandFull
-      emulationstation-de
-      duckstation
-      flycast
-      melonDS
-      pcsx2
-      rpcs3
-      retroarchFull
-      cemu
-      ppsspp-qt
-      dolphin-emu
   ];
 }

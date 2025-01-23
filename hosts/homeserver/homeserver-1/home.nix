@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../modules/homeManager
+    ../../../modules/homeManager
   ];
 
   custom = {

@@ -23,6 +23,8 @@ let
 	  ../overlays # Access to overlays
 	  inputs.home-manager.nixosModules.home-manager {
 	    home-manager = {
+	      useGlobalPkgs = true;
+	      useUserPackages = true;
 
 	      # Not just special, extra special.
 	      extraSpecialArgs = specialArgs // {
@@ -53,4 +55,4 @@ let
 in {
   emperor = mkConfiguration "emperor" { };
   duke = mkConfiguration "duke" { };
-} // mkHomeservers (lib.range 1 3)
+} // mkHomeservers (lib.range 1 4)

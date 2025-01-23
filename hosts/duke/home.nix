@@ -27,6 +27,7 @@
         ll = "ls -l";
 	vim = "nvim";
 	cd = "z";
+	k = "kubectl";
       };
     };
 
@@ -35,7 +36,7 @@
       text = ''
         #!/usr/bin/env bash
 	cd /home/pyro/pyrotechnix
-	sudo nixos-rebuild switch --flake .#laptop
+	sudo nixos-rebuild switch --flake .#duke
       '';
       runtimeInputs = [ ];
     };

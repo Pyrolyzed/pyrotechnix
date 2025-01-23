@@ -1,6 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config, osConfig, lib, pkgs, ... }:
 
-{
+let
+  projectDir = "/home/pyro/Projects/pyrotechnix";
+in {
   imports = [
     ../../modules/homeManager
     ./hyprland.nix
@@ -21,6 +23,18 @@
     allowOther = true;
   };
   custom = {
+    gaming = {
+      enable = true;
+      emulation.enable = true;
+      streaming = {
+	moonlight.enable = true;
+      };
+      games = {
+        armaLauncher.enable = true;
+	cloneHero.enable = true;
+      };
+    };
+
     git = {
       enable = true;
       email = "pyrolyzed@proton.me";
@@ -41,30 +55,68 @@
         ll = "ls -l";
 	vim = "nvim";
 	cd = "z";
+	k = "kubectl";
       };
     };
+
     scripts = {
       enable = true;
       script = {
 	rebuild = {
 	  text = ''
 	    #!/usr/bin/env bash
-	    cd /home/pyro/pyrotechnix
-	    sudo nixos-rebuild switch --flake .#desktop
+	    cd ${projectDir}
+	    sudo nixos-rebuild switch --flake .#emperor
 	  '';
 	};
 
+	rebuild-server = {
+	  text = ''
+	    #!/usr/bin/env bash
+	    cd ${projectDir}
+	    build_server () {
+	      num=$1
+	      ip=$2
+
+	      echo "Rebuilding homeserver-$num..."
+	      nixos-rebuild switch --flake .#homeserver-"$num" --target-host root@"$ip" > ${projectDir}/.logs/homeserver-"$num"-build.log
+	      echo "Done."
+	    }
+	    build_server "$1" "$2"
+	  '';
+	};
+	rebuild-servers = {
+	  text = ''
+	    #!/usr/bin/env bash
+	    rebuild-server 1 192.168.1.151
+	    rebuild-server 4 192.168.1.147
+	  '';
+	};
+
+	install-remote = {
+	  text = ''
+	    #!/usr/bin/env bash
+	    cd ${projectDir}
+	    flake=$1
+	    host=$2
+	    nix run github:nix-community/nixos-anywhere -- --flake .#"$flake" root@"$host"
+	  '';
+	};
 	build-iso = {
 	  text = ''
-	  #!/usr/bin/env bash
-	  cd /home/pyro/pyrotechnix
-	  nix build .#nixosConfigurations.isoInstaller.config.system.build.isoImage
+	    #!/usr/bin/env bash
+	    cd ${projectDir}
+	    nix build .#nixosConfigurations.isoInstaller.config.system.build.isoImage
 	  '';
 	};
       };
     };
   };
 
+  programs.zsh.historySubstringSearch = {
+    searchDownKey = "$terminfo[kcud1]";
+    searchUpKey = "$terminfo[kcuu1]";
+  };
   systemd.user.services =
     let
       graphicalTarget = config.wayland.systemd.target;
@@ -116,7 +168,6 @@
     size = 24;
   };
 
-  #programs.kitty.settings.cursor_trail = 3;
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
@@ -147,38 +198,6 @@
     ESDE_APPDATA_DIR = "~/.config/ES-DE";
     MANPAGER = "nvim +Man!";
     QT_QPA_PLATFORM = "wayland";
-  };
-
-  home.file.".config/MangoHud/MangoHud.conf" = {
-    enable = true;
-    text = ''
-      gpu_stats
-      gpu_temp
-      gpu_core_clock
-      gpu_mem_clock
-
-      cpu_stats
-      cpu_temp
-      cpu_mhz
-
-      vram
-      ram
-      fps
-      frametime
-
-      throttling_status
-      #throttling_status_graph
-
-      gpu_name
-
-      frame_timing
-
-      font_size=36
-      # font_scale=1.0
-      font_size_text=36
-      text_outline
-      toggle_hud=Shift_R+F12
-    '';
   };
 
   programs.home-manager.enable = true;

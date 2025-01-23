@@ -2,7 +2,6 @@
 
 {
   boot.loader.systemd-boot.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   networking = {
     hostName = "duke";
@@ -22,10 +21,7 @@
     pulse.enable = true;
   };
 
-  users.users.pyro = {
-    extraGroups = [ "wheel" "video" "audio" "power" ]; 
-    shell = pkgs.zsh;
-  };
+  users.users.pyro.shell = pkgs.zsh;
 
   hardware.graphics = {
     enable = true;
@@ -76,6 +72,9 @@
       calibre
       fastfetch
       lsd
+      kubectl
+      kubernetes-helm
+      helmfile
       protontricks
       protonup-qt
       steamtinkerlaunch
