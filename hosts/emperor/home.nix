@@ -5,10 +5,10 @@ let
 in {
   imports = [
     ../../modules/homeManager
+    ../../modules/homeManager/impermanence.nix
     ./hyprland.nix
-    inputs.impermanence.nixosModules.home-manager.impermanence
   ];
-  # TODO: Temp spot for impermanence
+
   home.persistence."/persist/home" = {
     directories = [
       "Media"
@@ -20,8 +20,8 @@ in {
 	method = "symlink";
       }
     ];
-    allowOther = true;
   };
+
   custom = {
     gaming = {
       enable = true;
