@@ -43,6 +43,7 @@ let
 	    };
 	  }
           inputs.disko.nixosModules.default # Disko just in case the host uses it.
+	  inputs.impermanence.nixosModules.impermanence
 	];
       };
   getHomeservers = range: 

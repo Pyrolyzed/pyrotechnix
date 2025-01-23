@@ -4,8 +4,22 @@
   imports = [
     ../../modules/homeManager
     ./hyprland.nix
+    inputs.impermanence.nixosModules.home-manager.impermanence
   ];
-
+  # TODO: Temp spot for impermanence
+  home.persistence."/persist/home" = {
+    directories = [
+      "Media"
+      "Projects"
+      ".ssh"
+      ".zsh_history"
+      {
+        directory = ".local/share/Steam";
+	method = "symlink";
+      }
+    ];
+    allowOther = true;
+  };
   custom = {
     git = {
       enable = true;
