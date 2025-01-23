@@ -108,6 +108,7 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.caskaydia-cove
     poppins
+    sn-pro
   ];
 
   programs.tmux.enable = true;
