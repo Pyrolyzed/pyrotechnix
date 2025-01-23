@@ -1,12 +1,20 @@
-{ config, lib, pkgs, ... }:
+{ config, osConfig, lib, pkgs, ... }:
 
-{
+let
+  projectDir = "/home/pyro/Projects/pyrotechnix";
+in {
   imports = [
     ../../modules/homeManager
-    ./hyprland.nix
   ];
 
   custom = {
+    gaming = {
+      enable = true;
+      streaming = {
+	moonlight.enable = true;
+      };
+    };
+
     git = {
       enable = true;
       email = "pyrolyzed@proton.me";
@@ -17,7 +25,7 @@
       enable = true;
       backgroundOpacity = 0.8;
       font = "CaskaydiaCove Nerd Font Mono";
-      fontSize = 16;
+      fontSize = 18;
     };
 
     shell.zsh = {
@@ -31,31 +39,33 @@
       };
     };
 
-    scripts.enable = true;
-    scripts.script.rebuild = {
-      text = ''
-        #!/usr/bin/env bash
-	cd /home/pyro/pyrotechnix
-	sudo nixos-rebuild switch --flake .#duke
-      '';
-      runtimeInputs = [ ];
+    scripts = {
+      enable = true;
+      script = {
+	rebuild = {
+	  text = ''
+	    #!/usr/bin/env bash
+	    cd ${projectDir}
+	    sudo nixos-rebuild switch --flake .#duke
+	  '';
+	};
+	install-remote = {
+	  text = ''
+	    #!/usr/bin/env bash
+	    cd ${projectDir}
+	    flake=$1
+	    host=$2
+	    nix run github:nix-community/nixos-anywhere -- --flake .#"$flake" root@"$host"
+	  '';
+	};
+      };
     };
   };
 
-  #home.pointerCursor = {
-  #  gtk.enable = true;
-  #  package = pkgs.bibata-cursors;
-  #  name = "Bibata-Modern-Classic";
-  #  size = 24;
-  #};
-
-  home.username = "pyro";
-  home.homeDirectory = "/home/pyro";
-
-  home.stateVersion = "24.05";
-
-  programs.zsh.enable = true;
-
+  programs.zsh.historySubstringSearch = {
+    searchDownKey = "$terminfo[kcud1]";
+    searchUpKey = "$terminfo[kcuu1]";
+  };
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
@@ -68,10 +78,6 @@
 
   programs.ranger = {
     enable = true;
-    extraConfig = ''
-      set preview_images true
-      set preview_images_method kitty
-    '';
   };
 
   programs.zoxide = {
@@ -83,14 +89,11 @@
     window_padding_width = 10;
     window_padding_height = 5;
   };
-
+  
   home.sessionVariables = {
     EDITOR = "nvim";
     NIXOS_OZONE_WL = 1;
-  };
-
-  programs.zsh.shellAliases = { 
-    cd = "z";
+    MANPAGER = "nvim +Man!";
   };
 
   programs.home-manager.enable = true;

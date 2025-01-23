@@ -87,7 +87,6 @@
       steamtinkerlaunch
       protonvpn-gui
       kitty
-      steam
       wl-clipboard
       rofi-wayland
       vesktop
@@ -103,6 +102,5 @@
       cifs-utils
       obsidian
       parsec-bin
-      moonlight-qt
   ];
 }
