@@ -1,8 +1,8 @@
 { config, lib, pkgs, inputs, ... }:
 {
   imports = [
-<<<<<<< HEAD
     (import ./disk-config.nix { device = "/dev/disk/by-partuuid/8324c052-a744-4d7f-aad8-cd3b84a15f90"; })
+    ../../modules/nixos/gaming
   ];
 
   # TODO: Temporary spot for impermanent stuff
@@ -47,11 +47,6 @@
   };
   programs.fuse.userAllowOther = true;
 
-=======
-    ../../modules/nixos/gaming
-  ];
-
->>>>>>> main
   boot.loader.grub = {
     enable = true;
     efiSupport = true;
@@ -126,12 +121,8 @@
   programs.zsh.enable = true;
   users.users.pyro = {
     shell = pkgs.zsh;
-<<<<<<< HEAD
     initialPassword = "foobar";
-    extraGroups = [ "wheel" "video" "audio" "power" "libvirtd" "docker" ]; 
-=======
     extraGroups = [ "libvirtd" "docker" ]; 
->>>>>>> main
   };
 
   hardware.graphics = {
