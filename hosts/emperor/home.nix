@@ -15,6 +15,8 @@ in {
       "Projects"
       ".ssh"
       ".zsh_history"
+      ".steam"
+      ".local/share/zoxide"
       {
         directory = ".local/share/Steam";
 	method = "symlink";
