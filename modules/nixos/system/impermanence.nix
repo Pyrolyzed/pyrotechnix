@@ -25,7 +25,7 @@ in {
       example = "/etc/persistFile" "/etc/persistFile2" ];
     };
   };
-  config.custom.impermanence = mkIf cfg.enable {
+  config = mkIf cfg.enable {
     imports = [
       (import ./disk-config.nix { device = cfg.device; })
     ];

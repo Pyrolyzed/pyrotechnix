@@ -38,7 +38,7 @@ in {
     };
   };
 
-  config.custom.network = mkIf cfg.enable {
+  config = mkIf cfg.enable {
     networking = {
       hostName = cfg.hostName;
       networkmanager.enable = cfg.networkManager.enable;

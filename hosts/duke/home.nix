@@ -5,7 +5,7 @@ let
 in {
   imports = [
     ../../modules/homeManager
-    ../../modules/homeManager/impermanence.nix
+    ../../modules/homeManager/gaming
     ./hyprland.nix
   ];
 
@@ -25,6 +25,7 @@ in {
   };
 
   custom = {
+    impermanence.enable = true;
     gaming = {
       enable = true;
       streaming = {

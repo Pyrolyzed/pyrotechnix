@@ -24,6 +24,7 @@
         proxyPass = "http://longhorn.home";
       };
     };
+    resolver.addresses = [ "192.168.1.132" ];
   };
 
   networking = {

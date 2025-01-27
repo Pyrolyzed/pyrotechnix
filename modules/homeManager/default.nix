@@ -4,6 +4,6 @@
     ./shell
     ./scripts
     ./misc
-    ./gaming
+    ./impermanence.nix
   ];
 }
