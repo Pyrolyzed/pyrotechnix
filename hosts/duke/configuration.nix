@@ -1,51 +1,27 @@
 { config, lib, pkgs, inputs, ... }:
 {
-  imports = [
-    ../../modules/nixos/gaming
-    (import ../../modules/nixos/system/impermanence.nix { device = "/dev/nvme0n1" });
-  ];
-
-  boot.loader.grub = {
-    enable = true;
-    efiSupport = true;
-    devices = [ "nodev" ];
-    theme = "${pkgs.catppuccin-grub.overrideAttrs (old: {
-      patches = (old.patches or []) ++ [
-        ../../patches/grub_patch.patch
-      ];
-    })}";
-    gfxmodeEfi = "1920x1080";
-    font = "${pkgs.poppins}/share/fonts/truetype/Poppins-Regular.ttf";
-    fontSize = 24;
-    extraConfig = ''
-      set timeout=-1
-    '';
-  };
-
   environment.pathsToLink = [ "/share/zsh" ];
-
   custom = {
-    gaming = {
+    impermanence = {
       enable = true;
+      device = "/dev/nvme0n1";
     };
+
+    network = {
+      hostName = "duke";
+      wakeOnLan.enable = true;
+    };
+
+    boot.grub = {
+      useOSProber = true;
+      removable = true;
+      style.resolutionEfi = "1920x1080";
+    };
+
+    gaming.enable = true;
   };
 
   environment.localBinInPath = true;
-
-  networking = {
-    hostName = "duke";
-    useDHCP = false;
-    interfaces.enp8s0 = {
-      ipv4.addresses = [ {
-      	address = "192.168.1.96";
-	prefixLength = 24;
-      } ];
-    };
-    defaultGateway = {
-      address = "192.168.1.1";
-      interface = "enp8s0";
-    };
-  };
 
   hardware.bluetooth.enable = true;
 
@@ -80,12 +56,14 @@
   fileSystems."/home/pyro/NAS" = {
     device = "//192.168.1.200/Storage";
     fsType = "cifs";
+    # Plain text password because I'm lazy and also because it's not exposed to the internet and also I don't use it anywhere else.
     options = [ "uid=1000" "username=pyro" "password=spoons" "x-systemd.automount" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s" ];
   };
 
   fileSystems."/home/pyro/Storage" = {
-    device = "/dev/sda1";
+    device = "dev/sda1";
     fsType = "ext4";
+    # options = [ "uid=1000" "gid=100" "dmask=007" "fmask=117" ];
   };
 
   fonts.packages = with pkgs; [ 
@@ -136,7 +114,6 @@
       xfce.thunar
       slurp
       dunst
-      via
       syncthing
       yt-dlp
       unrar
