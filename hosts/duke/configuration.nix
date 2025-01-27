@@ -1,57 +1,87 @@
 { config, lib, pkgs, inputs, ... }:
-
 {
-  boot.loader.systemd-boot.enable = true;
+  imports = [
+    ../../modules/nixos/gaming
+    (import ../../modules/nixos/system/impermanence.nix { device = "/dev/nvme0n1" });
+  ];
+
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    devices = [ "nodev" ];
+    theme = "${pkgs.catppuccin-grub.overrideAttrs (old: {
+      patches = (old.patches or []) ++ [
+        ../../patches/grub_patch.patch
+      ];
+    })}";
+    gfxmodeEfi = "1920x1080";
+    font = "${pkgs.poppins}/share/fonts/truetype/Poppins-Regular.ttf";
+    fontSize = 24;
+    extraConfig = ''
+      set timeout=-1
+    '';
+  };
+
+  environment.pathsToLink = [ "/share/zsh" ];
+
+  custom = {
+    gaming = {
+      enable = true;
+    };
+  };
+
+  environment.localBinInPath = true;
 
   networking = {
     hostName = "duke";
-    networkmanager.enable = true;
+    useDHCP = false;
+    interfaces.enp8s0 = {
+      ipv4.addresses = [ {
+      	address = "192.168.1.96";
+	prefixLength = 24;
+      } ];
+    };
+    defaultGateway = {
+      address = "192.168.1.1";
+      interface = "enp8s0";
+    };
   };
 
-  services.tailscale = {
+  hardware.bluetooth.enable = true;
+
+  programs.hyprland.enable = true;
+  services.displayManager.sddm = {
     enable = true;
-    authKeyFile = "/home/pyro/Documents/authkey";
-    extraUpFlags = [
-      "--accept-routes"
-    ];
+    wayland.enable = true;
   };
 
+  programs.virt-manager.enable = true;
+  virtualisation.libvirtd.enable = true;
+
+  programs.ssh.startAgent = true;
+  
   services.pipewire = {
     enable = true;
     pulse.enable = true;
   };
 
-  users.users.pyro.shell = pkgs.zsh;
+  programs.zsh.enable = true;
+  users.users.pyro = {
+    shell = pkgs.zsh;
+    initialPassword = "foobar";
+    extraGroups = [ "libvirtd" ]; 
+  };
 
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
+  fileSystems."/home/pyro/NAS" = {
+    device = "//192.168.1.200/Storage";
+    fsType = "cifs";
+    options = [ "uid=1000" "username=pyro" "password=spoons" "x-systemd.automount" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s" ];
   };
-
-  services.desktopManager.plasma6.enable = true;
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-  };
-
-
-  programs.zsh.enable = true;
-
-  #fileSystems."/home/pyro/NAS" = {
-  #  device = "//192.168.1.200/Storage";
-  #  fsType = "cifs";
-    # Plain text password because I'm lazy and also because it's not exposed to the internet and also I don't use it anywhere else.
-  #  options = [ "uid=1000" "username=pyro" "password=spoons" "x-systemd.automount" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s" ];
-  #};
 
   fileSystems."/home/pyro/Storage" = {
     device = "/dev/sda1";
@@ -61,41 +91,78 @@
   fonts.packages = with pkgs; [ 
     noto-fonts
     noto-fonts-cjk-sans
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.caskaydia-cove
+    poppins
   ];
 
+  programs.tmux.enable = true;
+
+  systemd.user.services.lnxlink-pyro = {
+    enable = true;
+    description = "Manual service for lnxlink since it won't autostart";
+    wantedBy = [ "default.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.bash}/bin/bash -c '/home/pyro/.local/bin/lnxlink -c /home/pyro/.config/lnxlink/lnxlink.yaml'";
+      ExecStop = "${pkgs.coreutils}/bin/true";
+      Type = "oneshot";
+    };
+  };
   environment.systemPackages = with pkgs; [
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.caskaydia-cove
+      kdePackages.bluedevil
       neovim
       git
       firefox
-      calibre
-      fastfetch
-      lsd
-      kubectl
+      xorg.xrandr
+      swww
+      qalculate-gtk
+      python314
+      anki
       kubernetes-helm
       helmfile
-      protontricks
-      protonup-qt
-      steamtinkerlaunch
+      filezilla
+      kdePackages.kde-cli-tools
+      kubectl
+      kdePackages.qtsvg
+      kdePackages.qt6ct
+      onlyoffice-desktopeditors
+      copyq
+      wl-clipboard
+      grim
+      tealdeer
+      manix
+      vscode
+      wikiman
+      xfce.thunar
+      slurp
+      dunst
+      via
+      syncthing
+      yt-dlp
+      unrar
+      sshpass
+      unzip
+      fastfetch
+      pavucontrol
+      btop
       protonvpn-gui
       kitty
-      steam
-      wl-clipboard
       rofi-wayland
-      vesktop
-      dunst
-      wl-clipboard
-      copyq
-      grim
-      slurp
+      discord
       spotify
-      mangohud
+      appimage-run
+      obs-studio
       qbittorrent
-      vlc
       cifs-utils
+      pipx
+      vlc
       obsidian
+      lvm2
+      calibre
       parsec-bin
-      moonlight-qt
+      lsd
+      bat
+      wine
+      wineWowPackages.waylandFull
   ];
 }

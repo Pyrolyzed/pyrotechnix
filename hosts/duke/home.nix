@@ -1,12 +1,37 @@
-{ config, lib, pkgs, ... }:
+{ config, osConfig, lib, pkgs, host, ... }:
 
-{
+let
+  projectDir = "/home/pyro/Projects/pyrotechnix";
+in {
   imports = [
     ../../modules/homeManager
+    ../../modules/homeManager/impermanence.nix
     ./hyprland.nix
   ];
 
+  home.persistence."/persist/home" = {
+    directories = [
+      "Media"
+      "Projects"
+      ".ssh"
+      ".zsh_history"
+      ".steam"
+      ".local/share/zoxide"
+      {
+        directory = ".local/share/Steam";
+	method = "symlink";
+      }
+    ];
+  };
+
   custom = {
+    gaming = {
+      enable = true;
+      streaming = {
+	moonlight.enable = true;
+      };
+    };
+
     git = {
       enable = true;
       email = "pyrolyzed@proton.me";
@@ -17,7 +42,7 @@
       enable = true;
       backgroundOpacity = 0.8;
       font = "CaskaydiaCove Nerd Font Mono";
-      fontSize = 16;
+      fontSize = 18;
     };
 
     shell.zsh = {
@@ -27,34 +52,117 @@
         ll = "ls -l";
 	vim = "nvim";
 	cd = "z";
+	cat = "bat";
 	k = "kubectl";
       };
     };
 
-    scripts.enable = true;
-    scripts.script.rebuild = {
-      text = ''
-        #!/usr/bin/env bash
-	cd /home/pyro/pyrotechnix
-	sudo nixos-rebuild switch --flake .#duke
-      '';
-      runtimeInputs = [ ];
+    scripts = {
+      enable = true;
+      script = {
+	rebuild = {
+	  text = ''
+	    #!/usr/bin/env bash
+	    cd ${projectDir}
+	    sudo nixos-rebuild switch --flake .#${host}
+	  '';
+	};
+	rebuild-server = {
+	  text = ''
+	    #!/usr/bin/env bash
+	    cd ${projectDir}
+	    build_server () {
+	      num=$1
+	      ip=$2
+
+	      echo "Rebuilding homeserver-$num..."
+	      nixos-rebuild switch --flake .#homeserver-"$num" --target-host root@"$ip" > ${projectDir}/.logs/homeserver-"$num"-build.log
+	      echo "Done."
+	    }
+	    build_server "$1" "$2"
+	  '';
+	};
+	rebuild-servers = {
+	  text = ''
+	    #!/usr/bin/env bash
+	    rebuild-server 1 192.168.1.151
+	    rebuild-server 4 192.168.1.147
+	  '';
+	};
+	install-remote = {
+	  text = ''
+	    #!/usr/bin/env bash
+	    cd ${projectDir}
+	    flake=$1
+	    host=$2
+	    nix run github:nix-community/nixos-anywhere -- --flake .#"$flake" root@"$host"
+	  '';
+	};
+	build-iso = {
+	  text = ''
+	    #!/usr/bin/env bash
+	    cd ${projectDir}
+	    nix build .#nixosConfigurations.isoInstaller.config.system.build.isoImage
+	  '';
+	};
+      };
     };
   };
 
-  #home.pointerCursor = {
-  #  gtk.enable = true;
-  #  package = pkgs.bibata-cursors;
-  #  name = "Bibata-Modern-Classic";
-  #  size = 24;
-  #};
+  programs.zsh.historySubstringSearch = {
+    searchDownKey = "$terminfo[kcud1]";
+    searchUpKey = "$terminfo[kcuu1]";
+  };
+  systemd.user.services =
+    let
+      graphicalTarget = config.wayland.systemd.target;
+    in
+    {
+      swww = {
+        Install.WantedBy = [ graphicalTarget ];
+        Unit = {
+          Description = "Wayland wallpaper daemon";
+          After = [ graphicalTarget ];
+          PartOf = [ graphicalTarget ];
+        };
+        Service = {
+          ExecStart = lib.getExe' pkgs.swww "swww-daemon";
+          Restart = "on-failure";
+        };
+      };
+    };
 
-  home.username = "pyro";
-  home.homeDirectory = "/home/pyro";
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+    iconTheme = {
+      package = pkgs.adwaita-icon-theme;
+      name = "Adwaita-dark";
+    };
+  };
 
-  home.stateVersion = "24.05";
+  qt = {
+    enable = true;
+    style = {
+      name = "adwaita-dark";
+      package = pkgs.adwaita-qt6;
+    };
+    platformTheme.name = "qtct";
+  };
 
-  programs.zsh.enable = true;
+  home.pointerCursor = {
+    gtk.enable = true;
+    hyprcursor.enable = true;
+    hyprcursor.size = 24;
+    x11.enable = true;
+    x11.defaultCursor = "left_ptr";
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 24;
+  };
 
   programs.starship = {
     enable = true;
@@ -68,10 +176,6 @@
 
   programs.ranger = {
     enable = true;
-    extraConfig = ''
-      set preview_images true
-      set preview_images_method kitty
-    '';
   };
 
   programs.zoxide = {
@@ -83,46 +187,13 @@
     window_padding_width = 10;
     window_padding_height = 5;
   };
-
+  
   home.sessionVariables = {
     EDITOR = "nvim";
     NIXOS_OZONE_WL = 1;
-  };
-
-  programs.zsh.shellAliases = { 
-    cd = "z";
-  };
-
-  home.file.".config/MangoHud/MangoHud.conf" = {
-    enable = true;
-    text = ''
-      gpu_stats
-      gpu_temp
-      gpu_core_clock
-      gpu_mem_clock
-
-      cpu_stats
-      cpu_temp
-      cpu_mhz
-
-      vram
-      ram
-      fps
-      frametime
-
-      throttling_status
-      #throttling_status_graph
-
-      gpu_name
-
-      frame_timing
-
-      font_size=36
-      # font_scale=1.0
-      font_size_text=36
-      text_outline
-      toggle_hud=Shift_R+F12
-    '';
+    ESDE_APPDATA_DIR = "~/.config/ES-DE";
+    MANPAGER = "nvim +Man!";
+    QT_QPA_PLATFORM = "wayland";
   };
 
   programs.home-manager.enable = true;

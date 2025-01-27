@@ -19,7 +19,7 @@ let
 	  (if isServer host then ./homeserver/${host}/configuration.nix else ./${host}/configuration.nix) # Host specific configuration
 	  (if isServer host then ./homeserver/${host}/hardware.nix else ./${host}/hardware.nix) # Host hardware configuration
 	  (if isServer host then ./homeserver else { }) # Common homeserver configuration
-	  ../nixos # Common nixos configuration
+	  ../default/nixos # Default nixos configuration
 	  ../overlays # Access to overlays
 	  inputs.home-manager.nixosModules.home-manager {
 	    home-manager = {
@@ -39,7 +39,7 @@ let
 	      users.${user} = {
 	        imports = [
 		  (if isServer host then ./homeserver/${host}/home.nix else ./${host}/home.nix) # Host specific home configuration
-		  ../home-manager # Common home configuration
+		  ../default/home-manager # Default home configuration
 		];
 	      };
 	    };

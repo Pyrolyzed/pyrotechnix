@@ -1,31 +1,23 @@
 { config, lib, pkgs, inputs, ... }:
 {
-  imports = [
-    ../../modules/nixos/gaming
-    (import ../../modules/nixos/system/impermanence.nix { device = "/dev/disk/by-partuuid/8324c052-a744-4d7f-aad8-cd3b84a15f90" });
-  ];
-
-  boot.loader.grub = {
-    enable = true;
-    efiSupport = true;
-    devices = [ "nodev" ];
-    efiInstallAsRemovable = true;
-    useOSProber = true;
-    theme = "${pkgs.catppuccin-grub.overrideAttrs (old: {
-      patches = (old.patches or []) ++ [
-        ../../patches/grub_patch.patch
-      ];
-    })}";
-    gfxmodeEfi = "3840x2160";
-    font = "${pkgs.poppins}/share/fonts/truetype/Poppins-Regular.ttf";
-    fontSize = 24;
-    extraConfig = ''
-      set timeout=-1
-    '';
-  };
   environment.pathsToLink = [ "/share/zsh" ];
-
   custom = {
+    impermanence = {
+      enable = true;
+      device = "/dev/disk/by-partuuid/8324c052-a744-4d7f-aad8-cd3b84a15f90";
+    };
+
+    network = {
+      hostName = "emperor";
+      wakeOnLan.enable = true;
+    };
+
+    boot.grub = {
+      useOSProber = true;
+      removable = true;
+      style.resolutionEfi = "3840x2160";
+    };
+
     gaming = {
       enable = true;
       streaming.sunshine.enable = true;
@@ -35,24 +27,6 @@
   virtualisation.docker.enable = true;
   environment.localBinInPath = true;
 
-  networking = {
-    hostName = "emperor";
-    useDHCP = false;
-    interfaces.enp8s0 = {
-      ipv4.addresses = [ {
-      	address = "192.168.1.97";
-	prefixLength = 24;
-      } ];
-      wakeOnLan = {
-        enable = true;
-	policy = [ "magic" ];
-      };
-    };
-    defaultGateway = {
-      address = "192.168.1.1";
-      interface = "enp8s0";
-    };
-  };
 
   hardware.bluetooth.enable = true;
 
