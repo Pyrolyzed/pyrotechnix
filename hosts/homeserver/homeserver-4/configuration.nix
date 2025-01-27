@@ -20,14 +20,14 @@
     enable = true;
     virtualHosts."homeserver.home" = {
       locations."/longhorn" = {
-        proxyPass = "http://longhorn.home/";
+        proxyPass = "http://longhorn.home";
 	extraConfig = ''
 	  proxy_set_header Host longhorn.home;
 	  proxy_set_header X-Forwarded-For $remote_addr;
 	'';
       };
       locations."/vaultwarden" = {
-        proxyPass = "http://vaultwarden.home/";
+        proxyPass = "http://vaultwarden.home";
 	extraConfig = ''
 	  proxy_set_header Host vaultwarden.home;
 	  proxy_set_header X-Forwarded-For $remote_addr;
