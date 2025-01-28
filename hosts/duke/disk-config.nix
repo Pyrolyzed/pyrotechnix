@@ -1,4 +1,4 @@
-{ lib, device ? throw "Device is required for Disko.", ... }:
+{ device ? throw "Device is required for Disko.", ... }:
 {
   disko.devices = {
     disk.main = {

@@ -1,10 +1,17 @@
 { config, lib, pkgs, inputs, ... }:
-{
+let
+  device = "/dev/nvme0n1";
+in {
+
+  imports = [
+    (import ./disk-config.nix { inherit device;  })
+  ];
+
   environment.pathsToLink = [ "/share/zsh" ];
   custom = {
     impermanence = {
       enable = true;
-      device = "/dev/nvme0n1";
+      inherit device;
     };
 
     network = {

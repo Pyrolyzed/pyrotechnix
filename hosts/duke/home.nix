@@ -4,7 +4,6 @@ let
   projectDir = "/home/pyro/Projects/pyrotechnix";
 in {
   imports = [
-    ../../modules/homeManager
     ../../modules/homeManager/gaming
     ./hyprland.nix
   ];

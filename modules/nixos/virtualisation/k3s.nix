@@ -1,6 +1,6 @@
 { lib, config, pkgs, user, ... }:
 let
-  cfg = custom.virtualisation.k3s;
+  cfg = config.custom.virtualisation.k3s;
   inherit (lib) mkEnableOption mkIf;
 in {
 

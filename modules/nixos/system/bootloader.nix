@@ -1,6 +1,6 @@
 { lib, pkgs, config, ... }:
 let
-  inherit (lib) mkEnableOption mkIf mkMerge;
+  inherit (lib) mkEnableOption mkOption mkIf mkMerge;
   inherit (lib.types) listOf str int package;
   cfg = config.custom.boot;
 in {

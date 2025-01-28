@@ -24,7 +24,7 @@ in {
 
     home = mkOption {
       type = path;
-      default = "/home/${toLower custom.toOneWord cfg.name}/"
+      default = "/home/${toLower (lib.custom.toOneWord cfg.name)}/";
     };
 
     shell = mkOption {
@@ -34,7 +34,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    users.users.${toLower replaceStrings [" "] [""] cfg.name} = {
+    users.users.${toLower (lib.custom.toOneWord cfg.name)} = {
       name = cfg.name;
       home = cfg.home;
       isNormalUser = true;

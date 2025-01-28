@@ -8,7 +8,7 @@ in {
     enable = mkEnableOption "Enable impermanence";
     device = mkOption {
       type = str;
-      description "Root disk for impermanence";
+      description = "Root disk for impermanence";
       default = "/dev/sda";
       example = "/dev/sda";
     };
@@ -22,13 +22,10 @@ in {
       type = listOf str;
       description = "Extra files to persist";
       default = [ ];
-      example = "/etc/persistFile" "/etc/persistFile2" ];
+      example = [ "/etc/persistFile" "/etc/persistFile2" ];
     };
   };
   config = mkIf cfg.enable {
-    imports = [
-      (import ./disk-config.nix { device = cfg.device; })
-    ];
     boot.initrd.postDeviceCommands = lib.mkAfter ''
       mkdir /btrfs_tmp
       mount /dev/root_vg/root /btrfs_tmp

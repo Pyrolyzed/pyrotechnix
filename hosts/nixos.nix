@@ -21,6 +21,7 @@ let
 	  (if isServer host then ./homeserver else { }) # Common homeserver configuration
 	  ../default/nixos # Default nixos configuration
 	  ../overlays # Access to overlays
+          ../modules/nixos
 	  inputs.home-manager.nixosModules.home-manager {
 	    home-manager = {
 	      useGlobalPkgs = true;
@@ -40,6 +41,7 @@ let
 	        imports = [
 		  (if isServer host then ./homeserver/${host}/home.nix else ./${host}/home.nix) # Host specific home configuration
 		  ../default/home-manager # Default home configuration
+                  ../modules/homeManager
 		];
 	      };
 	    };
