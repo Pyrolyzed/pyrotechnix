@@ -1,14 +1,30 @@
 { config, lib, pkgs, inputs, ... }:
-{
+let
+  device = "/dev/nvme0n1";
+in {
+
+  imports = [
+    (import ./disk-config.nix { inherit device;  })
+  ];
+
   environment.pathsToLink = [ "/share/zsh" ];
   custom = {
     impermanence = {
       enable = true;
-      device = "/dev/nvme0n1";
+      inherit device;
+    };
+
+    user = {
+      name = "pyro";
+      email = "pyrolyzed@proton.me";
+      shell = pkgs.zsh;
     };
 
     network = {
       hostName = "duke";
+      interface = "enp59s0";
+      networkManager.enable = true;
+      ip.address = "192.168.1.96";
       wakeOnLan.enable = true;
     };
 
@@ -42,11 +58,6 @@
   };
 
   programs.zsh.enable = true;
-  users.users.pyro = {
-    shell = pkgs.zsh;
-    initialPassword = "foobar";
-    extraGroups = [ "libvirtd" ]; 
-  };
 
   hardware.graphics = {
     enable = true;
@@ -76,16 +87,6 @@
 
   programs.tmux.enable = true;
 
-  systemd.user.services.lnxlink-pyro = {
-    enable = true;
-    description = "Manual service for lnxlink since it won't autostart";
-    wantedBy = [ "default.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.bash}/bin/bash -c '/home/pyro/.local/bin/lnxlink -c /home/pyro/.config/lnxlink/lnxlink.yaml'";
-      ExecStop = "${pkgs.coreutils}/bin/true";
-      Type = "oneshot";
-    };
-  };
   environment.systemPackages = with pkgs; [
       kdePackages.bluedevil
       neovim
@@ -98,7 +99,6 @@
       anki
       kubernetes-helm
       helmfile
-      filezilla
       kdePackages.kde-cli-tools
       kubectl
       kdePackages.qtsvg
@@ -114,7 +114,6 @@
       xfce.thunar
       slurp
       dunst
-      syncthing
       yt-dlp
       unrar
       sshpass
@@ -125,7 +124,7 @@
       protonvpn-gui
       kitty
       rofi-wayland
-      discord
+      vesktop
       spotify
       appimage-run
       obs-studio

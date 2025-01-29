@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, user, ... }:
 let
   cfg = config.custom.impermanence;
   inherit (lib) mkEnableOption mkIf;
@@ -11,8 +11,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-
-    home.persistence."/persist/home" = {
+    home.persistence."/persist/home/${user}" = {
       allowOther = true;
     };
   };

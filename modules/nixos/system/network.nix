@@ -34,7 +34,7 @@ in {
     gateway = mkOption {
       type = str;
       description = "The IP address of the network gateway";
-      default = cfg.interface;
+      default = "192.168.1.1";
     };
   };
 
@@ -42,7 +42,7 @@ in {
     networking = {
       hostName = cfg.hostName;
       networkmanager.enable = cfg.networkManager.enable;
-      useDHCP = cfg.dhcp;
+      useDHCP = cfg.dhcp.enable;
       interfaces.${cfg.interface} = {
 	ipv4.addresses = [ {
 	  address = cfg.ip.address; 

@@ -1,6 +1,6 @@
 { lib, pkgs, config, ... }:
 let
-  inherit (lib) mkEnableOption mkIf mkMerge;
+  inherit (lib) mkEnableOption mkOption mkIf mkMerge;
   inherit (lib.types) listOf str int package;
   cfg = config.custom.boot;
 in {
@@ -25,7 +25,7 @@ in {
 	  description = "The theme package to be used by GRUB";
 	  default = "${pkgs.catppuccin-grub.overrideAttrs (old: {
 	    patches = (old.patches or []) ++ [
-	      ../../patches/grub_patch.patch
+	      ../../../patches/grub_patch.patch
 	    ];
 	  })}";
 	};

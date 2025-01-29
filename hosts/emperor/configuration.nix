@@ -1,10 +1,18 @@
 { config, lib, pkgs, inputs, ... }:
-{
+let
+  device = "/dev/disk/by-partuuid/8324c052-a744-4d7f-aad8-cd3b84a15f90";
+in {
   environment.pathsToLink = [ "/share/zsh" ];
   custom = {
     impermanence = {
       enable = true;
-      device = "/dev/disk/by-partuuid/8324c052-a744-4d7f-aad8-cd3b84a15f90";
+      inherit device;
+    };
+
+    user = {
+      name = "pyro";
+      email = "pyrolyzed@proton.me";
+      shell = pkgs.zsh;
     };
 
     network = {

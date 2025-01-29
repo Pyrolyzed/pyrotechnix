@@ -1,15 +1,14 @@
-{ config, osConfig, lib, pkgs, host, ... }:
+{ config, osConfig, lib, pkgs, host, user, ... }:
 
 let
   projectDir = "/home/pyro/Projects/pyrotechnix";
 in {
   imports = [
-    ../../modules/homeManager
     ../../modules/homeManager/gaming
     ./hyprland.nix
   ];
 
-  home.persistence."/persist/home" = {
+  home.persistence."/persist/home/${user}" = {
     directories = [
       "Media"
       "Projects"
@@ -18,7 +17,7 @@ in {
       ".steam"
       ".local/share/zoxide"
       {
-        directory = ".local/share/Steam";
+	directory = ".local/share/Steam";
 	method = "symlink";
       }
     ];
@@ -114,24 +113,6 @@ in {
     searchDownKey = "$terminfo[kcud1]";
     searchUpKey = "$terminfo[kcuu1]";
   };
-  systemd.user.services =
-    let
-      graphicalTarget = config.wayland.systemd.target;
-    in
-    {
-      swww = {
-        Install.WantedBy = [ graphicalTarget ];
-        Unit = {
-          Description = "Wayland wallpaper daemon";
-          After = [ graphicalTarget ];
-          PartOf = [ graphicalTarget ];
-        };
-        Service = {
-          ExecStart = lib.getExe' pkgs.swww "swww-daemon";
-          Restart = "on-failure";
-        };
-      };
-    };
 
   gtk = {
     enable = true;
@@ -192,7 +173,6 @@ in {
   home.sessionVariables = {
     EDITOR = "nvim";
     NIXOS_OZONE_WL = 1;
-    ESDE_APPDATA_DIR = "~/.config/ES-DE";
     MANPAGER = "nvim +Man!";
     QT_QPA_PLATFORM = "wayland";
   };

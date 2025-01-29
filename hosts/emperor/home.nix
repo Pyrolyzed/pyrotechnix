@@ -1,4 +1,4 @@
-{ config, osConfig, lib, pkgs, ... }:
+{ config, osConfig, lib, pkgs, user, ... }:
 
 let
   projectDir = "/home/pyro/Projects/pyrotechnix";
@@ -9,7 +9,7 @@ in {
     ./hyprland.nix
   ];
 
-  home.persistence."/persist/home" = {
+  home.persistence."/persist/home/${user}" = {
     directories = [
       "Media"
       "Projects"
