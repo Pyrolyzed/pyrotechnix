@@ -19,11 +19,29 @@
   services.nginx = {
     enable = true;
     virtualHosts."homeserver.home" = {
-      locations."/" = {
-        recommendedProxySettings = true;
+      locations."/longhorn" = {
         proxyPass = "http://longhorn.home";
+	extraConfig = ''
+	  proxy_set_header Host longhorn.home;
+	  proxy_set_header X-Forwarded-For $remote_addr;
+	'';
+      };
+      locations."/vaultwarden/" = {
+        proxyPass = "http://vaultwarden.home/";
+	extraConfig = ''
+	  proxy_set_header Host vaultwarden.home;
+	  proxy_set_header X-Forwarded-For $remote_addr;
+	'';
+      };
+      locations."/hoardertwo" = {
+        proxyPass = "http://hoarder.home:3000/";
+        extraConfig = ''
+	  proxy_set_header Host hoarder.home;
+	  proxy_set_header X-Forwarded-For $remote_addr;
+	'';
       };
     };
+    resolver.addresses = [ "192.168.1.132" ];
   };
 
   networking = {

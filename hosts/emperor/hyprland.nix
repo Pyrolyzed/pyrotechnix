@@ -6,49 +6,42 @@
 
   custom.windowManager.hyprland = {
     enable = true;
-    monitors = [
-      {
-        name = "DP-1";
-	width = 3840;
-	height = 2160;
-	refreshRate = 240;
-	x = 0;
-	y = 0;
-	scale = 1.5;
-      }
-      {
-        name = "DP-3";
-	width = 2560;
-	height = 1440;
-	refreshRate = 144;
-	x = 2560;
-	y = 0;
-	scale = 1.25;
-      }
-      {
-        name = "HDMI-A-1";
-	width = 3840;
-	height = 2160;
-	refreshRate = 60;
-	x = 0;
-	y = 0;
-	scale = 2;
-	enabled = false;
-      }
-    ];
+    settings = {
+      monitors = [
+	{
+	  name = "DP-1";
+	  width = 3840;
+	  height = 2160;
+	  refreshRate = 240;
+	  x = 0;
+	  y = 0;
+	  scale = 1.5;
+	}
+	{
+	  name = "DP-3";
+	  width = 2560;
+	  height = 1440;
+	  refreshRate = 144;
+	  x = 2560;
+	  y = 0;
+	  scale = 1.25;
+	}
+	{
+	  name = "HDMI-A-1";
+	  width = 3840;
+	  height = 2160;
+	  refreshRate = 60;
+	  x = 0;
+	  y = 0;
+	  scale = 2;
+	  enabled = false;
+	}
+      ];
+    };
   };
 
   wayland.windowManager.hyprland = {
     settings = {
-      monitor = map (m:
-	let
-	  resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
-	  position = "${toString m.x}x${toString m.y}";
-	in
-	"${m.name},${if m.enabled then "${resolution},${position},${toString m.scale}" else "disable"}"
-      )
-      (config.custom.windowManager.hyprland.monitors);
-
       xwayland = {
         force_zero_scaling = true;
       };

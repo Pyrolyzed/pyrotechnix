@@ -3,7 +3,7 @@ let
   isServer = host: lib.strings.hasPrefix "homeserver" host;
   mkConfiguration =
     host: { pkgs ? args.pkgs, }:
-      inputs.nixpkgs.lib.nixosSystem {
+      lib.nixosSystem {
         inherit pkgs;
 
 	specialArgs = specialArgs // {
@@ -19,8 +19,9 @@ let
 	  (if isServer host then ./homeserver/${host}/configuration.nix else ./${host}/configuration.nix) # Host specific configuration
 	  (if isServer host then ./homeserver/${host}/hardware.nix else ./${host}/hardware.nix) # Host hardware configuration
 	  (if isServer host then ./homeserver else { }) # Common homeserver configuration
-	  ../nixos # Common nixos configuration
+	  ../default/nixos # Default nixos configuration
 	  ../overlays # Access to overlays
+          ../modules/nixos
 	  inputs.home-manager.nixosModules.home-manager {
 	    home-manager = {
 	      useGlobalPkgs = true;
@@ -39,12 +40,14 @@ let
 	      users.${user} = {
 	        imports = [
 		  (if isServer host then ./homeserver/${host}/home.nix else ./${host}/home.nix) # Host specific home configuration
-		  ../home-manager # Common home configuration
+		  ../default/home-manager # Default home configuration
+                  ../modules/homeManager
 		];
 	      };
 	    };
 	  }
           inputs.disko.nixosModules.default # Disko just in case the host uses it.
+	  inputs.impermanence.nixosModules.impermanence
 	];
       };
   getHomeservers = range: 

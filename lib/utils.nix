@@ -1,8 +1,9 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 lib.extend (
   _: libprev: {
     custom = rec {
-      toOneWord = string: libprev.replaceStrings [" "] [""] string;
+      toOneWord = string: (builtins.replaceStrings [" "] [""] string);
+      isEmptyList = list: list == [];
     };
   }
 )

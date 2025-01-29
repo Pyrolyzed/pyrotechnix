@@ -1,122 +1,152 @@
 { config, lib, pkgs, ... }:
 {
-  wayland.windowManager.hyprland.enable = true;
-  wayland.windowManager.hyprland.extraConfig = ''
-      monitor=eDP-1,1920x1080@60,0x0,1
+  imports = [
+    ../../modules/homeManager/windowManager/hyprland.nix
+  ];
 
-      # Autostart programs
-      exec-once = copyq --start-server & dunst
-      
-      # Set cursor (lazy way)
-      exec-once = hyprctl setcursor Bibata-Modern-Classic 18
+  custom.windowManager.hyprland = {
+    enable = true;
+    settings = {
+      monitors = [
+	{
+	  name = "eDP-1";
+	  width = 1920;
+	  height = 1080;
+	  refreshRate = 60;
+	  x = 0;
+	  y = 0;
+	  scale = 1.0;
+	}
+      ];
+    };
+  };
 
-      general { 
-	  gaps_in = 10
-	  gaps_out = 15
+  wayland.windowManager.hyprland = {
+    settings = {
+      xwayland = {
+        force_zero_scaling = true;
+      };
 
-	  border_size = 3
+      exec-once = "copyq --start-server & dunst & xrandr --output eDP-1 --primary";
 
-	  col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-	  col.inactive_border = rgba(595959aa)
+      workspace = let
+	makeWorkspace = workspace: monitor: range:
+	  "${toString workspace}, monitor:${monitor}, default:${lib.boolToString ((builtins.elemAt range 0) == workspace)}";
+	generateWorkspaces = range: monitor:
+	  map (w: makeWorkspace w monitor range) range;
+      in 
+      (generateWorkspaces (lib.range 1 3) "DP-1") ++ (generateWorkspaces (lib.range 4 6) "DP-3") ++ (generateWorkspaces (lib.range 7 9) "HDMI-A-1");
 
-	  resize_on_border = false 
+      general = {
+        gaps_in = 10;
+	gaps_out = 15;
+	border_size = 3;
+	"col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+	"col.inactive_border" = "rgba(595959aa)";
+	resize_on_border = false;
+	allow_tearing = false;
+	layout = "dwindle";
+      };
 
-	  allow_tearing = false
+      decoration = {
+        rounding = 10;
+	blur = {
+	  enabled = true;
+	  size = 3;
+	  passes = 2;
+	  vibrancy = 0.1696;
+	};
+      };
 
-	  layout = dwindle
-      }
+      animations = {
+        enabled = true;
+	bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+	animation = [
+	  "windows, 1, 7, myBezier"
+	  "windowsOut, 1, 7, default, popin 80%"
+	  "border, 1, 10, default"
+	  "borderangle, 1, 8, default"
+	  "fade, 1, 7, default"
+	  "workspaces, 1, 6, default"
+	];
+      };
 
-      decoration {
-	  rounding = 10
-	  
-	  blur {
-	      enabled = true
-	      size = 3
-	      passes = 2
-	      
-	      vibrancy = 0.1696
-	  }
-      }
+      dwindle = {
+        pseudotile = true;
+	preserve_split = true;
+      };
 
-      animations {
-	  enabled = true
+      "$scratch_term" = "class:^(scratch_term)$";
+      "$scratch_spotify" = "class:^(spotify)$";
+      windowrulev2 = [
+	"suppressevent maximize, class:.*"
+	"float,$scratch_term"
+	"size 80% 85%, $scratch_term"
+	"workspace special:scratch_term,$scratch_term"
+	"center, $scratch_term"
+	"float,$scratch_spotify"
+	"size 80% 85%, $scratch_spotify"
+	"workspace special:scratch_spotify,$scratch_spotify"
+	"center, $scratch_spotify"
+      ];
 
-	  bezier = myBezier, 0.05, 0.9, 0.1, 1.05
+      "$mod" = "SUPER";
+      "$terminal" = "kitty";
+      "$menu" = "rofi -show drun";
+      "$browser" = "firefox";
+      "$chat" = "vesktop --enable-features=UseOzonePlatform --ozone-platform=wayland";
+      "$files" = "thunar";
 
-	  animation = windows, 1, 7, myBezier
-	  animation = windowsOut, 1, 7, default, popin 80%
-	  animation = border, 1, 10, default
-	  animation = borderangle, 1, 8, default
-	  animation = fade, 1, 7, default
-	  animation = workspaces, 1, 6, default
-      }
-
-    dwindle {
-      pseudotile = true 
-      preserve_split = true
-    }
-
-    windowrulev2 = suppressevent maximize, class:.* 
-
-    $terminal = kitty
-    $menu = rofi -show drun
-    $browser = firefox
-    $chat = vesktop --enable-features=UseOzonePlatform --ozone-platform=wayland
-
-    $mainMod = SUPER 
-
-    bind = $mainMod SHIFT, S, exec, grim -g "$(slurp -d)" - | wl-copy
-    bind = $mainMod, F, exec, $browser
-    bind = $mainMod, Q, exec, $terminal
-    bind = $mainMod, C, killactive,
-    bind = $mainMod, M, exit,
-    bind = $mainMod, V, togglefloating,
-    bind = $mainMod, R, exec, $menu
-    bind = $mainMod, X, fullscreen
-    bind = $mainMod, D, exec, $chat
-
-    # Move focus with mainMod + vim bindings
-    bind = $mainMod, h, movefocus, l
-    bind = $mainMod, l, movefocus, r
-    bind = $mainMod, k, movefocus, u
-    bind = $mainMod, j, movefocus, d
-
-    # Switch workspaces with mainMod + [0-9]
-    bind = $mainMod, 1, workspace, 1
-    bind = $mainMod, 2, workspace, 2
-    bind = $mainMod, 3, workspace, 3
-    bind = $mainMod, 4, workspace, 4
-    bind = $mainMod, 5, workspace, 5
-    bind = $mainMod, 6, workspace, 6
-    bind = $mainMod, 7, workspace, 7
-    bind = $mainMod, 8, workspace, 8
-    bind = $mainMod, 9, workspace, 9
-    bind = $mainMod, 0, workspace, 10
-
-    # Move active window to a workspace with mainMod + SHIFT + [0-9]
-    bind = $mainMod SHIFT, 1, movetoworkspace, 1
-    bind = $mainMod SHIFT, 2, movetoworkspace, 2
-    bind = $mainMod SHIFT, 3, movetoworkspace, 3
-    bind = $mainMod SHIFT, 4, movetoworkspace, 4
-    bind = $mainMod SHIFT, 5, movetoworkspace, 5
-    bind = $mainMod SHIFT, 6, movetoworkspace, 6
-    bind = $mainMod SHIFT, 7, movetoworkspace, 7
-    bind = $mainMod SHIFT, 8, movetoworkspace, 8
-    bind = $mainMod SHIFT, 9, movetoworkspace, 9
-    bind = $mainMod SHIFT, 0, movetoworkspace, 10
-
-    # Scroll through existing workspaces with mainMod + scroll
-    bind = $mainMod, mouse_down, workspace, e+1
-    bind = $mainMod, mouse_up, workspace, e-1
-
-    # Move/resize windows with mainMod + LMB/RMB and dragging
-    bindm = $mainMod, mouse:272, movewindow
-    bindm = $mainMod, mouse:273, resizewindow
-
-    # Resize active windows with vim bindings
-    bind = $mainMod SHIFT, l, resizeactive, 10 0
-    bind = $mainMod SHIFT, h, resizeactive, -10 0
-    bind = $mainMod SHIFT, k, resizeactive, 0 -10
-    bind = $mainMod SHIFT, j, resizeactive, 0 10
-  '';
+      bind = [
+        "$mod SHIFT, S, exec, grim -g \"$(slurp -d)\" - | wl-copy"
+	"$mod, Z, exec, if hyprctl clients | grep scratch_term; then echo 'scratch_term found'; else kitty --class scratch_term; fi"
+	"$mod, Z, togglespecialworkspace, scratch_term"
+	"$mod, P, exec, if hyprctl clients | grep scratch_spotify; then echo 'scratch_spotify found'; else spotify --class scratch_spotify; fi"
+	"$mod, P, togglespecialworkspace, scratch_spotify"
+	"$mod, F, exec, $browser"
+	"$mod, Q, exec, $terminal"
+	"$mod, R, exec, $menu"
+	"$mod, D, exec, $chat"
+	"$mod, E, exec, $files"
+	"$mod, C, killactive"
+	"$mod, M, exit"
+	"$mod, V, togglefloating"
+	"$mod, X, fullscreen"
+	"$mod, H, movefocus, l"
+	"$mod, L, movefocus, r"
+	"$mod, K, movefocus, u"
+	"$mod, J, movefocus, d"
+	"$mod, 1, workspace, 1"
+	"$mod, 2, workspace, 2"
+	"$mod, 3, workspace, 3"
+	"$mod, 4, workspace, 4"
+	"$mod, 5, workspace, 5"
+	"$mod, 6, workspace, 6"
+	"$mod, 7, workspace, 7"
+	"$mod, 8, workspace, 8"
+	"$mod, 9, workspace, 9"
+	"$mod, 0, workspace, 10"	
+	"$mod SHIFT, 1, movetoworkspace, 1"
+	"$mod SHIFT, 2, movetoworkspace, 2"
+	"$mod SHIFT, 3, movetoworkspace, 3"
+	"$mod SHIFT, 4, movetoworkspace, 4"
+	"$mod SHIFT, 5, movetoworkspace, 5"
+	"$mod SHIFT, 6, movetoworkspace, 6"
+	"$mod SHIFT, 7, movetoworkspace, 7"
+	"$mod SHIFT, 8, movetoworkspace, 8"
+	"$mod SHIFT, 9, movetoworkspace, 9"
+	"$mod SHIFT, 0, movetoworkspace, 10"
+	"$mod, mouse_down, workspace, e+1"
+	"$mod, mouse_up, workspace, e-1"
+	"$mod SHIFT, l, resizeactive, 10 0"
+	"$mod SHIFT, h, resizeactive, -10 0"
+	"$mod SHIFT, k, resizeactive, 0 -10"
+	"$mod SHIFT, j, resizeactive, 0 10"
+      ];
+      bindm = [
+	"$mod, mouse:272, movewindow"
+	"$mod, mouse:273, resizewindow"
+      ];
+    };
+  };
 }
