@@ -11,6 +11,7 @@ let
 	  isNixOS = true;
 	  isDesktop = host == "emperor";
 	  isLaptop = host == "duke";
+	  isPersonal = isDesktop || isLaptop;
 	  isVm = host == "vm";
 	  isServer = isServer host;
 	};
@@ -19,6 +20,7 @@ let
 	  (if isServer host then ./homeserver/${host}/configuration.nix else ./${host}/configuration.nix) # Host specific configuration
 	  (if isServer host then ./homeserver/${host}/hardware.nix else ./${host}/hardware.nix) # Host hardware configuration
 	  (if isServer host then ./homeserver else { }) # Common homeserver configuration
+	  (if isPersonal then ../default/personal else { })
 	  ../default/nixos # Default nixos configuration
 	  ../overlays # Access to overlays
           ../modules/nixos
