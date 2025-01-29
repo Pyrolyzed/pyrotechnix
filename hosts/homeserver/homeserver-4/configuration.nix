@@ -26,10 +26,17 @@
 	  proxy_set_header X-Forwarded-For $remote_addr;
 	'';
       };
-      locations."/vaultwarden" = {
-        proxyPass = "http://vaultwarden.home";
+      locations."/vaultwarden/" = {
+        proxyPass = "http://vaultwarden.home/";
 	extraConfig = ''
 	  proxy_set_header Host vaultwarden.home;
+	  proxy_set_header X-Forwarded-For $remote_addr;
+	'';
+      };
+      locations."/hoardertwo" = {
+        proxyPass = "http://hoarder.home:3000/";
+        extraConfig = ''
+	  proxy_set_header Host hoarder.home;
 	  proxy_set_header X-Forwarded-For $remote_addr;
 	'';
       };
