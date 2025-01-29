@@ -14,8 +14,17 @@ in {
       inherit device;
     };
 
+    user = {
+      name = "pyro";
+      email = "pyrolyzed@proton.me";
+      shell = pkgs.zsh;
+    };
+
     network = {
       hostName = "duke";
+      interface = "enp59s0";
+      networkManager.enable = true;
+      ip.address = "192.168.1.96";
       wakeOnLan.enable = true;
     };
 
@@ -49,11 +58,6 @@ in {
   };
 
   programs.zsh.enable = true;
-  users.users.pyro = {
-    shell = pkgs.zsh;
-    initialPassword = "foobar";
-    extraGroups = [ "libvirtd" ]; 
-  };
 
   hardware.graphics = {
     enable = true;
@@ -83,16 +87,6 @@ in {
 
   programs.tmux.enable = true;
 
-  systemd.user.services.lnxlink-pyro = {
-    enable = true;
-    description = "Manual service for lnxlink since it won't autostart";
-    wantedBy = [ "default.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.bash}/bin/bash -c '/home/pyro/.local/bin/lnxlink -c /home/pyro/.config/lnxlink/lnxlink.yaml'";
-      ExecStop = "${pkgs.coreutils}/bin/true";
-      Type = "oneshot";
-    };
-  };
   environment.systemPackages = with pkgs; [
       kdePackages.bluedevil
       neovim
@@ -105,7 +99,6 @@ in {
       anki
       kubernetes-helm
       helmfile
-      filezilla
       kdePackages.kde-cli-tools
       kubectl
       kdePackages.qtsvg
@@ -121,7 +114,6 @@ in {
       xfce.thunar
       slurp
       dunst
-      syncthing
       yt-dlp
       unrar
       sshpass
@@ -132,7 +124,7 @@ in {
       protonvpn-gui
       kitty
       rofi-wayland
-      discord
+      vesktop
       spotify
       appimage-run
       obs-studio

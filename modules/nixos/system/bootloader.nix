@@ -25,7 +25,7 @@ in {
 	  description = "The theme package to be used by GRUB";
 	  default = "${pkgs.catppuccin-grub.overrideAttrs (old: {
 	    patches = (old.patches or []) ++ [
-	      ../../patches/grub_patch.patch
+	      ../../../patches/grub_patch.patch
 	    ];
 	  })}";
 	};

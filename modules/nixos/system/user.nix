@@ -27,19 +27,25 @@ in {
       default = "/home/${toLower (lib.custom.toOneWord cfg.name)}/";
     };
 
-    shell = mkOption {
+    initialPassword = mkOption {
       type = str;
-      default = "bash";
+      default = "foobar";
+    }; 
+
+    shell = mkOption {
+      type = lib.types.package;
+      default = pkgs.bash;
     };
   };
 
   config = mkIf cfg.enable {
     users.users.${toLower (lib.custom.toOneWord cfg.name)} = {
-      name = cfg.name;
+      name = toLower (lib.custom.toOneWord cfg.name);
       home = cfg.home;
       isNormalUser = true;
       extraGroups = cfg.groups;
       shell = cfg.shell;
+      initialPassword = cfg.initialPassword;
     };
   };
 }

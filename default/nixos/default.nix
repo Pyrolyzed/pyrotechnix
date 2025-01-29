@@ -42,8 +42,6 @@ in {
   };
 
   users.users.${user} = {
-    isNormalUser = mkDefault true;
-    extraGroups = [ "wheel" "power" "video" "audio" ];
     openssh.authorizedKeys.keys = mkDefault [ sshKey ];
   };
 

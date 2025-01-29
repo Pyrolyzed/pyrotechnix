@@ -48,7 +48,7 @@ in {
   config = mkIf cfg.enable {
     assertions = [
       {
-        assertion = !lib.isEmptyList cfg.settings.monitors;
+        assertion = !lib.custom.isEmptyList cfg.settings.monitors;
 	message = "A monitor is required to use Hyprland!";
       }
     ];

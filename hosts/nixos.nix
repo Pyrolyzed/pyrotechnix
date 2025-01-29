@@ -3,7 +3,7 @@ let
   isServer = host: lib.strings.hasPrefix "homeserver" host;
   mkConfiguration =
     host: { pkgs ? args.pkgs, }:
-      inputs.nixpkgs.lib.nixosSystem {
+      lib.nixosSystem {
         inherit pkgs;
 
 	specialArgs = specialArgs // {

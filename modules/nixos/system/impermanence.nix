@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, user, ... }:
 let
   cfg = config.custom.impermanence;
   inherit (lib) mkEnableOption mkOption mkIf;
@@ -28,7 +28,7 @@ in {
   config = mkIf cfg.enable {
     boot.initrd.postDeviceCommands = lib.mkAfter ''
       mkdir /btrfs_tmp
-      mount /dev/root_vg/root /btrfs_tmp
+      mount /dev/pool/root /btrfs_tmp
       if [[ -e /btrfs_tmp/root ]]; then
 	  mkdir -p /btrfs_tmp/old_roots
 	  timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
@@ -50,7 +50,10 @@ in {
       btrfs subvolume create /btrfs_tmp/root
       umount /btrfs_tmp
     '';
-
+    systemd.tmpfiles.rules = [
+      "d /persist/home/ 0777 root root -" 
+      "d /persist/home/${user} 0700 ${user} users -"
+    ];
     fileSystems."/persist".neededForBoot = true;
     environment.persistence."/persist/system" = {
       hideMounts = true;
@@ -59,11 +62,13 @@ in {
 	"/var/log"
 	"/var/lib/bluetooth"
 	"/var/lib/nixos"
+	"/etc/NetworkManager/system-connections"
 	"/var/lib/systemd/coredump"
 	{ directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
       ] ++ cfg.extraPersistDirectories;
       files = [
 	"/etc/machine-id"
+	{ file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
       ] ++ cfg.extraPersistFiles;
     };
     programs.fuse.userAllowOther = true;
