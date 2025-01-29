@@ -1,5 +1,4 @@
 { config, osConfig, lib, pkgs, host, user, ... }:
-
 let
   projectDir = "/home/pyro/Projects/pyrotechnix";
 in {
@@ -113,7 +112,6 @@ in {
     searchDownKey = "$terminfo[kcud1]";
     searchUpKey = "$terminfo[kcuu1]";
   };
-
   gtk = {
     enable = true;
     theme = {

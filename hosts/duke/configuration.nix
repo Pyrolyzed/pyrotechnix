@@ -2,7 +2,6 @@
 let
   device = "/dev/nvme0n1";
 in {
-
   imports = [
     (import ./disk-config.nix { inherit device;  })
   ];
@@ -123,6 +122,7 @@ in {
       btop
       protonvpn-gui
       kitty
+      wl-clipboard
       rofi-wayland
       vesktop
       spotify
