@@ -43,6 +43,7 @@ let
 	      users.${user} = {
 	        imports = [
 		  (if isServer host then ./homeserver/${host}/home.nix else ./${host}/home.nix) # Host specific home configuration
+		  (if isPersonal host then ../default/personal/home.nix else { })
 		  ../default/home-manager # Default home configuration
                   ../modules/homeManager
 		];

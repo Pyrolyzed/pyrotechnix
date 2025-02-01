@@ -6,12 +6,6 @@ let
 in {
   options.custom.impermanence = {
     enable = mkEnableOption "Enable impermanence";
-    device = mkOption {
-      type = str;
-      description = "Root disk for impermanence";
-      default = "/dev/sda";
-      example = "/dev/sda";
-    };
     extraPersistDirectories = mkOption {
       type = listOf str;
       description = "Extra directories to persist";

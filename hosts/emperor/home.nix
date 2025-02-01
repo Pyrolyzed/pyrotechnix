@@ -11,8 +11,11 @@
       "Projects"
       ".ssh"
       ".zsh_history"
-      ".steam"
       ".local/share/zoxide"
+      ".mozilla"
+      ".var"
+      ".config/rofi"
+      ".config/discord"
       {
         directory = ".local/share/Steam";
 	method = "symlink";

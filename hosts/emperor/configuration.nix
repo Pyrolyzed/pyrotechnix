@@ -1,16 +1,15 @@
 { config, lib, pkgs, inputs, ... }:
-let
-  device = "/dev/sda";
-in {
+{
   imports = [
-    (import ./disk-config.nix { inherit device;  })
+    (import ./disk-config.nix { device = "/dev/disk/by-id/wwn-0x5001b448b8739a09"; })
   ];
-
   environment.pathsToLink = [ "/share/zsh" ];
   custom = {
     impermanence = {
       enable = true;
-      inherit device;
+      extraPersistDirectories = [
+        "/var/lib/sddm"
+      ];
     };
 
     user = {
@@ -130,6 +129,7 @@ in {
       libreoffice
       onlyoffice-desktopeditors
       copyq
+      fd
       wl-clipboard
       grim
       tealdeer

@@ -17,7 +17,7 @@ in {
     interface = mkOption {
       type = str;
       description = "The main network interface used in configuration";
-      default = "enp8s0";
+      default = "enp9s0";
     };
     ip = {
       address = mkOption {
