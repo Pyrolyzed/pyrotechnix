@@ -1,7 +1,11 @@
 { config, lib, pkgs, inputs, ... }:
 let
-  device = "/dev/disk/by-partuuid/8324c052-a744-4d7f-aad8-cd3b84a15f90";
+  device = "/dev/sda";
 in {
+  imports = [
+    (import ./disk-config.nix { inherit device;  })
+  ];
+
   environment.pathsToLink = [ "/share/zsh" ];
   custom = {
     impermanence = {
@@ -60,7 +64,6 @@ in {
 
   programs.zsh.enable = true;
   users.users.pyro = {
-    shell = pkgs.zsh;
     initialPassword = "foobar";
     extraGroups = [ "libvirtd" "docker" ]; 
   };

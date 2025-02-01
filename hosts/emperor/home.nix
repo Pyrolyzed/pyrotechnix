@@ -1,10 +1,6 @@
 { config, osConfig, lib, pkgs, user, ... }:
-
-let
-  projectDir = "/home/pyro/Projects/pyrotechnix";
-in {
+{ 
   imports = [
-    ../../modules/homeManager
     ../../modules/homeManager/gaming
     ./hyprland.nix
   ];
@@ -61,30 +57,12 @@ in {
 	k = "kubectl";
       };
     };
-
+  };
 
   programs.zsh.historySubstringSearch = {
     searchDownKey = "$terminfo[kcud1]";
     searchUpKey = "$terminfo[kcuu1]";
   };
-  systemd.user.services =
-    let
-      graphicalTarget = config.wayland.systemd.target;
-    in
-    {
-      swww = {
-        Install.WantedBy = [ graphicalTarget ];
-        Unit = {
-          Description = "Wayland wallpaper daemon";
-          After = [ graphicalTarget ];
-          PartOf = [ graphicalTarget ];
-        };
-        Service = {
-          ExecStart = lib.getExe' pkgs.swww "swww-daemon";
-          Restart = "on-failure";
-        };
-      };
-    };
 
   gtk = {
     enable = true;
@@ -149,6 +127,25 @@ in {
     MANPAGER = "nvim +Man!";
     QT_QPA_PLATFORM = "wayland";
   };
+
+  systemd.user.services =
+    let
+      graphicalTarget = config.wayland.systemd.target;
+    in
+    {
+      swww = {
+        Install.WantedBy = [ graphicalTarget ];
+        Unit = {
+          Description = "Wayland wallpaper daemon";
+          After = [ graphicalTarget ];
+          PartOf = [ graphicalTarget ];
+        };
+        Service = {
+          ExecStart = lib.getExe' pkgs.swww "swww-daemon";
+          Restart = "on-failure";
+        };
+      };
+    };
 
   programs.home-manager.enable = true;
 }

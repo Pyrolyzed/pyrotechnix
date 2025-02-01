@@ -1,12 +1,13 @@
 { inputs, lib, specialArgs, modules, user ? "pyro", ...}@args:
 let
   isServer = host: lib.strings.hasPrefix "homeserver" host;
+  isPersonal = host: host == "emperor" || host == "duke";
   mkConfiguration =
     host: { pkgs ? args.pkgs, }:
       lib.nixosSystem {
         inherit pkgs;
 
-	specialArgs = specialArgs // {
+	specialArgs = specialArgs // rec {
 	  inherit host user;
 	  isNixOS = true;
 	  isDesktop = host == "emperor";
@@ -20,7 +21,7 @@ let
 	  (if isServer host then ./homeserver/${host}/configuration.nix else ./${host}/configuration.nix) # Host specific configuration
 	  (if isServer host then ./homeserver/${host}/hardware.nix else ./${host}/hardware.nix) # Host hardware configuration
 	  (if isServer host then ./homeserver else { }) # Common homeserver configuration
-	  (if isPersonal then ../default/personal else { })
+	  (if isPersonal host then ../default/personal else { })
 	  ../default/nixos # Default nixos configuration
 	  ../overlays # Access to overlays
           ../modules/nixos
