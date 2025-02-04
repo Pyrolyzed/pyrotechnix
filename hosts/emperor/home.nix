@@ -16,10 +16,9 @@
       ".var"
       ".config/rofi"
       ".config/discord"
-      {
-        directory = ".local/share/Steam";
-	method = "symlink";
-      }
+      ".config/a3unixlauncher"
+      ".local/share/Steam"
+      ".cache/spotify"
     ];
   };
 
