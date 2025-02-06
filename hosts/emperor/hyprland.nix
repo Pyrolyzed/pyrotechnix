@@ -46,7 +46,7 @@
         force_zero_scaling = true;
       };
 
-      exec-once = "copyq --start-server & dunst & streamcontroller & xrandr --output DP-1 --primary";
+      exec-once = "copyq --start-server & dunst & streamcontroller -b & xrandr --output DP-1 --primary";
 
       workspace = let
 	makeWorkspace = workspace: monitor: range:

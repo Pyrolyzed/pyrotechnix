@@ -10,7 +10,6 @@
       "Media"
       "Projects"
       ".ssh"
-      ".zsh_history"
       ".local/share/zoxide"
       ".mozilla"
       ".var"
@@ -22,6 +21,9 @@
       ".clonehero"
       ".cache/mozilla"
       ".cache/swww"
+    ];
+    files = [
+      ".zsh_history"
     ];
   };
 
