@@ -19,6 +19,9 @@
       ".config/a3unixlauncher"
       ".local/share/Steam"
       ".cache/spotify"
+      ".clonehero"
+      ".cache/mozilla"
+      ".cache/swww"
     ];
   };
 
