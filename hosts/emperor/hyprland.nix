@@ -54,7 +54,7 @@
 	generateWorkspaces = range: monitor:
 	  map (w: makeWorkspace w monitor range) range;
       in 
-      (generateWorkspaces (lib.range 1 3) "DP-1") ++ (generateWorkspaces (lib.range 4 6) "DP-3") ++ (generateWorkspaces (lib.range 7 9) "HDMI-A-1");
+      (generateWorkspaces (lib.range 1 3) "DP-1") ++ (generateWorkspaces (lib.range 4 6) "DP-2") ++ (generateWorkspaces (lib.range 7 9) "HDMI-A-1");
 
       general = {
         gaps_in = 10;
