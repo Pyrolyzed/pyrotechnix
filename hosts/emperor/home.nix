@@ -23,6 +23,7 @@
       ".cache/swww"
       ".paradoxlauncher"
       ".local/share/Paradox Interactive"
+      ".config/spotify"
     ];
     files = [
       ".zsh_history"
