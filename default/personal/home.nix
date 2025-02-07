@@ -21,7 +21,6 @@ in
           text = ''
             	    #!/usr/bin/env bash
             	    cd ${projectDir}
-		    nix fmt
             	    if [ $# -eq 0 ]; then
             	      sudo nixos-rebuild switch --flake .#${host}
             	    elif [[ $1 == "boot" ]]; then
@@ -34,7 +33,6 @@ in
           text = ''
             	    #!/usr/bin/env bash
             	    cd ${projectDir}
-		    nix fmt
             	    build_server () {
             	      num=$1
             	      ip=$2
