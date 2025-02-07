@@ -1,4 +1,7 @@
-{ device ? throw "Device is required for Disko.", ... }:
+{
+  device ? throw "Device is required for Disko.",
+  ...
+}:
 {
   disko.devices = {
     disk.main = {
@@ -22,15 +25,15 @@
               mountpoint = "/boot";
             };
           };
-	  swap = {
-	    name = "swap";
-	    size = "8G";
-	    content = {
-	      type = "swap";
-	      discardPolicy = "both";
-	      resumeDevice = true;
-	    };
-	  };
+          swap = {
+            name = "swap";
+            size = "8G";
+            content = {
+              type = "swap";
+              discardPolicy = "both";
+              resumeDevice = true;
+            };
+          };
           root = {
             name = "root";
             size = "100%";
@@ -50,23 +53,29 @@
             size = "100%FREE";
             content = {
               type = "btrfs";
-	      extraArgs = [ "-f" ];
+              extraArgs = [ "-f" ];
 
-	      subvolumes = {
-	        "/root" = {
-		  mountpoint = "/";
-		};
+              subvolumes = {
+                "/root" = {
+                  mountpoint = "/";
+                };
 
-		"/persist" = {
-		  mountOptions = [ "subvol=persist" "noatime" ];
-		  mountpoint = "/persist";
-		};
+                "/persist" = {
+                  mountOptions = [
+                    "subvol=persist"
+                    "noatime"
+                  ];
+                  mountpoint = "/persist";
+                };
 
-		"/nix" = {
-		  mountOptions = [ "subvol=nix" "noatime" ];
-		  mountpoint = "/nix";
-		};
-	      };
+                "/nix" = {
+                  mountOptions = [
+                    "subvol=nix"
+                    "noatime"
+                  ];
+                  mountpoint = "/nix";
+                };
+              };
             };
           };
         };

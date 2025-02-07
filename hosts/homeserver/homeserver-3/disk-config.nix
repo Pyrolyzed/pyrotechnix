@@ -22,15 +22,15 @@
               mountpoint = "/boot";
             };
           };
-	  swap = {
-	    name = "swap";
-	    size = "8G";
-	    content = {
-	      type = "swap";
-	      discardPolicy = "both";
-	      resumeDevice = true;
-	    };
-	  };
+          swap = {
+            name = "swap";
+            size = "8G";
+            content = {
+              type = "swap";
+              discardPolicy = "both";
+              resumeDevice = true;
+            };
+          };
           root = {
             name = "root";
             size = "100%";

@@ -1,8 +1,15 @@
-{ config, lib, pkgs, user, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  user,
+  ...
+}:
 let
   cfg = config.custom.gaming.emulation;
   inherit (lib) mkIf mkEnableOption;
-in {
+in
+{
   options.custom.gaming.emulation = {
     enable = mkEnableOption "Enable emulation, emulators, and ES-DE.";
   };

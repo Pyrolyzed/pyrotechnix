@@ -1,8 +1,15 @@
-{ config, lib, pkgs, user, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  user,
+  ...
+}:
 let
   cfg = config.custom.gaming;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.custom.gaming = {
     enable = mkEnableOption "Enable gaming packages";
     streaming = {

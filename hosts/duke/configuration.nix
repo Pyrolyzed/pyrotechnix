@@ -1,9 +1,16 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 let
   device = "/dev/nvme0n1";
-in {
+in
+{
   imports = [
-    (import ./disk-config.nix { inherit device;  })
+    (import ./disk-config.nix { inherit device; })
   ];
 
   environment.pathsToLink = [ "/share/zsh" ];
@@ -50,7 +57,7 @@ in {
   virtualisation.libvirtd.enable = true;
 
   programs.ssh.startAgent = true;
-  
+
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -67,7 +74,14 @@ in {
     device = "//192.168.1.200/Storage";
     fsType = "cifs";
     # Plain text password because I'm lazy and also because it's not exposed to the internet and also I don't use it anywhere else.
-    options = [ "uid=1000" "username=pyro" "password=spoons" "x-systemd.automount" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s" ];
+    options = [
+      "uid=1000"
+      "username=pyro"
+      "password=spoons"
+      "x-systemd.automount"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
+    ];
   };
 
   fileSystems."/home/pyro/Storage" = {
@@ -76,7 +90,7 @@ in {
     # options = [ "uid=1000" "gid=100" "dmask=007" "fmask=117" ];
   };
 
-  fonts.packages = with pkgs; [ 
+  fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
     nerd-fonts.jetbrains-mono
@@ -87,58 +101,58 @@ in {
   programs.tmux.enable = true;
 
   environment.systemPackages = with pkgs; [
-      kdePackages.bluedevil
-      neovim
-      git
-      firefox
-      xorg.xrandr
-      swww
-      qalculate-gtk
-      python314
-      anki
-      kubernetes-helm
-      helmfile
-      kdePackages.kde-cli-tools
-      kubectl
-      kdePackages.qtsvg
-      kdePackages.qt6ct
-      onlyoffice-desktopeditors
-      copyq
-      wl-clipboard
-      grim
-      tealdeer
-      manix
-      vscode
-      wikiman
-      xfce.thunar
-      slurp
-      dunst
-      yt-dlp
-      unrar
-      sshpass
-      unzip
-      fastfetch
-      pavucontrol
-      btop
-      protonvpn-gui
-      kitty
-      wl-clipboard
-      rofi-wayland
-      vesktop
-      spotify
-      appimage-run
-      obs-studio
-      qbittorrent
-      cifs-utils
-      pipx
-      vlc
-      obsidian
-      lvm2
-      calibre
-      parsec-bin
-      lsd
-      bat
-      wine
-      wineWowPackages.waylandFull
+    kdePackages.bluedevil
+    neovim
+    git
+    firefox
+    xorg.xrandr
+    swww
+    qalculate-gtk
+    python314
+    anki
+    kubernetes-helm
+    helmfile
+    kdePackages.kde-cli-tools
+    kubectl
+    kdePackages.qtsvg
+    kdePackages.qt6ct
+    onlyoffice-desktopeditors
+    copyq
+    wl-clipboard
+    grim
+    tealdeer
+    manix
+    vscode
+    wikiman
+    xfce.thunar
+    slurp
+    dunst
+    yt-dlp
+    unrar
+    sshpass
+    unzip
+    fastfetch
+    pavucontrol
+    btop
+    protonvpn-gui
+    kitty
+    wl-clipboard
+    rofi-wayland
+    vesktop
+    spotify
+    appimage-run
+    obs-studio
+    qbittorrent
+    cifs-utils
+    pipx
+    vlc
+    obsidian
+    lvm2
+    calibre
+    parsec-bin
+    lsd
+    bat
+    wine
+    wineWowPackages.waylandFull
   ];
 }

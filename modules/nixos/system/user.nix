@@ -1,11 +1,25 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 let
-  inherit (lib) mkOption mkEnableOption mkIf replaceStrings toLower;
+  inherit (lib)
+    mkOption
+    mkEnableOption
+    mkIf
+    replaceStrings
+    toLower
+    ;
   inherit (lib.types) str path listOf;
   cfg = config.custom.user;
-in {
+in
+{
   options.custom.user = {
-    enable = mkEnableOption "Enable user configuration" // { default = true; }; 
+    enable = mkEnableOption "Enable user configuration" // {
+      default = true;
+    };
 
     name = mkOption {
       type = str;
@@ -16,10 +30,15 @@ in {
       type = str;
       default = "your@email.com";
     };
-    
+
     groups = mkOption {
       type = listOf str;
-      default = [ "wheel" "power" "video" "audio" ];
+      default = [
+        "wheel"
+        "power"
+        "video"
+        "audio"
+      ];
     };
 
     home = mkOption {
@@ -30,7 +49,7 @@ in {
     initialPassword = mkOption {
       type = str;
       default = "foobar";
-    }; 
+    };
 
     shell = mkOption {
       type = lib.types.package;

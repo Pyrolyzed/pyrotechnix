@@ -2,8 +2,8 @@
 lib.extend (
   _: libprev: {
     custom = rec {
-      toOneWord = string: (builtins.replaceStrings [" "] [""] string);
-      isEmptyList = list: list == [];
+      toOneWord = string: (builtins.replaceStrings [ " " ] [ "" ] string);
+      isEmptyList = list: list == [ ];
     };
   }
 )

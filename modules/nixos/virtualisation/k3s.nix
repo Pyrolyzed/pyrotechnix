@@ -1,8 +1,15 @@
-{ lib, config, pkgs, user, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  user,
+  ...
+}:
 let
   cfg = config.custom.virtualisation.k3s;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
 
   options.custom.virtualisation.k3s = {
     enable = mkEnableOption "Enable K3s.";
@@ -13,7 +20,7 @@ in {
       enable = true;
       tokenFile = "/home/${user}/.k3token";
       extraFlags = [
-	"--docker"
+        "--docker"
       ];
     };
 

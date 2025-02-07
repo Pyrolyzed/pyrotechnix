@@ -1,10 +1,16 @@
-{ config, lib, pkgs, inputs, user, ... }:
 {
-  imports =
-    [ 
-      ./disk-config.nix
-      ../../../modules/nixos/virtualisation/k3s.nix
-    ];
+  config,
+  lib,
+  pkgs,
+  inputs,
+  user,
+  ...
+}:
+{
+  imports = [
+    ./disk-config.nix
+    ../../../modules/nixos/virtualisation/k3s.nix
+  ];
 
   boot.loader.grub.enable = true;
 
@@ -21,10 +27,12 @@
   networking = {
     hostName = "homeserver-2";
     interfaces.ens18 = {
-      ipv4.addresses = [ {
-	address = "192.168.1.154";
-	prefixLength = 24;
-      } ];
+      ipv4.addresses = [
+        {
+          address = "192.168.1.154";
+          prefixLength = 24;
+        }
+      ];
     };
   };
 

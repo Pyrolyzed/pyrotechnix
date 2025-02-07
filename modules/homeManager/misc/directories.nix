@@ -1,11 +1,26 @@
-{ config, lib, pkgs, user, ... }:
-let 
+{
+  config,
+  lib,
+  pkgs,
+  user,
+  ...
+}:
+let
   cfg = config.custom.customDirs;
-  inherit (lib) mkDefault mkOption mkEnableOption mkMerge mkIf;
+  inherit (lib)
+    mkDefault
+    mkOption
+    mkEnableOption
+    mkMerge
+    mkIf
+    ;
   inherit (lib.types) str nullOr attrsOf;
-in {
+in
+{
   options.custom.customDirs = {
-    enable = mkEnableOption "Enable custom home directories" // { default = true; };
+    enable = mkEnableOption "Enable custom home directories" // {
+      default = true;
+    };
     documents = mkOption {
       type = nullOr str;
       default = "/home/${user}/Storage/Media/Documents";
@@ -44,28 +59,34 @@ in {
     };
     extraFolders = mkOption {
       type = attrsOf str;
-      default = { XDG_PROJECTS_DIR = "/home/${user}/Projects"; };
-      example = { XDG_PROJECTS_DIR = "/home/${user}/Projects"; };
+      default = {
+        XDG_PROJECTS_DIR = "/home/${user}/Projects";
+      };
+      example = {
+        XDG_PROJECTS_DIR = "/home/${user}/Projects";
+      };
       description = "Attribute set of extra folders";
     };
   };
 
-  config = (mkIf cfg.enable { 
-    xdg.userDirs = {
-      enable = true;
-      createDirectories = true;
-      
-      extraConfig = cfg.extraFolders;
-      desktop = cfg.desktop;
-      music = cfg.music;
-      download = cfg.downloads;
-      pictures = cfg.pictures;
-      documents = cfg.documents;
-      videos = cfg.videos;
+  config = (
+    mkIf cfg.enable {
+      xdg.userDirs = {
+        enable = true;
+        createDirectories = true;
 
-      # Will never need these
-      templates = null;
-      publicShare = null;
-    };
-  });
+        extraConfig = cfg.extraFolders;
+        desktop = cfg.desktop;
+        music = cfg.music;
+        download = cfg.downloads;
+        pictures = cfg.pictures;
+        documents = cfg.documents;
+        videos = cfg.videos;
+
+        # Will never need these
+        templates = null;
+        publicShare = null;
+      };
+    }
+  );
 }

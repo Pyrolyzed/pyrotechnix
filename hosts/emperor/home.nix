@@ -1,5 +1,12 @@
-{ config, osConfig, lib, pkgs, user, ... }:
-{ 
+{
+  config,
+  osConfig,
+  lib,
+  pkgs,
+  user,
+  ...
+}:
+{
   imports = [
     ../../modules/homeManager/gaming
     ./hyprland.nix
@@ -36,11 +43,11 @@
       enable = true;
       emulation.enable = true;
       streaming = {
-	moonlight.enable = true;
+        moonlight.enable = true;
       };
       games = {
         armaLauncher.enable = true;
-	cloneHero.enable = true;
+        cloneHero.enable = true;
       };
     };
 
@@ -60,11 +67,11 @@
     shell.zsh = {
       enable = true;
       aliases = {
-	ls = "lsd";
+        ls = "lsd";
         ll = "ls -l";
-	vim = "nvim";
-	cd = "z";
-	k = "kubectl";
+        vim = "nvim";
+        cd = "z";
+        k = "kubectl";
       };
     };
   };
@@ -110,7 +117,7 @@
     enable = true;
     enableZshIntegration = true;
   };
-  
+
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
@@ -125,11 +132,11 @@
     enableZshIntegration = true;
   };
 
-  programs.kitty.settings = { 
+  programs.kitty.settings = {
     window_padding_width = 10;
     window_padding_height = 5;
   };
-  
+
   home.sessionVariables = {
     EDITOR = "nvim";
     NIXOS_OZONE_WL = 1;

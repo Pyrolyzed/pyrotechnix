@@ -1,11 +1,19 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.custom.network;
   inherit (lib) mkEnableOption mkOption mkIf;
   inherit (lib.types) str int;
-in {
+in
+{
   options.custom.network = {
-    enable = mkEnableOption "Enable network configuration" // { default = true; };
+    enable = mkEnableOption "Enable network configuration" // {
+      default = true;
+    };
     dhcp.enable = mkEnableOption "Enable the use of DHCP";
     wakeOnLan.enable = mkEnableOption "Enable Wake-On-LAN support via magic packets";
     networkManager.enable = mkEnableOption "Enable NetworkManager";
@@ -22,13 +30,13 @@ in {
     ip = {
       address = mkOption {
         type = str;
-	description = "The main IPv4 address of the PC";
-	default = "192.168.1.97";
+        description = "The main IPv4 address of the PC";
+        default = "192.168.1.97";
       };
       prefixLength = mkOption {
         type = int;
-	description = "The prefix length of the IPv4 address";
-	default = 24;
+        description = "The prefix length of the IPv4 address";
+        default = 24;
       };
     };
     gateway = mkOption {
@@ -44,18 +52,20 @@ in {
       networkmanager.enable = cfg.networkManager.enable;
       useDHCP = cfg.dhcp.enable;
       interfaces.${cfg.interface} = {
-	ipv4.addresses = [ {
-	  address = cfg.ip.address; 
-	  prefixLength = cfg.ip.prefixLength;
-	} ];
-	wakeOnLan = {
-	  enable = cfg.wakeOnLan.enable;
-	  policy = [ "magic" ];
-	};
+        ipv4.addresses = [
+          {
+            address = cfg.ip.address;
+            prefixLength = cfg.ip.prefixLength;
+          }
+        ];
+        wakeOnLan = {
+          enable = cfg.wakeOnLan.enable;
+          policy = [ "magic" ];
+        };
       };
       defaultGateway = {
-	address = cfg.gateway;
-	interface = cfg.interface;
+        address = cfg.gateway;
+        interface = cfg.interface;
       };
     };
   };

@@ -1,9 +1,15 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 let
   inherit (lib) mkOption mkEnableOption mkIf;
   inherit (lib.types) str float int;
   cfg = config.custom.kitty;
-in {
+in
+{
   options.custom.kitty = {
     enable = mkEnableOption "Enable kitty configuration";
     backgroundOpacity = mkOption {

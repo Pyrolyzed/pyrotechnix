@@ -1,9 +1,15 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 let
   inherit (lib) mkOption mkEnableOption mkIf;
   inherit (lib.types) str;
   cfg = config.custom.git;
-in {
+in
+{
   options.custom.git = {
     enable = mkEnableOption "Enable git configuration";
     email = mkOption {

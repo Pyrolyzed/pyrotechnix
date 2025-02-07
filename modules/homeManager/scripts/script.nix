@@ -1,24 +1,35 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   inherit (lib) mkOption mkEnableOption mkIf;
-  inherit (lib.types) str attrsOf listOf submodule;
+  inherit (lib.types)
+    str
+    attrsOf
+    listOf
+    submodule
+    ;
   cfg = config.custom.scripts;
-in {
+in
+{
   options.custom.scripts = {
     enable = mkEnableOption "Enable script configuration.";
     script = mkOption {
       type = attrsOf (submodule {
         options = {
-	  text = mkOption {
-	    type = str;
-	    description = "The script commands";
-	  };
-	  runtimeInputs = mkOption {
-	    type = listOf str;
-	    description = "Packages used in the script";
-	    default = [ ];
-	  };
-	};
+          text = mkOption {
+            type = str;
+            description = "The script commands";
+          };
+          runtimeInputs = mkOption {
+            type = listOf str;
+            description = "Packages used in the script";
+            default = [ ];
+          };
+        };
       });
       description = "User defined scripts";
       default = { };

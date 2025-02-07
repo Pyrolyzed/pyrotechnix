@@ -1,7 +1,16 @@
-{ config, osConfig, lib, pkgs, host, user, ... }:
+{
+  config,
+  osConfig,
+  lib,
+  pkgs,
+  host,
+  user,
+  ...
+}:
 let
   projectDir = "/home/pyro/Projects/pyrotechnix";
-in {
+in
+{
   imports = [
     ../../modules/homeManager/gaming
     ./hyprland.nix
@@ -16,8 +25,8 @@ in {
       ".steam"
       ".local/share/zoxide"
       {
-	directory = ".local/share/Steam";
-	method = "symlink";
+        directory = ".local/share/Steam";
+        method = "symlink";
       }
     ];
   };
@@ -27,7 +36,7 @@ in {
     gaming = {
       enable = true;
       streaming = {
-	moonlight.enable = true;
+        moonlight.enable = true;
       };
     };
 
@@ -47,63 +56,63 @@ in {
     shell.zsh = {
       enable = true;
       aliases = {
-	ls = "lsd";
+        ls = "lsd";
         ll = "ls -l";
-	vim = "nvim";
-	cd = "z";
-	cat = "bat";
-	k = "kubectl";
+        vim = "nvim";
+        cd = "z";
+        cat = "bat";
+        k = "kubectl";
       };
     };
 
     scripts = {
       enable = true;
       script = {
-	rebuild = {
-	  text = ''
-	    #!/usr/bin/env bash
-	    cd ${projectDir}
-	    sudo nixos-rebuild switch --flake .#${host}
-	  '';
-	};
-	rebuild-server = {
-	  text = ''
-	    #!/usr/bin/env bash
-	    cd ${projectDir}
-	    build_server () {
-	      num=$1
-	      ip=$2
+        rebuild = {
+          text = ''
+            	    #!/usr/bin/env bash
+            	    cd ${projectDir}
+            	    sudo nixos-rebuild switch --flake .#${host}
+            	  '';
+        };
+        rebuild-server = {
+          text = ''
+            	    #!/usr/bin/env bash
+            	    cd ${projectDir}
+            	    build_server () {
+            	      num=$1
+            	      ip=$2
 
-	      echo "Rebuilding homeserver-$num..."
-	      nixos-rebuild switch --flake .#homeserver-"$num" --target-host root@"$ip" > ${projectDir}/.logs/homeserver-"$num"-build.log
-	      echo "Done."
-	    }
-	    build_server "$1" "$2"
-	  '';
-	};
-	rebuild-servers = {
-	  text = ''
-	    #!/usr/bin/env bash
-	    rebuild-server 1 192.168.1.151
-	    rebuild-server 4 192.168.1.147
-	  '';
-	};
-	install-remote = {
-	  text = ''
-	    #!/usr/bin/env bash
-	    cd ${projectDir}
-	    flake=$1
-	    host=$2
-	    nix run github:nix-community/nixos-anywhere -- --flake .#"$flake" root@"$host"
-	  '';
-	};
-	build-iso = {
-	  text = ''
-	    #!/usr/bin/env bash
-	    cd ${projectDir}
-	    nix build .#nixosConfigurations.isoInstaller.config.system.build.isoImage
-	  '';
-	};
+            	      echo "Rebuilding homeserver-$num..."
+            	      nixos-rebuild switch --flake .#homeserver-"$num" --target-host root@"$ip" > ${projectDir}/.logs/homeserver-"$num"-build.log
+            	      echo "Done."
+            	    }
+            	    build_server "$1" "$2"
+            	  '';
+        };
+        rebuild-servers = {
+          text = ''
+            	    #!/usr/bin/env bash
+            	    rebuild-server 1 192.168.1.151
+            	    rebuild-server 4 192.168.1.147
+            	  '';
+        };
+        install-remote = {
+          text = ''
+            	    #!/usr/bin/env bash
+            	    cd ${projectDir}
+            	    flake=$1
+            	    host=$2
+            	    nix run github:nix-community/nixos-anywhere -- --flake .#"$flake" root@"$host"
+            	  '';
+        };
+        build-iso = {
+          text = ''
+            	    #!/usr/bin/env bash
+            	    cd ${projectDir}
+            	    nix build .#nixosConfigurations.isoInstaller.config.system.build.isoImage
+            	  '';
+        };
       };
     };
   };
@@ -148,7 +157,7 @@ in {
     enable = true;
     enableZshIntegration = true;
   };
-  
+
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
@@ -163,11 +172,11 @@ in {
     enableZshIntegration = true;
   };
 
-  programs.kitty.settings = { 
+  programs.kitty.settings = {
     window_padding_width = 10;
     window_padding_height = 5;
   };
-  
+
   home.sessionVariables = {
     EDITOR = "nvim";
     NIXOS_OZONE_WL = 1;

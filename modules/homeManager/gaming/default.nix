@@ -2,7 +2,8 @@
 let
   cfg = config.custom.gaming;
   inherit (lib) mkIf mkEnableOption;
-in {
+in
+{
   imports = [
     ./emulation.nix
     ./utilities.nix

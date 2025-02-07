@@ -1,8 +1,16 @@
-{ config, lib, pkgs, inputs, user, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  user,
+  ...
+}:
 let
   cfg = config.custom.impermanence;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
   ];
