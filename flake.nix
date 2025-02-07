@@ -54,6 +54,7 @@
       commonArgs = createCommonArgs system;
     in {
       nixosConfigurations = (import ./hosts/nixos.nix commonArgs);
+      formatter.x86_64-linux = pkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
       inherit lib self;
     };
 }
