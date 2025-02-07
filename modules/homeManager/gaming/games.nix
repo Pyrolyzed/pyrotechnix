@@ -5,6 +5,13 @@ let
   createGameConfig = pkg: setting: { 
     home.packages = mkIf cfg.${setting}.enable [ pkg ]; 
   };
+
+  # Patch to add EF CDLC
+  arma3-unix-launcher = pkgs.arma3-unix-launcher.overrideAttrs (old: {
+    patches = (old.patches or []) ++ [
+      ../../../patches/a3unix.patch
+    ];
+  });
 in {
   options.custom.gaming.games = {
     armaLauncher.enable = mkEnableOption "Enable the Arma 3 Unix Launcher";
@@ -12,7 +19,7 @@ in {
   };
 
   config = (mkMerge [
-    (createGameConfig pkgs.arma3-unix-launcher "armaLauncher")
+    (createGameConfig arma3-unix-launcher "armaLauncher")
     (createGameConfig pkgs.clonehero "cloneHero")
   ]);
 }

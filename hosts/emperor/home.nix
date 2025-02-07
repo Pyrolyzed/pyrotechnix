@@ -21,6 +21,8 @@
       ".clonehero"
       ".cache/mozilla"
       ".cache/swww"
+      ".paradoxlauncher"
+      ".local/share/Paradox Interactive"
     ];
     files = [
       ".zsh_history"
