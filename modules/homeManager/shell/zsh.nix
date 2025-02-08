@@ -56,7 +56,7 @@ in
       historySubstringSearch.enable = true;
 
       shellAliases = {
-        # Anything here
+        "nd" = "nix develop --command \"zsh\"";
       } // cfg.aliases;
 
       initExtra = optionalString cfg.options.extendedGlobbing ''

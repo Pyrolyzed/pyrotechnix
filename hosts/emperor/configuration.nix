@@ -42,6 +42,7 @@
   };
 
   virtualisation.docker.enable = true;
+  virtualisation.libvirtd.qemu.swtpm.enable = true;
   environment.localBinInPath = true;
 
   hardware.bluetooth.enable = true;
@@ -160,6 +161,7 @@
     dunst
     via
     syncthing
+    swtpm
     yt-dlp
     unrar
     sshpass
