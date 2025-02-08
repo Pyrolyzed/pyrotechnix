@@ -31,6 +31,7 @@
       ".paradoxlauncher"
       ".local/share/Paradox Interactive"
       ".config/spotify"
+      ".config/obsidian"
     ];
     files = [
       ".zsh_history"
