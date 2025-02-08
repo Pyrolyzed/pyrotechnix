@@ -15,7 +15,10 @@ let
   # Patch to add EF CDLC
   arma3-unix-launcher = pkgs.arma3-unix-launcher.overrideAttrs (old: {
     patches = (old.patches or [ ]) ++ [
-      ../../../patches/a3unix.patch
+      (pkgs.fetchpatch {
+        url = "https://github.com/DrymarchonShaun/arma3-unix-launcher/commit/9e8b274443bebccd3b3e4a261bca9ddc2d508c72.patch";
+	hash = "sha256-0swtiB9g/8nU3ws63SvFVVgFhPwlwjZcn7F1aYHyKhc=";
+      })
     ];
   });
 in
