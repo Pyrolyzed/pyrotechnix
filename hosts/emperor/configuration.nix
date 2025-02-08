@@ -47,6 +47,7 @@
   hardware.bluetooth.enable = true;
 
   programs.hyprland.enable = true;
+  programs.hyprland.withUWSM = true;
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
