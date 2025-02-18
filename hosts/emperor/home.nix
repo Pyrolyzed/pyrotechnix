@@ -16,7 +16,9 @@
     directories = [
       "Media"
       "Projects"
+      ".config/obs-studio"
       ".ssh"
+      ".config/unity3d"
       ".local/share/zoxide"
       ".mozilla"
       ".var"

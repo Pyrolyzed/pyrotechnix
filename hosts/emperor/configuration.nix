@@ -10,6 +10,7 @@
     (import ./disk-config.nix { device = "/dev/disk/by-id/wwn-0x5001b448b8739a09"; })
   ];
   environment.pathsToLink = [ "/share/zsh" ];
+  programs.dconf.enable = true;
   custom = {
     impermanence = {
       enable = true;
@@ -48,7 +49,6 @@
   hardware.bluetooth.enable = true;
 
   programs.hyprland.enable = true;
-  programs.hyprland.withUWSM = true;
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
@@ -76,7 +76,6 @@
       "docker"
     ];
   };
-
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -139,6 +138,7 @@
     python314
     streamcontroller
     anki
+    easyeffects
     kubernetes-helm
     helmfile
     filezilla
@@ -155,6 +155,7 @@
     tealdeer
     manix
     vscode
+    amf
     wikiman
     xfce.thunar
     slurp
