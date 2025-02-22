@@ -23,8 +23,10 @@ in
               	    #!/usr/bin/env bash
               	    cd ${projectDir}
               	    if [ $# -eq 0 ]; then
+                      nix fmt
               	      sudo nixos-rebuild switch --flake .#${host}
               	    elif [[ $1 == "boot" ]]; then
+                      nix fmt
               	      sudo nixos-rebuild boot --flake .#${host}
               	    fi
             '';

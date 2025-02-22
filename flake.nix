@@ -56,10 +56,10 @@
     in
     {
       packages."x86_64-linux".default =
-      	(inputs.nvf.lib.neovimConfiguration {
-	  pkgs = nixpkgs.legacyPackages."x86_64-linux";
-	  modules = [ ./default/nvf-configuration.nix ];
-	}).neovim;
+        (inputs.nvf.lib.neovimConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          modules = [ ./default/nvf-configuration.nix ];
+        }).neovim;
       nixosConfigurations = (import ./hosts/nixos.nix commonArgs);
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
       inherit lib self;

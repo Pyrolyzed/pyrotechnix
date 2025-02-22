@@ -21,7 +21,7 @@ let
       })
       (pkgs.fetchpatch {
         url = "https://github.com/Pyrolyzed/arma3-unix-launcher/commit/76dabcb69d1ddddd50a27afb29cd7351f65b539b.patch";
-	hash = "sha256-CD2SwCZYP79JH9M/6HCvesGYBCaqHWwhMUXtzskXrUE=";
+        hash = "sha256-CD2SwCZYP79JH9M/6HCvesGYBCaqHWwhMUXtzskXrUE=";
       })
     ];
   });
