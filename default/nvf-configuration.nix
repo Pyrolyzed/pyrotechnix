@@ -1,4 +1,8 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   vim = {
@@ -7,6 +11,14 @@
       name = "catppuccin";
       style = "macchiato";
     };
+
+    assistant.copilot = {
+      enable = true;
+      cmp.enable = true;
+    };
+
+
+    options.shiftwidth = 2;
 
     statusline.lualine.enable = true;
     telescope.enable = true;

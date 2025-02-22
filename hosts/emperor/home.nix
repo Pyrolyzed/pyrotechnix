@@ -10,7 +10,6 @@
     ../../modules/homeManager/gaming
     ./hyprland.nix
   ];
-
   home.persistence."/persist/home/${user}" = {
     directories = [
       "Media"
