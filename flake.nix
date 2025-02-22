@@ -9,14 +9,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    impermanence = {
-      url = "github:nix-community/impermanence";
-    };
+    impermanence.url = "github:nix-community/impermanence";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nvf.url = "github:notashelf/nvf";
   };
 
   outputs =
@@ -55,6 +55,11 @@
       commonArgs = createCommonArgs system;
     in
     {
+      packages."x86_64-linux".default =
+      	(inputs.nvf.lib.neovimConfiguration {
+	  pkgs = nixpkgs.legacyPackages."x86_64-linux";
+	  modules = [ ./default/nvf-configuration.nix ];
+	}).neovim;
       nixosConfigurations = (import ./hosts/nixos.nix commonArgs);
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
       inherit lib self;

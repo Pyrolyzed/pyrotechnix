@@ -1,6 +1,5 @@
 {
   config,
-  osConfig,
   lib,
   pkgs,
   user,
@@ -26,6 +25,7 @@
       ".config/discord"
       ".config/a3unixlauncher"
       ".local/share/Steam"
+      ".local/state/wireplumber"
       ".cache/spotify"
       ".clonehero"
       ".cache/mozilla"
@@ -72,7 +72,8 @@
       aliases = {
         ls = "lsd";
         ll = "ls -l";
-        vim = "nvim";
+        vim = "nix run ~/Projects/pyrotechnix";
+        vi = "nix run ~/Projects/pyrotechnix";
         cd = "z";
         k = "kubectl";
       };
