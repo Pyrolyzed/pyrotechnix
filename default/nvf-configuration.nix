@@ -17,7 +17,6 @@
       cmp.enable = true;
     };
 
-
     options.shiftwidth = 2;
 
     statusline.lualine.enable = true;

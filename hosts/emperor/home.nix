@@ -17,6 +17,7 @@
       ".config/obs-studio"
       ".ssh"
       ".config/unity3d"
+      ".config/vesktop"
       ".local/share/zoxide"
       ".mozilla"
       ".var"

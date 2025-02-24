@@ -136,6 +136,7 @@
     swww
     qalculate-gtk
     python314
+    ffmpeg
     streamcontroller
     anki
     easyeffects
@@ -173,7 +174,7 @@
     protonvpn-gui
     kitty
     rofi-wayland
-    discord
+    vesktop
     spotify
     appimage-run
     obs-studio

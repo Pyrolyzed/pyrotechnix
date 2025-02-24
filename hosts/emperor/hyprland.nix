@@ -123,7 +123,7 @@
       "$terminal" = "kitty";
       "$menu" = "rofi -show drun";
       "$browser" = "firefox";
-      "$chat" = "discord --enable-features=UseOzonePlatform --ozone-platform=wayland";
+      "$chat" = "vesktop";
       "$files" = "thunar";
 
       bind = [
