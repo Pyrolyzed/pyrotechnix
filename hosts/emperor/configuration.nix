@@ -11,6 +11,11 @@
   ];
   environment.pathsToLink = [ "/share/zsh" ];
   programs.dconf.enable = true;
+  xdg.portal.extraPortals = with pkgs; [
+    xdg-desktop-portal-kde
+    xdg-desktop-portal-gtk
+  ];
+  xdg.portal.enable = true;
   custom = {
     impermanence = {
       enable = true;
@@ -34,6 +39,7 @@
       useOSProber = true;
       removable = true;
       style.resolutionEfi = "3840x2160";
+      style.fontSize = 96;
     };
 
     gaming = {

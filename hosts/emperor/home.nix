@@ -14,6 +14,7 @@
     directories = [
       "Media"
       "Projects"
+      ".config/steamtinkerlaunch"
       ".config/obs-studio"
       ".ssh"
       ".config/unity3d"
