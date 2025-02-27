@@ -17,16 +17,36 @@
       cmp.enable = true;
     };
 
-    options.shiftwidth = 2;
+    options = {
+      smartindent = true;
+      magic = true;
+      shiftround = true;
+      expandtab = true;
+      tabstop = 4;
+      shiftwidth = 4;
+    };
 
     statusline.lualine.enable = true;
     telescope.enable = true;
     autocomplete.nvim-cmp.enable = true;
+    autopairs.nvim-autopairs.enable = true;
+
+    lsp = {
+      formatOnSave = true;
+    };
 
     languages = {
+      enableFormat = true;
       enableLSP = true;
       enableTreesitter = true;
-      nix.enable = true;
+      bash.enable = true;
+      nix = {
+        enable = true;
+        format.type = "nixfmt";
+        lsp = {
+          server = "nixd";
+        };
+      };
       ts.enable = true;
       rust.enable = true;
       clang.enable = true;

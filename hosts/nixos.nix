@@ -16,7 +16,6 @@ let
     }:
     lib.nixosSystem {
       inherit pkgs;
-
       specialArgs = specialArgs // rec {
         inherit host user;
         isNixOS = true;
