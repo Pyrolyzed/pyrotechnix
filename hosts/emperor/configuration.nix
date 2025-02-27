@@ -39,7 +39,6 @@
       useOSProber = true;
       removable = true;
       style.resolutionEfi = "3840x2160";
-      style.fontSize = 96;
     };
 
     gaming = {
