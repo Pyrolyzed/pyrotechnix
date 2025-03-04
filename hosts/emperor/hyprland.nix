@@ -50,8 +50,10 @@
       xwayland = {
         force_zero_scaling = true;
       };
-
-      exec-once = "copyq --start-server & dunst & xrandr --output DP-1 --primary & streamcontroller -b";
+      exec-once = [
+        "wl-paste -t text -w xclip -selection clipboard"
+        "copyq --start-server & dunst & xrandr --output DP-1 --primary & streamcontroller -b"
+      ];
 
       workspace =
         let
@@ -69,7 +71,7 @@
       general = {
         gaps_in = 10;
         gaps_out = 15;
-        border_size = 3;
+        border_size = 2;
         "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
         resize_on_border = false;

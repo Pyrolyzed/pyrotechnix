@@ -189,6 +189,7 @@
     vlc
     obsidian
     lvm2
+    xclip
     calibre
     parsec-bin
     lsd

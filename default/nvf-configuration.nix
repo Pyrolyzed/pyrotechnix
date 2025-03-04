@@ -42,6 +42,7 @@
       bash.enable = true;
       nix = {
         enable = true;
+        # nixfmt-rfc-style
         format.type = "nixfmt";
         lsp = {
           server = "nixd";
