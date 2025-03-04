@@ -64,7 +64,7 @@
     kitty = {
       enable = true;
       backgroundOpacity = 0.8;
-      font = "CaskaydiaCove Nerd Font Mono";
+      font = "JetBrainsMono Nerd Font";
       fontSize = 18;
     };
 
