@@ -51,7 +51,6 @@
         force_zero_scaling = true;
       };
       exec-once = [
-        "wl-paste -t text -w xclip -selection clipboard"
         "copyq --start-server & dunst & xrandr --output DP-1 --primary & streamcontroller -b"
       ];
 

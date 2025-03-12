@@ -84,6 +84,13 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [
+      vaapiVdpau
+      libvdpau-va-gl
+      intel-media-driver
+      intel-ocl
+      intel-vaapi-driver
+    ];
   };
 
   boot.initrd.kernelModules = [
@@ -141,7 +148,7 @@
     swww
     qalculate-gtk
     python314
-    ffmpeg
+    ffmpeg-full
     streamcontroller
     anki
     easyeffects
@@ -162,6 +169,7 @@
     manix
     vscode
     amf
+    libva
     wikiman
     xfce.thunar
     slurp
@@ -171,6 +179,7 @@
     swtpm
     yt-dlp
     unrar
+    p7zip
     sshpass
     unzip
     fastfetch
