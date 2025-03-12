@@ -1,9 +1,6 @@
 {
-  pkgs,
-  lib,
   ...
 }:
-
 {
   vim = {
     theme = {
