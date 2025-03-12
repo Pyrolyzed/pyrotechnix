@@ -3,20 +3,19 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    impermanence.url = "github:nix-community/impermanence";
+    nvf.url = "github:notashelf/nvf";
 
+    # TODO: Phase out Disko.
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    impermanence.url = "github:nix-community/impermanence";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nvf.url = "github:notashelf/nvf";
   };
 
   outputs =
@@ -55,9 +54,9 @@
       commonArgs = createCommonArgs system;
     in
     {
-      packages."x86_64-linux".default =
+      packages.${system}.default =
         (inputs.nvf.lib.neovimConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          pkgs = nixpkgs.legacyPackages.${system};
           modules = [ ./default/nvf-configuration.nix ];
         }).neovim;
       nixosConfigurations = (import ./hosts/nixos.nix commonArgs);
