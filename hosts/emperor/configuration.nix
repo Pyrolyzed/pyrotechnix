@@ -9,7 +9,7 @@
   environment.pathsToLink = [ "/share/zsh" ];
   programs.dconf.enable = true;
   xdg.portal.extraPortals = with pkgs; [
-    xdg-desktop-portal-kde
+    kdePackages.xdg-desktop-portal-kde
     xdg-desktop-portal-gtk
   ];
   xdg.portal.enable = true;
@@ -144,6 +144,7 @@
     xorg.xrandr
     swww
     qalculate-gtk
+    inkscape
     python314
     ffmpeg-full
     streamcontroller
