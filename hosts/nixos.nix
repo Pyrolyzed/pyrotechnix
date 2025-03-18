@@ -12,18 +12,20 @@ let
   mkConfiguration =
     host:
     {
+      pkgs-stable ? args.pkgs-stable,
       pkgs ? args.pkgs,
     }:
     lib.nixosSystem {
       inherit pkgs;
       specialArgs = specialArgs // rec {
-        inherit host user;
+        inherit host user pkgs-stable;
         isNixOS = true;
         isDesktop = host == "emperor";
         isLaptop = host == "duke";
         isPersonal = isDesktop || isLaptop;
         isVm = host == "vm";
         isServer = isServer host;
+        dots = "/persist/home/${user}/Projects/pyrotechnix";
       };
 
       modules = modules ++ [
@@ -48,6 +50,7 @@ let
               isLaptop = host == "duke";
               isVm = host == "vm";
               isServer = lib.strings.hasPrefix "homeserver" host;
+              dots = "/persist/home/${user}/Projects/pyrotechnix";
             };
 
             users.${user} = {

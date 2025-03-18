@@ -34,6 +34,9 @@
       pkgs-stable = import inputs.nixpkgs-stable {
         inherit system;
         config.allowUnfree = true;
+        config.permittedInsecurePackages = [
+          "freeimage-unstable-2021-11-01"
+        ];
       };
 
       lib = import ./lib/utils.nix {
@@ -64,7 +67,13 @@
       packages.${system}.default =
         (inputs.nvf.lib.neovimConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
-          modules = [ ./default/nvf-configuration.nix ];
+          modules = [
+            (import ./default/nvf-configuration.nix {
+              inherit pkgs;
+              inherit lib;
+              dots = "/persist/home/pyro/Projects/pyrotechnix";
+            })
+          ];
         }).neovim;
       nixosConfigurations = (import ./hosts/nixos.nix commonArgs);
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;

@@ -1,5 +1,5 @@
 {
   imports = [
-    ./libgit.nix
+    ./esde.nix
   ];
 }

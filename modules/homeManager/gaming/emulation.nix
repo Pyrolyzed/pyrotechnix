@@ -21,7 +21,7 @@ in
       melonDS
       pcsx2
       rpcs3
-      retroarchFull
+      #retroarchFull
       cemu
       ppsspp-qt
       dolphin-emu
