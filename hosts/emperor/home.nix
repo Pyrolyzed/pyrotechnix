@@ -35,6 +35,7 @@
       ".local/share/Paradox Interactive"
       ".config/spotify"
       ".config/obsidian"
+      ".config/ES-DE"
     ];
     files = [
       ".zsh_history"
@@ -140,6 +141,7 @@
   programs.kitty.settings = {
     window_padding_width = 10;
     window_padding_height = 5;
+    enable_audio_bell = false;
   };
 
   home.sessionVariables = {
