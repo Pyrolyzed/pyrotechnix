@@ -68,12 +68,11 @@
         (inputs.nvf.lib.neovimConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
-            (import ./default/nvf-configuration.nix {
-              inherit pkgs;
-              inherit lib;
-              dots = "/persist/home/pyro/Projects/pyrotechnix";
-            })
+            ./default/nvf-configuration.nix
           ];
+          specialArgs = {
+            dots = "/persist/home/pyro/Projects/pyrotechnix";
+          };
         }).neovim;
       nixosConfigurations = (import ./hosts/nixos.nix commonArgs);
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
