@@ -70,7 +70,7 @@
           modules = [
             ./default/nvf-configuration.nix
           ];
-          specialArgs = {
+          extraSpecialArgs = {
             dots = "/persist/home/pyro/Projects/pyrotechnix";
           };
         }).neovim;
