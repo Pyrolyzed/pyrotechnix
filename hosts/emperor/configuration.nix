@@ -2,6 +2,9 @@
   pkgs,
   ...
 }:
+let
+  citron = pkgs.callPackage ../../packages/citron.nix { };
+in
 {
   imports = [
     (import ./disk-config.nix { device = "/dev/disk/by-id/wwn-0x5001b448b8739a09"; })
@@ -129,11 +132,13 @@
       Type = "oneshot";
     };
   };
+
   environment.systemPackages = with pkgs; [
     kdePackages.bluedevil
     neovim
     git
     firefox
+    citron
     xorg.xrandr
     swww
     qalculate-gtk
@@ -195,6 +200,7 @@
     lsd
     bat
     wine
+    ryubing
     wineWowPackages.waylandFull
   ];
 }

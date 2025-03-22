@@ -35,7 +35,23 @@
       ".local/share/Paradox Interactive"
       ".config/spotify"
       ".config/obsidian"
+      ".config/Thunar"
+      # Emulators
       ".config/ES-DE"
+      ".cache/rpcs3"
+      ".config/Cemu"
+      ".config/flycast"
+      ".config/melonDS"
+      ".config/dolphin-emu"
+      ".config/ppsspp"
+      ".config/retroarch"
+      ".config/rpcs3"
+      ".local/share/Cemu"
+      ".local/share/dolphin-emu"
+      ".local/share/duckstation"
+      ".local/share/flycast"
+      ".local/share/citron"
+      ".local/share/citra-emu"
     ];
     files = [
       ".zsh_history"

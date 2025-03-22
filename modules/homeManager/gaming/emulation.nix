@@ -24,6 +24,11 @@ in
                 <entry>~/Storage/Emulation/Emulators/Yuzu/Yuzu.AppImage</entry>
               </rule>
             </emulator>
+            <core name="RETROARCH">
+              <rule type="corepath">
+                <entry>${pkgs.retroarchFull}/lib/retroarch/cores</entry>
+              </rule>
+            </core>
           </ruleList>
         '';
       };
