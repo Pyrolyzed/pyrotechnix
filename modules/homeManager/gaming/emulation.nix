@@ -19,9 +19,9 @@ in
         text = ''
           <?xml version="1.0"?>
           <ruleList>
-            <emulator name="YUZU">
+            <emulator name="CITRON">
               <rule type="staticpath">
-                <entry>~/Storage/Emulation/Emulators/Yuzu/Yuzu.AppImage</entry>
+                <entry>~/.local/share/citron</entry>
               </rule>
             </emulator>
             <core name="RETROARCH">
@@ -41,7 +41,7 @@ in
               <fullname>Nintendo Switch</fullname>
               <path>%ROMPATH%/switch</path>
               <extension>.nca .NCA .nro .NRO .nso .NSO .nsp .NSP .xci .XCI</extension>
-              <command label="Yuzu">appimage-run %EMULATOR_YUZU% %ROM%</command>
+              <command label="Citron">citron %ROM%</command>
               <platform>switch</platform>
               <theme>switch</theme>
             </system>
