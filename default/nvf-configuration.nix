@@ -1,4 +1,7 @@
 {
+  pkgs,
+  lib,
+  dots ? null,
   ...
 }:
 {
@@ -43,6 +46,14 @@
         format.type = "nixfmt";
         lsp = {
           server = "nixd";
+          options = lib.mkIf (dots != null) {
+            nixos = {
+              expr = "(builtins.getFlake \"${dots}\").nixosConfigurations.emperor.options";
+            };
+            home-manager = {
+              expr = "(builtins.getFlake \"${dots}\").homeConfigurations.emperor.options";
+            };
+          };
         };
       };
       ts.enable = true;

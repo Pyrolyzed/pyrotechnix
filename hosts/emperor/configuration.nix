@@ -2,6 +2,9 @@
   pkgs,
   ...
 }:
+let
+  citron = pkgs.callPackage ../../packages/citron.nix { };
+in
 {
   imports = [
     (import ./disk-config.nix { device = "/dev/disk/by-id/wwn-0x5001b448b8739a09"; })
@@ -9,7 +12,7 @@
   environment.pathsToLink = [ "/share/zsh" ];
   programs.dconf.enable = true;
   xdg.portal.extraPortals = with pkgs; [
-    xdg-desktop-portal-kde
+    kdePackages.xdg-desktop-portal-kde
     xdg-desktop-portal-gtk
   ];
   xdg.portal.enable = true;
@@ -81,13 +84,6 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages = with pkgs; [
-      vaapiVdpau
-      libvdpau-va-gl
-      intel-media-driver
-      intel-ocl
-      intel-vaapi-driver
-    ];
   };
 
   boot.initrd.kernelModules = [
@@ -136,14 +132,17 @@
       Type = "oneshot";
     };
   };
+
   environment.systemPackages = with pkgs; [
     kdePackages.bluedevil
     neovim
     git
     firefox
+    citron
     xorg.xrandr
     swww
     qalculate-gtk
+    inkscape
     python314
     ffmpeg-full
     streamcontroller
@@ -201,6 +200,7 @@
     lsd
     bat
     wine
+    ryubing
     wineWowPackages.waylandFull
   ];
 }
