@@ -137,8 +137,9 @@ in
     kdePackages.bluedevil
     neovim
     git
+    chromium
     firefox
-    citron
+    #citron
     xorg.xrandr
     swww
     qalculate-gtk

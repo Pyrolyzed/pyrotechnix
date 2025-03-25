@@ -134,7 +134,9 @@
     name = "Bibata-Modern-Classic";
     size = 24;
   };
-
+  home.packages = with pkgs; [
+    pinta
+  ];
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
