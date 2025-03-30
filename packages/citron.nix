@@ -15,7 +15,7 @@ let
 in
 pkgs.stdenv.mkDerivation rec {
   pname = "citron-emu";
-  version = "51800e249bc44bd13b528220a8e064c3744c05d1";
+  version = "55dc3f8ec152f2441be8cce113ce47ebb3251bab";
 
   src = fetchGit {
     url = "https://git.citron-emu.org/Citron/Citron.git";
