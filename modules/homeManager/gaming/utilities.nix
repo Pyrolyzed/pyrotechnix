@@ -3,7 +3,6 @@
   osConfig,
   lib,
   pkgs,
-  user,
   ...
 }:
 let
@@ -76,7 +75,7 @@ in
             {
               "install_path" "."
               "display_name" "Steam Tinker Launch"
-                                                                                     
+
               "from_oslist"  "windows"
               "to_oslist"    "linux"
             }

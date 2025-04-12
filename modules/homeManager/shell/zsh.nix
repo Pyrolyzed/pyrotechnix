@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }:
@@ -11,7 +10,7 @@ let
     mkIf
     optionalString
     ;
-  inherit (lib.types) str listOf attrsOf;
+  inherit (lib.types) str attrsOf;
   cfg = config.custom.shell.zsh;
 in
 {

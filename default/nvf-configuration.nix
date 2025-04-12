@@ -17,6 +17,12 @@
       cmp.enable = true;
     };
 
+    navigation = {
+      harpoon = {
+        enable = true;
+      };
+    };
+
     options = {
       smartindent = true;
       magic = true;

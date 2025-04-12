@@ -15,6 +15,7 @@
       "Media"
       "Projects"
       ".config/steamtinkerlaunch"
+      ".local/share/PrismLauncher"
       ".config/obs-studio"
       ".ssh"
       ".config/unity3d"
@@ -36,6 +37,8 @@
       ".config/spotify"
       ".config/obsidian"
       ".config/Thunar"
+      ".config/sunshine"
+      ".config/cosmic"
       # Emulators
       ".config/ES-DE"
       ".cache/rpcs3"

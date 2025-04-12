@@ -1,17 +1,14 @@
 {
   config,
   lib,
-  pkgs,
   user,
   ...
 }:
 let
   cfg = config.custom.customDirs;
   inherit (lib)
-    mkDefault
     mkOption
     mkEnableOption
-    mkMerge
     mkIf
     ;
   inherit (lib.types) str nullOr attrsOf;

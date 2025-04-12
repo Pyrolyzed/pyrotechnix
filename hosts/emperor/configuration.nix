@@ -4,6 +4,7 @@
 }:
 let
   citron = pkgs.callPackage ../../packages/citron.nix { };
+  armake = pkgs.callPackage ../../packages/armake.nix { };
 in
 {
   imports = [
@@ -16,6 +17,7 @@ in
     xdg-desktop-portal-gtk
   ];
   xdg.portal.enable = true;
+  hardware.amdgpu.opencl.enable = true;
   custom = {
     impermanence = {
       enable = true;
@@ -58,7 +60,8 @@ in
     enable = true;
     wayland.enable = true;
   };
-
+  services.desktopManager.cosmic.enable = true;
+  services.desktopManager.cosmic.xwayland.enable = true;
   programs.virt-manager.enable = true;
   virtualisation.libvirtd.enable = true;
 
@@ -136,9 +139,11 @@ in
   environment.systemPackages = with pkgs; [
     kdePackages.bluedevil
     neovim
+    er-patcher
     git
     firefox
     citron
+    armake
     xorg.xrandr
     swww
     qalculate-gtk
@@ -176,6 +181,7 @@ in
     yt-dlp
     unrar
     p7zip
+    davinci-resolve
     sshpass
     unzip
     fastfetch
@@ -200,7 +206,7 @@ in
     lsd
     bat
     wine
-    ryubing
+    winetricks
     wineWowPackages.waylandFull
   ];
 }
