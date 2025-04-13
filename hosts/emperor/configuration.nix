@@ -3,8 +3,6 @@
   ...
 }:
 let
-  citron = pkgs.callPackage ../../packages/citron.nix { };
-  armake = pkgs.callPackage ../../packages/armake.nix { };
 in
 {
   imports = [
@@ -138,12 +136,11 @@ in
 
   environment.systemPackages = with pkgs; [
     kdePackages.bluedevil
-    neovim
     er-patcher
+    custom.neovim-pyro
+    custom.citron
     git
     firefox
-    citron
-    armake
     xorg.xrandr
     swww
     qalculate-gtk

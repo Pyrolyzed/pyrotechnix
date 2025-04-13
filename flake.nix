@@ -62,20 +62,19 @@
         modules = [ ];
       };
       commonArgs = createCommonArgs system;
+      forAllSystems =
+        fn:
+        lib.genAttrs [
+          "x86_64-linux"
+          "aarch64-linux"
+          "x86_64-darwin"
+          "aarch64-darwin"
+        ] (system: fn (createCommonArgs system));
     in
     {
-      packages.${system}.default =
-        (inputs.nvf.lib.neovimConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
-          modules = [
-            ./default/nvf-configuration.nix
-          ];
-          extraSpecialArgs = {
-            dots = "/persist/home/pyro/Projects/pyrotechnix";
-          };
-        }).neovim;
       nixosConfigurations = (import ./hosts/nixos.nix commonArgs);
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+      packages = forAllSystems (commonArgs': (import ./packages commonArgs'));
       inherit lib self;
     };
 }

@@ -93,8 +93,8 @@
       aliases = {
         ls = "lsd";
         ll = "ls -l";
-        vim = "nix run ~/Projects/pyrotechnix";
-        vi = "nix run ~/Projects/pyrotechnix";
+        vim = "nvim";
+        vi = "nvim";
         cd = "z";
         k = "kubectl";
       };
