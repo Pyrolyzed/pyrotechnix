@@ -1,8 +1,6 @@
 {
   config,
   lib,
-  pkgs,
-  user,
   ...
 }:
 let
@@ -23,6 +21,26 @@ in
       autoStart = true;
       capSysAdmin = true;
       openFirewall = true;
+      settings = {
+        sunshine_name = "Emperor";
+        encoder = "vaapi";
+        output_name = 1;
+      };
+      # Add Steam big picture since in-app configuration seems to not work.
+      applications = {
+        env = {
+          PATH = "$(PATH):$(HOME)/.local/bin";
+        };
+        apps = [
+          {
+            name = "Steam Big Picture";
+            detached = [
+              "setsid steam steam://open/gamepadui"
+            ];
+            image-path = "steam.png";
+          }
+        ];
+      };
     };
 
     programs.steam = {

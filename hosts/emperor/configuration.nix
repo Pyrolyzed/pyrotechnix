@@ -15,7 +15,6 @@ in
     xdg-desktop-portal-gtk
   ];
   xdg.portal.enable = true;
-  hardware.amdgpu.opencl.enable = true;
   custom = {
     impermanence = {
       enable = true;
@@ -138,7 +137,7 @@ in
     kdePackages.bluedevil
     er-patcher
     custom.neovim-pyro
-    custom.citron
+    #custom.citron
     git
     firefox
     xorg.xrandr
@@ -166,8 +165,6 @@ in
     tealdeer
     manix
     vscode
-    amf
-    libva
     wikiman
     xfce.thunar
     slurp
